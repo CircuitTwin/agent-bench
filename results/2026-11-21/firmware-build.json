@@ -1,0 +1,226 @@
+{
+ "arguments": {
+  "define": []
+ },
+ "image": "circuittwin/arm-gcc:12.2rel1-bookworm-1",
+ "imageId": "sha256:c75729557f428e9ada3d9381a151ca997359b880f36b5ea7321166c57caa3b2b",
+ "outputs": [
+  {
+   "bytes": 6644,
+   "file": "baud_v0.elf",
+   "sha256": "a6678a8f6fa3eb5b98f79838e69f0a0dd0a9fb987a93281f3734c62092cd29cf"
+  },
+  {
+   "bytes": 6644,
+   "file": "baud_v1.elf",
+   "sha256": "d0e90f543c72e42b425178935350fd89e359b121d173278da56362b0dbc04638"
+  },
+  {
+   "bytes": 6804,
+   "file": "clk_gpio_v0.elf",
+   "sha256": "1dbf49a389d38e7c1691f3a7747ae48f83f501f33980d396c33a366b9b67c994"
+  },
+  {
+   "bytes": 6788,
+   "file": "clk_gpio_v1.elf",
+   "sha256": "2e7a15ba9b591b4b633fb46f78c5101c67678f8782b7b044f05a3540891154cd"
+  },
+  {
+   "bytes": 6820,
+   "file": "clk_timer_v0.elf",
+   "sha256": "53c850d4179663e91728bfa8a5b02c75d065b6a07a40655d9a182e508f4afd02"
+  },
+  {
+   "bytes": 6800,
+   "file": "clk_timer_v1.elf",
+   "sha256": "ad5dc801cde0bb1655e7d26d2e6d779a902ac1ad0419a7341bebbe0f87b08dca"
+  },
+  {
+   "bytes": 7068,
+   "file": "dma_m2m_v0.elf",
+   "sha256": "4d60f3c1cce51d6d48ebd5ab5fc0f0be5562441326d4e463885318705981bb7e"
+  },
+  {
+   "bytes": 7052,
+   "file": "dma_m2m_v1.elf",
+   "sha256": "16b5287c5fcb869eeccfa5ab4fa0e720ce93e459a79d6f9b6b52c79f0673565d"
+  },
+  {
+   "bytes": 7068,
+   "file": "dma_m2m_v2.elf",
+   "sha256": "c0e33e69f73e2f7ec5497db593fe5cf03241a38354dd2a8d1931ef62a8cb400d"
+  },
+  {
+   "bytes": 7068,
+   "file": "dma_m2m_v3.elf",
+   "sha256": "ef70e1d68c8f289b42e5b17bd845f4e776378b6479b50110154dd8d660d155b2"
+  },
+  {
+   "bytes": 6804,
+   "file": "gpio_mode_v0.elf",
+   "sha256": "adfe68e8e0de8687e63c17b79020d275e5eb0a9d7a6388d7b4a710959005b493"
+  },
+  {
+   "bytes": 6804,
+   "file": "gpio_mode_v1.elf",
+   "sha256": "46ce0a511fb5967c3915513645d52dd165a6d9fe2623a677b19c49c538cb57b2"
+  },
+  {
+   "bytes": 7048,
+   "file": "i2c_nack_v0.elf",
+   "sha256": "4905cecaf8c0cc213b4e218d8a61ba4e58275b1d737f9c8f6f37c77b1006ebd2"
+  },
+  {
+   "bytes": 6944,
+   "file": "i2c_nack_v1.elf",
+   "sha256": "d30f0e3a46a664e7c3a30ec7e091de9fa607777826cfdad966eecc748c4748cc"
+  },
+  {
+   "bytes": 6972,
+   "file": "i2c_nack_v2.elf",
+   "sha256": "e8136d9e06238531220875658c7504b0e53178f1c1c3fec726ec7184a7b7c6e1"
+  },
+  {
+   "bytes": 6952,
+   "file": "irq_chain_v0.elf",
+   "sha256": "834f8655bd05ee93bf4b414dd22330f59be6a3e973b1032363d7610ac3dca9a0"
+  },
+  {
+   "bytes": 6940,
+   "file": "irq_chain_v1.elf",
+   "sha256": "35ca586a43a427e0fe0ef7228814b35f0a9221424a86326af70c60dd07392e6f"
+  },
+  {
+   "bytes": 6948,
+   "file": "irq_chain_v2.elf",
+   "sha256": "0dbcad3934a95cd0b082732e2e3ac575960348e436b2047b583463f087ceef0f"
+  },
+  {
+   "bytes": 6944,
+   "file": "irq_chain_v3.elf",
+   "sha256": "183dfc6757a23f16ee1be478de05fe1ebcd49af280f3f3210a6d2e86e3fe2e0b"
+  },
+  {
+   "bytes": 6896,
+   "file": "irq_chain_v4.elf",
+   "sha256": "74d7709112a0d9c6965dd5987ba1f02990fdc14a3847eab03e45e308dc8e8440"
+  },
+  {
+   "bytes": 7252,
+   "file": "nvic_prio_v0.elf",
+   "sha256": "a5051d9ea5368108b87f6263a00317ff3d52f10b206e646320cabd2dde30bd89"
+  },
+  {
+   "bytes": 7244,
+   "file": "nvic_prio_v1.elf",
+   "sha256": "be7ed8129ec0e4644e890e15a9c3595aff36a0453d0881f8446baf1771a398d8"
+  },
+  {
+   "bytes": 7080,
+   "file": "pll_v0.elf",
+   "sha256": "f7fc565d7d7017aac8cbce8bfb497cd7b44f103d9ef808ebdcab9885ef0e697a"
+  },
+  {
+   "bytes": 7072,
+   "file": "pll_v1.elf",
+   "sha256": "a8aae80efe2d4305a537570ae2366768c45633a4baf84d294e3d74afaf1d3307"
+  },
+  {
+   "bytes": 6972,
+   "file": "pll_v2.elf",
+   "sha256": "5b49bfe20a04b419d3a086ba12a2bfab3f5aa371fb47e038ab932297bded59bd"
+  },
+  {
+   "bytes": 6636,
+   "file": "poll_flag_v0.elf",
+   "sha256": "0e81d8385a166bed5c93e6b0999b062db113bd5ded6c92943f09ecfceab9b99c"
+  },
+  {
+   "bytes": 6636,
+   "file": "poll_flag_v1.elf",
+   "sha256": "14b752f6c62989058775ed0d0ea4198f3475f099d45d895ebaba812baca7575f"
+  },
+  {
+   "bytes": 7128,
+   "file": "psc_v0.elf",
+   "sha256": "b01e2ae9e48c16d0b6c2e2988b7ba58049279028c9eff4e6f09b40688bf9bf8d"
+  },
+  {
+   "bytes": 7128,
+   "file": "psc_v1.elf",
+   "sha256": "cc2330310608f724a91e7d922322c8daff4eff002c773b76f86dff74dfc9c9fd"
+  },
+  {
+   "bytes": 7008,
+   "file": "race_v0.elf",
+   "sha256": "6aa57c418d79212ca5f914587d2bb6de0837b950e5cef855cf099b8599fde03d"
+  },
+  {
+   "bytes": 7004,
+   "file": "race_v1.elf",
+   "sha256": "d5d0812bc9a64457a01e02581cb9a7d9a2aa822f842bd974a15efcfb3faae6ec"
+  },
+  {
+   "bytes": 6812,
+   "file": "reset_vals_v0.elf",
+   "sha256": "a71bdd207a49df46b3c44224ca480fba5efea4217708dab2d93669fc73d61941"
+  },
+  {
+   "bytes": 6800,
+   "file": "reset_vals_v1.elf",
+   "sha256": "c48fb3ac1252f736369e90c1a80a8a2ecc1dc38a6cc24bb13531e1ecb2d70d5b"
+  },
+  {
+   "bytes": 6792,
+   "file": "ro_write_v0.elf",
+   "sha256": "d5ab6b6ab75488cde7774825875285e7d72608dace05ae51337087ccb4830d10"
+  },
+  {
+   "bytes": 6792,
+   "file": "ro_write_v1.elf",
+   "sha256": "85aded6d7f0242d9a6a6b4bb1f129c104dc2bd98575574bcbf59a77da98d1fce"
+  },
+  {
+   "bytes": 6776,
+   "file": "ro_write_v2.elf",
+   "sha256": "e5dacba0233abf4ca5366cdff0d3ec786a153559b963c1d701acf92b4c60b7d2"
+  },
+  {
+   "bytes": 6804,
+   "file": "stack_v0.elf",
+   "sha256": "0c48587babb13c6a4548b178070117358d1fc4a709300d7f1c8efd766e1db019"
+  },
+  {
+   "bytes": 6812,
+   "file": "stack_v1.elf",
+   "sha256": "8f2e55ae051234f5783693dd6b1fa47503bf3b46d8bf2e8721017f55cef5c17a"
+  },
+  {
+   "bytes": 10056,
+   "file": "unaligned_v0.elf",
+   "sha256": "58b65a8b6e1dfe53e59fef7871642d74c45ed82748a6cbadd45ee7ea6e29a1c3"
+  },
+  {
+   "bytes": 10056,
+   "file": "unaligned_v1.elf",
+   "sha256": "fdbe9ee6f135f8c91e7d59191e205bf6cd1390451ae71918f4c3296797b8634d"
+  },
+  {
+   "bytes": 10056,
+   "file": "unaligned_v2.elf",
+   "sha256": "9201c6998771b0603bea4624b1203752098e5bb420fa7b861f5d0c8d3b87a0dd"
+  },
+  {
+   "bytes": 6848,
+   "file": "wdg_v0.elf",
+   "sha256": "b9d337920ac12960ad72783bef8fe595130582220c1ab0ea6f62f8dd55aef347"
+  },
+  {
+   "bytes": 6840,
+   "file": "wdg_v1.elf",
+   "sha256": "2d0bc59bfc282a4872affdb480a7f17fa5180f0a77c39dc9196babc28d392fea"
+  }
+ ],
+ "project": "firmware",
+ "toolchain": "arm"
+}

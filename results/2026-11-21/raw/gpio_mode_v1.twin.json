@@ -1,0 +1,227 @@
+{
+ "command": [
+  "ct.exe",
+  "--json",
+  "run",
+  "<fw>/gpio_mode_v1.elf",
+  "--board",
+  "stm32f4-discovery",
+  "--max-ms",
+  "500",
+  "--until",
+  "CT-BENCH-DONE",
+  "--console-baud",
+  "115200"
+ ],
+ "exit": 0,
+ "result": {
+  "assertions": [
+   {
+    "assertion": {
+     "kind": "until",
+     "marker": "CT-BENCH-DONE"
+    },
+    "index": 0,
+    "message": "reached marker \"CT-BENCH-DONE\"",
+    "passed": true
+   },
+   {
+    "assertion": {
+     "kind": "no_fault"
+    },
+    "index": 1,
+    "message": "no fault exception",
+    "passed": true
+   },
+   {
+    "assertion": {
+     "codes": [
+      "bus.serial.baud-mismatch",
+      "bus.serial.format-mismatch"
+     ],
+     "kind": "no_issues"
+    },
+    "index": 2,
+    "message": "no issues with codes bus.serial.baud-mismatch, bus.serial.format-mismatch",
+    "passed": true
+   }
+  ],
+  "board": "stm32f4-discovery",
+  "caseId": "gpio_mode_v1.elf",
+  "console": {
+   "USART2": "CT-BENCH gpio_mode_v1 FAIL PD12 reads low\r\nCT-BENCH-DONE\r\n"
+  },
+  "digests": {
+   "bus": "e19ecd16600fce6a85aca0f54b4c068060f4ab16fb2468dae149484c05d71aed",
+   "combined": "c302ba6601f141d3a6d845c5341f9e91c2145a8b233cdc81ed38b74498233204",
+   "exceptions": "b11c770ed8c316a4efe23e86f7d476db9d5588945afcb5afda925fb5c045dc50",
+   "finalState": "6beda7d28953ed5ccbf8c2cc40672750c9efbe76bb5309335b63f290a40224cd",
+   "inputs": "52f5e1f5bcd9cdb363f9a64f030ee2059f4eb46bf91d1f730b404fd09e3dc6cc",
+   "uart": {
+    "USART2": "87e17ec17c75796b51ba5e674b9eefc2826307373cef5bbcb97c688079479579"
+   }
+  },
+  "engine": {
+   "crates": [
+    {
+     "name": "ct-behavior",
+     "sha256": "e31d8d07b697023854b73b658c44d39410839602fecd579fbb20aff566c9ca21"
+    },
+    {
+     "name": "ct-cpu-arm",
+     "sha256": "3ce635a3bc52105c3336ca81c667af48a1b00170da24c28fea4e1738a62afb5a"
+    },
+    {
+     "name": "ct-cpu-armr",
+     "sha256": "affb92cea939238d1766268ec7b9dbe1b5144723aaf61af4591f78f77d9eaea7"
+    },
+    {
+     "name": "ct-cpu-avr",
+     "sha256": "34f74fbc438a9fa32c02b1d3a652e73a087baf466a0f18ad61e660583d753225"
+    },
+    {
+     "name": "ct-cpu-c28x",
+     "sha256": "cf5e91e8eb517aec7c03ffb2664929681c4e3697cd93d736e308e9a313a43c06"
+    },
+    {
+     "name": "ct-cpu-msp430",
+     "sha256": "7f26d85fc873f7dbe84c98088ca29269bcd62c7ca62539ea2adce42256be7199"
+    },
+    {
+     "name": "ct-cpu-8051",
+     "sha256": "02d02d43995c69b08b665461f8fc1b234ab9ef2dc95ebca157e8aaea1f81d1a4"
+    },
+    {
+     "name": "ct-cpu-pic",
+     "sha256": "2428c3bb74129f57cb68cc277256f7dc4e5bbda5f197e7528b4841dfe57744d6"
+    },
+    {
+     "name": "ct-cpu-mips",
+     "sha256": "0e3a2c1b9fb309c1ce57539e7c8c9b33e19b91bbb4072c56b243aaa8e52430aa"
+    },
+    {
+     "name": "ct-cpu-rx",
+     "sha256": "13c93f59a6c625673215fb3c3ae8d4b89c3256a9884286cf76151b04949ae689"
+    },
+    {
+     "name": "ct-cpu-rl78",
+     "sha256": "c816667f541944137a9fc6d671f20b312c577b073ca2d5c6bff073a07faf8928"
+    },
+    {
+     "name": "ct-cpu-ppc",
+     "sha256": "a42cc3a6815d6e2ead9bd7a56e1e59a4a5517728c830d2abedf3f6e1dc410165"
+    },
+    {
+     "name": "ct-cpu-rh850",
+     "sha256": "ddb2c8877bdbe67096a02a2dda65a203503884b56bb5fced259380cf9f2d97a4"
+    },
+    {
+     "name": "ct-cpu-riscv",
+     "sha256": "6100ee038f665b3312597c3ad145c906946a51aa416568a10bff37e78ce2127b"
+    },
+    {
+     "name": "ct-cpu-tricore",
+     "sha256": "af121303876fb1d978067076b4ed11119a50481efe8de90d191d371f02cdb98c"
+    },
+    {
+     "name": "ct-cpu-xtensa",
+     "sha256": "90ea4a7f812065ce7a2833f33e84584a76dbd0067af284579f2ac1567a79756d"
+    },
+    {
+     "name": "ct-engine",
+     "sha256": "e3d42b698a4821fabf621d4d64199905ab9364ef4791bfa8360ea065efaf0fce"
+    },
+    {
+     "name": "ct-periph",
+     "sha256": "0d1e2a32c21ddaa8a1c1d254bfac8ff923e523fab10e6586fdf0cb4c97b257ab"
+    }
+   ],
+   "revision": "d81cc15fc3bcafb4702bbf386aab0443dc35b521500cb53649d0a5e3dea89890"
+  },
+  "firmware": {
+   "path": "<fw>/gpio_mode_v1.elf",
+   "sha256": "46ce0a511fb5967c3915513645d52dd165a6d9fe2623a677b19c49c538cb57b2"
+  },
+  "issues": [],
+  "runId": "run-18128-1795237614819-0",
+  "stats": {
+   "energy": {
+    "avgCurrentNa": 3808000,
+    "band": "none (unmeasured)",
+    "basis": "estimate (datasheet tables)",
+    "clockHz": 16000000,
+    "constants": [
+     {
+      "name": "run",
+      "singleSource": true,
+      "source": "DS8626 Rev 12 (STM32F405/407) Table 20: IDD Run, external clock, all peripherals disabled, fHCLK 168 MHz, TA 25 degC typ = 40 mA (40 mA / 168 MHz); VDD 3.3 V typ, code from flash with ART on",
+      "unit": "nA/MHz",
+      "valueNa": 238000
+     },
+     {
+      "name": "sleep",
+      "singleSource": true,
+      "source": "DS8626 Rev 12 Table 22: IDD Sleep, external clock, all peripherals disabled, fHCLK 168 MHz, TA 25 degC typ = 12 mA (12 mA / 168 MHz)",
+      "unit": "nA/MHz",
+      "valueNa": 71000
+     },
+     {
+      "name": "stop",
+      "singleSource": true,
+      "source": "DS8626 Rev 12 Table 23: IDD_STOP, main regulator in Run mode, flash in Stop mode, TA 25 degC typ = 0.45 mA",
+      "unit": "nA",
+      "valueNa": 450000
+     },
+     {
+      "name": "standby",
+      "singleSource": true,
+      "source": "DS8626 Rev 12 Table 24: IDD_STBY, backup SRAM off, RTC off, VDD 3.3 V, TA 25 degC typ = 2.2 uA",
+      "unit": "nA",
+      "valueNa": 2200
+     }
+    ],
+    "family": "stm32f4",
+    "modes": [
+     {
+      "avgCurrentNa": 3808000,
+      "energyNj": 64451,
+      "mode": "run",
+      "timeNs": 5128875
+     },
+     {
+      "avgCurrentNa": 0,
+      "energyNj": 0,
+      "mode": "sleep",
+      "timeNs": 0
+     },
+     {
+      "avgCurrentNa": 0,
+      "energyNj": 0,
+      "mode": "stop",
+      "timeNs": 0
+     },
+     {
+      "avgCurrentNa": 0,
+      "energyNj": 0,
+      "mode": "standby",
+      "timeNs": 0
+     }
+    ],
+    "peakCurrentNa": 3808000,
+    "supplyMv": 3300,
+    "totalNj": 64451
+   },
+   "instructions": 49028,
+   "virtualTimeNs": 5128875,
+   "wallMs": 26
+  },
+  "stop": {
+   "kind": "marker",
+   "port": "USART2",
+   "text": "CT-BENCH-DONE"
+  },
+  "verdict": "pass"
+ },
+ "stderr": "",
+ "stdoutHead": ""
+}

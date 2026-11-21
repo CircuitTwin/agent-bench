@@ -1,0 +1,12 @@
+{
+  "schema": "agent-bench.ct-release/1",
+  "$comment": "The ct build the published record in results/2026-11-21 was made with: the Windows x86_64 build of CircuitTwin ct 0.1.0 at sourceRevision, a source tree that the provenance block of the record lists as clean (cleanTree). tools/run.py compares the ct binary it is given with these digests and records whether it is the pinned build.",
+  "version": "ct 0.1.0",
+  "platform": "windows-x86_64",
+  "sourceRevision": "287d49a4a6b9254b66f5a8f12637a53945bee637",
+  "cleanTree": true,
+  "binaries": {
+    "ct.exe": "3c5ab24e7a1cf3a8ee5519f3cddaf0ba90af1d7a4c30b65337ba121a80d598d4",
+    "ct-server.exe": "36f2d30e25b16656af8ea89b3034ccde4da67509f00be27b5531c3a5c4fae464"
+  }
+}

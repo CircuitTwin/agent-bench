@@ -1,0 +1,3 @@
+# Checked out with LF on every platform: the files are read by Linux containers and by sh.
+* text=auto eol=lf
+*.elf binary

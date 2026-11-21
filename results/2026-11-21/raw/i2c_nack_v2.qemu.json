@@ -1,0 +1,12 @@
+{
+ "dockerExit": 0,
+ "faults": "",
+ "guest": "",
+ "image": "circuittwin/refs-qemu-system-arm:10.0.13-1",
+ "machine": "olimex-stm32-h405",
+ "serial": "CT-BENCH i2c_nack_v2 FAIL no start condition\nCT-BENCH-DONE",
+ "status": "QEMU-STATUS=killed-at-limit",
+ "stderr": "",
+ "stdout": "",
+ "unimp": "      2 GPIOA: unimplemented device read \n      2 GPIOA: unimplemented device write\n      3 GPIOB: unimplemented device read \n      3 GPIOB: unimplemented device write\n 100003 I2C1: unimplemented device read \n      5 I2C1: unimplemented device write"
+}

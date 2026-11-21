@@ -1,0 +1,12 @@
+{
+ "binaries": {
+  "ct-confidence.exe": "61f80f6dc54e13d9ef246b7a49e2ea5ae39f81100bf14342519e95b03530e232",
+  "ct-server.exe": "36f2d30e25b16656af8ea89b3034ccde4da67509f00be27b5531c3a5c4fae464",
+  "ct-worker.exe": "1b315cc2734fc9f32073df99106e39d6effd529285803fab78391081c731849f",
+  "ct.exe": "3c5ab24e7a1cf3a8ee5519f3cddaf0ba90af1d7a4c30b65337ba121a80d598d4"
+ },
+ "checkedAt": "2026-11-21T05:06:14+00:00",
+ "cleanTree": true,
+ "dirtyTree": false,
+ "sourceRevision": "287d49a4a6b9254b66f5a8f12637a53945bee637"
+}

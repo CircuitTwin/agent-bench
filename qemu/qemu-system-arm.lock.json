@@ -1,0 +1,12 @@
+{
+  "$comment": "Pinned reference emulator of the benchmark: upstream QEMU system mode as built by Debian 13, run as an external process in the container image built from qemu/Dockerfile (base image and Debian snapshot pinned there). Nothing of it is linked into, vendored by or redistributed with this repository. License: GPL-2.0 (QEMU), used as a test oracle only. tools/run.py refuses an image whose qemu-system-arm differs from binarySha256. An image rebuilt from the Dockerfile has another image id than the one the published record names; the binary is what is pinned.",
+  "name": "qemu-system-arm",
+  "version": "10.0.13",
+  "package": "qemu-system-arm 1:10.0.13+ds-0+deb13u1",
+  "debianSnapshot": "20261026T000000Z",
+  "baseImage": "debian@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f",
+  "dockerfile": "qemu/Dockerfile",
+  "image": "agent-bench/qemu-system-arm:10.0.13-1",
+  "binary": "/usr/bin/qemu-system-arm",
+  "binarySha256": "0dfd6c04c472cf2e6478092caf090a963a6e9ae354ffe39cfc309966430c093e"
+}

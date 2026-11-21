@@ -1,0 +1,68 @@
+{
+  "schema": "ct.agent-bench-cases/1",
+  "firmwareProject": "firmware",
+  "defaultMaxMs": 500,
+  "twinArgs": ["--console-baud", "115200"],
+  "cases": [
+    {"id": "clk_gpio", "task": "Drive PD12 high and read it back", "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "missing peripheral clock enable", "note": "GPIOD clock (AHB1ENR bit 3) never enabled; the port ignores writes and reads 0 on silicon"}]},
+    {"id": "clk_timer", "task": "Start TIM3 and see its counter advance", "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "missing peripheral clock enable", "note": "TIM3 clock (APB1ENR bit 1) never enabled; CNT stays 0 on silicon"}]},
+    {"id": "gpio_mode", "task": "Configure PD12 as output, drive high, read the pin level", "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "wrong register bit or field", "note": "MODER written at bit 12 (the pin number) instead of bit 24 (2 x pin); the pin stays an input"}]},
+    {"id": "poll_flag", "task": "Send a byte and wait for transmit complete", "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "polling a flag that never sets", "note": "unbounded poll on USART2 RXNE (no byte is ever received) instead of TC"}]},
+    {"id": "irq_chain", "task": "Count three TIM3 update interrupts", "maxMs": 1000, "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "forgotten interrupt enable", "note": "NVIC ISER bit for TIM3 never set"},
+      {"v": 2, "kind": "bug", "bugClass": "forgotten interrupt enable", "note": "TIM3 DIER.UIE never set"},
+      {"v": 3, "kind": "bug", "bugClass": "interrupt flag not cleared", "note": "handler never clears UIF; it re-enters forever and starves main"},
+      {"v": 4, "kind": "bug", "bugClass": "forgotten interrupt enable", "note": "handler name misspelled, so the vector keeps the default handler"}]},
+    {"id": "nvic_prio", "task": "TIM3 handler waits for a SysTick tick, which must preempt it", "maxMs": 1000, "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "wrong NVIC priority", "note": "TIM3 priority 0 equals SysTick priority 0: no preemption, the wait inside the handler times out"}]},
+    {"id": "dma_m2m", "task": "DMA2 stream 0 memory-to-memory copy of 16 words", "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "DMA misconfiguration", "note": "DMA2 clock never enabled"},
+      {"v": 2, "kind": "bug", "bugClass": "DMA misconfiguration", "note": "FIFO direct mode left on (DMDIS=0); memory-to-memory needs the FIFO"},
+      {"v": 3, "kind": "bug", "bugClass": "DMA misconfiguration", "note": "NDTR left at 0, so the stream has nothing to transfer"}]},
+    {"id": "wdg", "task": "Run 200 ms of work under a 31 ms independent watchdog", "maxMs": 600, "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "unkicked watchdog", "note": "loop never writes IWDG_KR=0xAAAA; silicon resets after 31 ms"}]},
+    {"id": "baud", "task": "Report the result at 115200 baud", "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "wrong UART baud versus the peer", "note": "BRR=0x16C computed for an unconfigured 42 MHz APB1; the line runs at about 44 kbaud against a 115200 peer"}]},
+    {"id": "i2c_nack", "task": "Address a sensor that is absent from the bus", "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "I2C NACK not handled", "note": "unbounded wait for ADDR; AF is never looked at"},
+      {"v": 2, "kind": "bug", "bugClass": "I2C NACK not handled", "note": "bounded wait, AF never checked, the read is reported as done"}]},
+    {"id": "reset_vals", "task": "Use a never-written SRAM word", "twinExtra": [{"label": "seeded", "args": ["--uninitialized-memory", "seeded:1"]}], "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "reliance on undocumented reset values", "note": "assumes SRAM reads 0 at power-up; the vendor documents it as undefined"}]},
+    {"id": "stack", "task": "Recursive sum", "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "stack overflow", "note": "depth 4000 x about 80 bytes outruns the 128 KB SRAM and runs below 0x20000000"}]},
+    {"id": "unaligned", "task": "Read a 64-bit pair from a byte buffer", "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "unaligned access", "note": "LDRD at an address 2 mod 8 (always a UsageFault on Cortex-M4)"},
+      {"v": 2, "kind": "bug", "bugClass": "unaligned access", "note": "CCR.UNALIGN_TRP set, then a word load at buf+1 (UsageFault)"}]},
+    {"id": "race", "task": "Read an ISR-published pair (a, ~a) from main", "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "race between ISR and main", "note": "two-word read without masking interrupts; torn when SysTick fires between the loads"}]},
+    {"id": "psc", "task": "TIM3 at 1 MHz from 16 MHz HSI, cross-checked with SysTick", "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "timer prescaler off by one", "note": "PSC=16 (divide by 17) instead of 15: a 5.9% slow timebase"}]},
+    {"id": "ro_write", "task": "Drive PD12 high (or store a flash word) and read it back", "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "writing to a read-only register", "note": "writes GPIOD_IDR (read-only) instead of BSRR"},
+      {"v": 2, "kind": "bug", "bugClass": "writing to a read-only register", "note": "stores to flash at 0x08008000 without unlocking or programming it"}]},
+    {"id": "pll", "task": "Switch to the 168 MHz PLL, verify, return to HSI", "versions": [
+      {"v": 0, "kind": "correct"},
+      {"v": 1, "kind": "bug", "bugClass": "wrong register bit or field", "note": "FLASH_ACR wait states never set; silicon runs 168 MHz code from flash with 0 wait states and faults or misreads"},
+      {"v": 2, "kind": "bug", "bugClass": "polling a flag that never sets", "note": "SW written and SWS read at once, without waiting for PLLRDY"}]}
+  ]
+}

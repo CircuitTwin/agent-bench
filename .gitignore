@@ -1,0 +1,8 @@
+# Build and run outputs. The published record lives in results/.
+/build/
+/out/
+/work/
+__pycache__/
+*.pyc
+*.elf
+*.map
