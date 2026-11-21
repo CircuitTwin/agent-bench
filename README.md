@@ -104,6 +104,10 @@ prints `CT-BENCH <case>_v<N> PASS|FAIL <message>` and then `CT-BENCH-DONE` on US
 
 ## Reproduce
 
+> **The pinned `ct` and `ct-server` builds are not publicly downloadable yet.** Steps 1 to 3 below need neither of them.
+> Reproduction of the full record (steps 4 to 6) is available on request: open an issue on this repository
+> (<https://gitlab.com/apanter265/agent-bench/-/issues>) and say that you want to reproduce the record.
+
 ### What you need
 
 | | |
@@ -111,7 +115,7 @@ prints `CT-BENCH <case>_v<N> PASS|FAIL <message>` and then `CT-BENCH-DONE` on US
 | Python 3.9 or newer | every tool in `tools/` (standard library only) |
 | Docker, Linux containers | builds the firmware toolchain image (about 2.7 GB) and the QEMU image from the Dockerfiles in this repository, and runs them (the tools never run an image that is not built locally). The first build downloads the pinned base images and Debian packages (Docker Hub, `snapshot.debian.org`). |
 | git | to clone this repository |
-| the pinned `ct` release | `ct 0.1.0`, Windows x86_64: `ct.exe` (sha256 `3c5ab24e7a1cf3a8ee5519f3cddaf0ba90af1d7a4c30b65337ba121a80d598d4`) and `ct-server.exe` (sha256 `36f2d30e25b16656af8ea89b3034ccde4da67509f00be27b5531c3a5c4fae464`), from `ct-release.json`. Check them before use: `sha256sum ct.exe ct-server.exe`, or `Get-FileHash ct.exe, ct-server.exe` in PowerShell. |
+| the pinned `ct` release | `ct 0.1.0`, Windows x86_64: `ct.exe` (sha256 `3c5ab24e7a1cf3a8ee5519f3cddaf0ba90af1d7a4c30b65337ba121a80d598d4`) and `ct-server.exe` (sha256 `36f2d30e25b16656af8ea89b3034ccde4da67509f00be27b5531c3a5c4fae464`), from `ct-release.json`; not publicly downloadable yet, see the note above. Check them before use: `sha256sum ct.exe ct-server.exe`, or `Get-FileHash ct.exe, ct-server.exe` in PowerShell. |
 | the twin's documents | four files, laid out as in [The twin](#the-twin) |
 
 The runner records whether the `ct` it was given is the pinned build (`ct.pinned` in `results.json`, and a line in the
