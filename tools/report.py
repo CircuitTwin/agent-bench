@@ -153,16 +153,31 @@ def pinned_ct(ct):
         return False
 
 
+def pinned_twin():
+    """The id of the twin the published record was made with (ct-release.json)."""
+    try:
+        with open(os.path.join(ROOT, "ct-release.json"), encoding="utf-8") as f:
+            return json.load(f)["twin"]["id"]
+    except (OSError, ValueError, KeyError):
+        return None
+
+
 def twin_id(twin_runs):
-    """The twin id and its documents, from the note `ct run` prints when it generates a twin."""
+    """The twin id and its documents, from the note `ct run` prints when it generates a twin, and the ids that are not the pinned twin."""
     found = {}
     for run in twin_runs:
         m = TWIN_NOTE.search(run.get("stderr") or "")
         if m:
             found[m.group(2)] = m.group(3)
     if not found:
-        return "taken from the catalog (the runs print no generation note)"
-    return "; ".join("`%s` generated from %s" % (k, esc(v)) for k, v in sorted(found.items()))
+        return "taken from the catalog (the runs print no generation note)", []
+    pin = pinned_twin()
+
+    def note(k):
+        if not pin:
+            return ""
+        return ", the twin of the published record" if k == pin else ", NOT the twin of the published record (`%s`)" % pin
+    return "; ".join("`%s` generated from %s%s" % (k, esc(found[k]), note(k)) for k in sorted(found)), [k for k in sorted(found) if pin and k != pin]
 
 
 def compare(summary, ref_dir):
@@ -260,10 +275,14 @@ def main():
         out.append("| harness revision | `%s`, %s |" % (harness.get("revision"), "uncommitted changes in the checkout" if harness.get("dirtyTree") else "clean checkout"))
     if ct_rev:
         out.append("| ct build source revision | `%s`, %s |" % (ct_rev, "clean source tree" if ct_clean else "tree state not recorded"))
+    twin_text, other_twins = twin_id(twin_runs)
+    unusable = sum(c["kind"] in ("refused", "no-data") for r in rows for c in r["platforms"].values())
+    if unusable:
+        out.append("| **runs without a verdict** | **%d** (refused by ct, or no result document: fix the cause and run them again) |" % unusable)
     out += ["| twin board | `%s` (`ct --json run <elf> --board %s --until CT-BENCH-DONE`) |" % (res["twinBoard"], res["twinBoard"]),
             "| ct binary | %s |" % esc("%s; `%s`; sha256 `%s`; %s" % (ct.get("version", "?"), ct.get("exe", "?"), ct.get("exeSha256", "?"),
                                                                     "the pinned build (ct-release.json)" if pinned_ct(ct) else "not the pinned build (ct-release.json)")),
-            "| twin | %s |" % twin_id(twin_runs),
+            "| twin | %s |" % twin_text,
             "| twin engine revision | `%s` |" % next((r["platforms"]["twin"].get("engine") for r in rows if r["platforms"].get("twin", {}).get("engine")), "unknown"),
             "| firmware toolchain | %s |" % esc(fw_toolchain(a.out)),
             "| QEMU | %s %s, machine `%s` |" % ("qemu-system-arm", res["qemu"]["version"], res["qemu"]["machine"]),
@@ -310,6 +329,10 @@ def main():
     with open(os.path.join(a.out, "summary.json"), "w", encoding="utf-8", newline="\n") as f:
         json.dump(summary, f, indent=1, sort_keys=True)
     print("wrote report.md and summary.json:", json.dumps(s["platforms"], sort_keys=True))
+    if unusable:
+        print("warning: %d run(s) were refused by ct or have no result document; the totals do not describe them" % unusable)
+    if other_twins:
+        print("warning: the twin of these runs (%s) is not the one of the published record (%s): the numbers can differ" % (", ".join(other_twins), pinned_twin()))
     if a.against:
         diffs, n_cases, n_runs = compare(summary, a.against)
         if diffs:

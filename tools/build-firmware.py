@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import json
 import os
+import shutil
 import subprocess
 import sys
 
@@ -23,6 +24,8 @@ BUILD = ("set -e; cmake -S /work/firmware -B /tmp/b -G Ninja -DCMAKE_TOOLCHAIN_F
 
 
 def docker(*args, check=True, **kw):
+    if not shutil.which("docker"):
+        sys.exit("docker is not on PATH: the firmware is built in a container (Docker with Linux containers)")
     env = dict(os.environ, MSYS_NO_PATHCONV="1")
     p = subprocess.run(["docker", *args], env=env, **kw)
     if check and p.returncode != 0:

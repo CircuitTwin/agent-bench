@@ -136,8 +136,23 @@ def split_qemu(text):
     return parts
 
 
+def twin_verdict(run):
+    doc = run.get("result")
+    return None if doc is None else doc.get("verdict")
+
+
+def why_no_verdict(run):
+    err = (run.get("result") or {}).get("error")
+    if isinstance(err, dict) and err.get("message"):
+        return str(err["message"])[:200]
+    lines = [ln for ln in (run.get("stderr") or run.get("stdoutHead") or "").strip().splitlines() if ln.strip()]
+    return lines[-1][:200] if lines else "no output (exit %s)" % run.get("exit")
+
+
 def check_qemu_image(lock):
     """The image must exist (it is never pulled) and hold the pinned qemu-system-arm; returns the image id."""
+    if not shutil.which("docker"):
+        sys.exit("docker is not on PATH: the QEMU runs need Docker with Linux containers")
     image = lock["image"]
     insp = subprocess.run(["docker", "image", "inspect", image, "--format", "{{.Id}}"], capture_output=True)
     if insp.returncode != 0:
@@ -156,12 +171,28 @@ def run_qemu(image, fw_dir, elf_name, limit_s, scrub):
            "--entrypoint", "sh", image, "-c",
            "tr -d '\\r' < /qemu-run.sh > /tmp/r.sh; sh /tmp/r.sh %s %d" % (elf_name, int(limit_s * 10))]
     env = dict(os.environ, MSYS_NO_PATHCONV="1")
-    rc, out, err = run_capture(cmd, 120, env)
+    rc, out, err = run_capture(cmd, limit_s + 90, env)
     parts = split_qemu(out)
     return {"image": image, "machine": QEMU_MACHINE, "dockerExit": rc, "status": parts.get("status", "").strip(),
             "serial": parts.get("serial", ""), "stdout": parts.get("stdout", ""), "faults": parts.get("faults", ""),
             "unimp": parts.get("unimp", ""), "guest": parts.get("guest", ""),
             "stderr": scrub(err)[-800:]}
+
+
+def run_qemu_confirmed(image, fw_dir, elf_name, limit_s, scrub):
+    """One QEMU run. A run that reaches the wall limit is repeated once with five times the limit: on a loaded host QEMU can
+    need seconds just to start, and that must not look like a hang. Only a run that stops again counts as a hang, and then the
+    record of the first attempt is kept."""
+    first = run_qemu(image, fw_dir, elf_name, limit_s, scrub)
+    if "CT-BENCH-DONE" in first["serial"] or "killed-at-limit" not in first["status"]:
+        return first
+    again = run_qemu(image, fw_dir, elf_name, limit_s * 5, scrub)
+    if "CT-BENCH-DONE" in again["serial"]:
+        print("  %s reached the %g s limit but finished when repeated with %g s: the host is loaded" % (elf_name, limit_s, limit_s * 5), flush=True)
+        again["firstAttempt"] = {"limitS": limit_s, "status": first["status"]}
+        return again
+    first["repeatedAtLimitS"] = limit_s * 5
+    return first
 
 
 def main():
@@ -178,7 +209,8 @@ def main():
     ap.add_argument("--only", help="comma list of case ids")
     ap.add_argument("--skip-twin", action="store_true")
     ap.add_argument("--skip-qemu", action="store_true")
-    ap.add_argument("--qemu-limit-s", type=float, default=4.0, help="wall limit of one QEMU run (default 4)")
+    ap.add_argument("--qemu-limit-s", type=float, default=4.0, help="wall limit of one QEMU run (default 4); a run that reaches it is "
+                    "repeated once with five times the limit, and only a run that stops again counts as a hang")
     a = ap.parse_args()
     a.fw = os.path.abspath(a.fw)
     a.out = os.path.abspath(a.out)
@@ -213,6 +245,7 @@ def main():
     raw_dir = os.path.join(a.out, "raw")
     os.makedirs(raw_dir, exist_ok=True)
     records = []
+    no_verdict = []
     for case in manifest["cases"]:
         if only and case["id"] not in only:
             continue
@@ -228,12 +261,14 @@ def main():
                 for extra in case.get("twinExtra", []):
                     rec["runs"]["twin:" + extra["label"]] = run_twin(a.ct, elf, max_ms, manifest.get("twinArgs", []) + extra["args"], 180, env, scrub)
             if not a.skip_qemu:
-                rec["runs"]["qemu"] = run_qemu(image, a.fw, name + ".elf", a.qemu_limit_s, scrub)
+                rec["runs"]["qemu"] = run_qemu_confirmed(image, a.fw, name + ".elf", a.qemu_limit_s, scrub)
             for plat, run in rec["runs"].items():
                 with open(os.path.join(raw_dir, "%s.%s.json" % (name, plat.replace(":", "-"))), "w", encoding="utf-8", newline="\n") as f:
                     json.dump(run, f, indent=1, sort_keys=True)
+                if plat != "qemu" and not twin_verdict(run):
+                    no_verdict.append("%s %s: %s" % (name, plat, why_no_verdict(run)))
             records.append(rec)
-            print("ran", name, {p: ("done" if r else "none") for p, r in rec["runs"].items()}, flush=True)
+            print("ran", name, {p: ("NO VERDICT" if p != "qemu" and not twin_verdict(r) else "done") for p, r in rec["runs"].items()}, flush=True)
 
     prior = {}
     old_meta = {}
@@ -260,6 +295,11 @@ def main():
     with open(results_path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(meta, f, indent=1, sort_keys=True)
     print("wrote", results_path)
+    if no_verdict:
+        print("%d twin run(s) produced no verdict (sign-in, server or twin inputs?), so they are no result; fix the cause and run them again:" % len(no_verdict))
+        for line in no_verdict[:10]:
+            print("  " + line)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

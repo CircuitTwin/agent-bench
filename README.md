@@ -164,9 +164,10 @@ python tools/local-server.py --server-bin <dir with the pinned release>/ct-serve
 ```
 
 It starts the server on `http://127.0.0.1:8137`, creates an account and an access token (scope `twins`), writes the token
-to `work/token.txt` (readable by you only; it is never printed) and keeps running until Ctrl-C. To use a hosted server
-instead, create an access token in the web app (Settings, Access tokens) and pass `--server <url>` and `--token-file` to
-`tools/run.py` below, or run `ct login --server <url>` once and pass neither; that setup was not used for the record.
+to `work/token.txt` (mode 600 where the system has file modes; it is never printed) and keeps running until Ctrl-C. To use
+a hosted server instead, create an access token in the web app (Settings, Access tokens) and pass `--server <url>` and
+`--token-file` to `tools/run.py` below, or run `ct login --server <url>` once and pass neither; that setup was not used for
+the record.
 
 **5. Run both platforms.** Point `ct` at the documents of the twin (laid out as in [The twin](#the-twin)) and at a fresh
 catalog, so the first run builds the twin and prints its id. In bash:
@@ -180,8 +181,10 @@ python tools/run.py --ct <dir with the pinned release>/ct.exe --server http://12
 
 In PowerShell, set the two variables with `$env:CT_SOURCES_DIR = '<inputs>\sources'` and
 `$env:CT_DATASHEET_CORPUS = '<inputs>\vendor'` and put the `run.py` command on one line. It runs the 43 images on `ct`
-(45 runs: `reset_vals` also runs with `--uninitialized-memory seeded:1`) and on QEMU, takes about five minutes, and writes
-`out/run/results.json` and one file per run in `out/run/raw/`.
+(45 runs: `reset_vals` also runs with `--uninitialized-memory seeded:1`) and on QEMU, takes about six minutes on an otherwise
+idle machine, and writes `out/run/results.json` and one file per run in `out/run/raw/`. A `ct` run that produces no
+verdict (sign-in refused, server not reachable) is listed at the end with its reason and makes `run.py` exit with 1; the
+report flags such runs too.
 
 **6. Score and compare:**
 
@@ -214,14 +217,16 @@ Lay them out like this (`<inputs>` is any directory; the documents are not part 
 The SVD and the manual are ST's; check the digest of every file you use. Two things change the twin you get:
 
 * **Other inputs.** Without the last two files `ct` builds another twin (`twin:ec1299ce48246a84` when tried), and a server
-  whose catalog already holds a twin of the part gives `ct run` that twin instead.
+  whose catalog already holds a twin of the part gives `ct run` that twin instead. In a test with both variables unset, `ct`
+  still generated a twin, from the SVD and the devicetree only (`twin:ec1299ce48246a84`), and the runs completed.
 * **The order of the files.** In the layouts tried, `ct` listed the documents in the order of their sorted absolute paths,
   and the twin's id covers that order. With `sources` sorting before `vendor`, as above, the id is the record's. With the
   directories the other way round (for example `corpus` and `sources`) the id is another one (`twin:e2cd0fe6aedf9810` when
   tried). Apart from provenance records (the order of the listed documents and which document some pin-mux citations
   name), the two twins are identical.
 
-The report's `twin` row shows the id when the runs generated the twin. Compare the id before comparing numbers.
+`tools/report.py` compares the id of the twin the runs generated with the record's (`twin.id` in `ct-release.json`): its
+`twin` row says whether it is the record's twin, and it warns when it is not. Compare the id before comparing numbers.
 
 ## What is in the repository
 
@@ -244,7 +249,11 @@ How a run is made:
   `--console-baud` declares the rate the console peer expects; without it nothing is compared and `baud` v1 passes.
 * **QEMU:** `qemu-system-arm -M olimex-stm32-h405 -kernel <elf> -display none -monitor none -serial null -serial file:...
   -icount shift=2,sleep=off -d guest_errors,unimp,int`, USART2 on a file, stopped at `CT-BENCH-DONE` or after 4 s of wall
-  time (`qemu/run.sh`).
+  time (`qemu/run.sh`). Virtual time is deterministic, the wall limit is not: on a loaded host QEMU can need seconds just to
+  start. `tools/run.py` therefore repeats a run that reaches the limit once, with 20 s, and records a hang only for a run
+  that stops again; a run that finishes in the repeat is recorded as finished and the host is reported as loaded. The
+  published record was made with the single 4 s attempt. Its five hangs (`irq_chain` v4, `poll_flag` v1, `stack` v1,
+  `unaligned` v1 and v2) do not finish within 60 s either.
 * **Firmware:** `-O1`, soft-float, no libc and no vendor library (register addresses only), Cortex-M4, the linker script
   of an STM32F407VG (1 MB flash, 128 KB SRAM at 0x20000000). The same ELF runs on both platforms.
 
@@ -301,6 +310,6 @@ This repository contains no third-party source code. The firmware uses register 
 manual RM0090 and no vendor library (no CMSIS, HAL or startup file); the linker script is written for this repository
 following the usual GNU ld layout of an STM32 image. The tools run as separate programs in containers and are not
 redistributed here: QEMU (GPL-2.0), the Arm GNU toolchain from the Debian `gcc-arm-none-eabi` package (GPL-3.0-or-later;
-the images link libgcc under the GCC Runtime Library Exception), binutils, CMake (BSD-3-Clause), Ninja (Apache-2.0) and the
-Debian base images. They are installed at build time from the Debian snapshots named in the Dockerfiles. The documents
-named under [The twin](#the-twin) belong to their publishers and are not included.
+the ELF images it builds link libgcc under the GCC Runtime Library Exception), binutils (GPL-3.0-or-later), CMake
+(BSD-3-Clause), Ninja (Apache-2.0) and the Debian base images. They are installed at build time from the Debian snapshots
+named in the Dockerfiles. The documents named under [The twin](#the-twin) belong to their publishers and are not included.

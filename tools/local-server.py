@@ -4,9 +4,9 @@
   python tools/local-server.py --server-bin <ct-server> [--port 8137] [--data-dir work/server] [--token-file work/token.txt]
 
 --server-bin is the ct-server binary of the release pinned in ct-release.json. The server keeps running until you stop it
-(Ctrl-C). The access token (scope `twins`: enough for `ct run`) is written to --token-file, readable by you only, for
-`tools/run.py --token-file`; it is never printed. Development sign-in exists only with CT_ENV=dev and CT_AUTH=dev on a loopback
-address, and any well-formed e-mail address signs in. Standard library only.
+(Ctrl-C). The access token (scope `twins`: enough for `ct run`) is written to --token-file (created with mode 600 where the
+system has file modes) for `tools/run.py --token-file`; it is never printed. Development sign-in exists only with
+CT_ENV=dev and CT_AUTH=dev on a loopback address, and any well-formed e-mail address signs in. Standard library only.
 """
 import argparse
 import hashlib
