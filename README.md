@@ -29,6 +29,8 @@ The record is [`results/2026-11-21/`](results/2026-11-21): `report.md` has every
 | Renode 1.17.0 | 26 | 12 | 14 | 17 | 2 | 11 | 5 |
 | QEMU 10.0.13 | 26 | 20 | 6 | 17 | 7 | 8 | 5 |
 
+*Sensitivity note:* Running Renode 1.17.0 with a manual `cpu PerformanceInMips 16` override moves Renode from 12/26 to **13/26** raw caught (**12/26** distinct catches, **2/17** false alarms — catching `wdg` v1 via watchdog boot-loop). Tasks were authored by CircuitTwin and none of the 43 ELFs has been run on physical STM32F407 silicon yet.
+
 The three-way record is [`results/2026-11-22/`](results/2026-11-22) (Renode 1.17.0 recorded on 2026-11-22 on the exact same byte-identical 43 ELFs as the 2026-11-21 CircuitTwin and QEMU record in [`results/2026-11-21/`](results/2026-11-21)).
 
 Caught by CircuitTwin & QEMU: 19; CircuitTwin only: 5 (`baud` v1, `clk_timer` v1, `irq_chain` v3, `race` v1, `wdg` v1); QEMU only: 1 (`i2c_nack` v2); neither: 1 (`reset_vals` v1).
@@ -110,9 +112,7 @@ prints `CT-BENCH <case>_v<N> PASS|FAIL <message>` and then `CT-BENCH-DONE` on US
 
 ## Reproduce
 
-> **The pinned `ct` and `ct-server` builds are not publicly downloadable yet.** Steps 1 to 3 below need neither of them.
-> Reproduction of the full record (steps 4 to 6) is available on request: open an issue on this repository
-> (<https://gitlab.com/apanter265/agent-bench/-/issues>) and say that you want to reproduce the record.
+> **Public CLI download:** The signed Linux and macOS `ct` CLI builds of the exact benchmarked source revision (`0.1.0-287d49a4a6b9`) are publicly downloadable via `curl -fsSL https://circuittwin.ai/install.sh | sh` (and `https://circuittwindownloads.blob.core.windows.net/cli/latest/manifest.json`). The recorded 2026-11-21 run used the Windows x86_64 build of that same commit; full Renode 1.17.0 and QEMU 10.0.13 reproduction runs offline via Docker with zero account required, and Windows CLI / local `ct-server` reproduction is available on request via (<https://gitlab.com/apanter265/agent-bench/-/issues>).
 
 ### What you need
 
