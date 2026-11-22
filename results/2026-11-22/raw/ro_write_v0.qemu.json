@@ -1,0 +1,12 @@
+{
+ "dockerExit": 0,
+ "faults": "",
+ "guest": "",
+ "image": "circuittwin/refs-qemu-system-arm:10.0.13-1",
+ "machine": "olimex-stm32-h405",
+ "serial": "CT-BENCH ro_write_v0 FAIL PD12 low\nCT-BENCH-DONE",
+ "status": "QEMU-STATUS=killed-at-limit",
+ "stderr": "",
+ "stdout": "",
+ "unimp": "      2 GPIOA: unimplemented device read \n      2 GPIOA: unimplemented device write\n      2 GPIOD: unimplemented device read \n      2 GPIOD: unimplemented device write"
+}

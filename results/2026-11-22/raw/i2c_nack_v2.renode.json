@@ -1,0 +1,21 @@
+{
+ "errorCount": 0,
+ "errorsHead": [],
+ "faultLinesHead": [],
+ "logTail": "cpu: Setting initial values: PC = 0x8000269, SP = 0x20020000.\n[17:46:18.4546]  [INFO] stm32f4: Machine started.\n[17:46:18.4905]  [WARNING] gpioPortB: Unhandled write to offset 0x4. Unhandled bits: [6-7] when writing value 0xC0. Tags: OT6 (0x1), OT7 (0x1).\n[17:46:18.4928]  [WARNING] i2c1: Unhandled write to offset 0x1C. Unhandled bits: [4, 6] when writing value 0x50. Tags: CCR (0x50).\n[17:46:18.4929]  [WARNING] i2c1: Unhandled write to offset 0x20. Unhandled bits: [0, 4] when writing value 0x11. Tags: TRISE (0x11).\n[17:46:18.4964]  [WARNING] i2c1: Child address changed to 0x68, but target is not registered\n[17:46:18.7543]  [INFO] stm32f4: Machine paused.\n[17:46:18.7580]  [INFO] stm32f4: Machine resumed.\n[17:46:18.7613]  [INFO] stm32f4: Machine paused.\n[17:46:18.7759]  [INFO] Got exception when reading from socket: System.IO.IOException: Unable to read data from the transport connection: Connection reset by peer.\n     ---> System.Net.Sockets.SocketException (104): Connection reset by peer\n       at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 count)\n       --- End of inner exception stack trace ---\n       at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 count)\n       at Antmicro.Renode.Utilities.SocketServerProvider.ReaderThreadBody(Stream stream)\n[17:46:18.7759]  [INFO] Got exception when writing to socket: System.IO.IOException: Unable to write data to the transport connection: Broken pipe.\n     ---> System.Net.Sockets.SocketException (32): Broken pipe\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       --- End of inner exception stack trace ---\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       at Antmicro.Renode.Utilities.SocketServerProvider.ProcessWriteTelnet(Stream stream, Byte[] data)\n       at Antmicro.Renode.Utilities.SocketServerProvider.WriterThreadBody(Stream stream)\n[17:46:18.8040]  [INFO] stm32f4: Disposed.\n",
+ "maxMs": 500,
+ "monitorErrors": [],
+ "platform": "platforms/boards/stm32f4_discovery.repl",
+ "renodeVersion": "Renode v1.17.0\n  build: 1.17.0+20260907gitf1dd1b4af\n  build type: Release\n  runtime: .NET 8.0.12",
+ "serial": "CT-BENCH i2c_nack_v2 PASS sensor read done\nCT-BENCH-DONE\n",
+ "status": "marker",
+ "vtimeInfo": "emulation GetTimeSourceInfo\n\rElapsed Virtual Time: 00:00:00.010000000\r\nElapsed Host Time: 00:00:00.301036400\r\nCurrent load: 0.0642\r\nCumulative load: 30.10364\r\nState: Idle\r\nAdvance immediately: False\r\nQuantum: 00:00:00.000100000\r\r\n(stm32f4)",
+ "wallMs": 3405,
+ "warningCount": 4,
+ "warningsHead": [
+  "[17:46:18.4905]  [WARNING] gpioPortB: Unhandled write to offset 0x4. Unhandled bits: [6-7] when writing value 0xC0. Tags: OT6 (0x1), OT7 (0x1).",
+  "[17:46:18.4928]  [WARNING] i2c1: Unhandled write to offset 0x1C. Unhandled bits: [4, 6] when writing value 0x50. Tags: CCR (0x50).",
+  "[17:46:18.4929]  [WARNING] i2c1: Unhandled write to offset 0x20. Unhandled bits: [0, 4] when writing value 0x11. Tags: TRISE (0x11).",
+  "[17:46:18.4964]  [WARNING] i2c1: Child address changed to 0x68, but target is not registered"
+ ]
+}

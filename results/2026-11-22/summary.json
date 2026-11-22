@@ -1,0 +1,1314 @@
+{
+ "ct": {
+  "exe": "ct.exe",
+  "exeSha256": "3c5ab24e7a1cf3a8ee5519f3cddaf0ba90af1d7a4c30b65337ba121a80d598d4",
+  "version": "ct 0.1.0"
+ },
+ "date": "2026-11-22",
+ "harness": {
+  "dirtyTree": true,
+  "revision": "b62421fc1ed7493d0a0db0e1a31a1758b70ef121"
+ },
+ "provenance": {
+  "binaries": {
+   "ct-confidence.exe": "61f80f6dc54e13d9ef246b7a49e2ea5ae39f81100bf14342519e95b03530e232",
+   "ct-server.exe": "36f2d30e25b16656af8ea89b3034ccde4da67509f00be27b5531c3a5c4fae464",
+   "ct-worker.exe": "1b315cc2734fc9f32073df99106e39d6effd529285803fab78391081c731849f",
+   "ct.exe": "3c5ab24e7a1cf3a8ee5519f3cddaf0ba90af1d7a4c30b65337ba121a80d598d4"
+  },
+  "checkedAt": "2026-11-21T05:06:14+00:00",
+  "cleanTree": true,
+  "dirtyTree": false,
+  "sourceRevision": "287d49a4a6b9254b66f5a8f12637a53945bee637"
+ },
+ "rows": [
+  {
+   "bugClass": "",
+   "case": "baud",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS sent at the configured rate; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS sent at the configured rate",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS sent at the configured rate; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "wrong UART baud versus the peer",
+   "case": "baud",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS sent at the configured rate; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS sent at the configured rate",
+     "signals": []
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH PASS sent at the configured rate; verdict=fail stop=marker; issues=bus.serial.baud-mismatch x1",
+     "signals": [
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "",
+   "case": "clk_gpio",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL PD12 did not go high; unimplemented-device log: GPIOA,GPIOD",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS PD12 high",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS PD12 high; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "missing peripheral clock enable",
+   "case": "clk_gpio",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL PD12 did not go high; unimplemented-device log: GPIOA,GPIOD",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS PD12 high",
+     "signals": []
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL PD12 did not go high; verdict=inconclusive stop=marker; issues=mcu.unclocked-access x4; note={\"accesses\": [{\"access\": \"read\", \"address\": 1073875968, \"code\": \"mcu.unclocked-access\", \"count\": 1, \"firstPc\": 134218448, \"peripheral\": \"GPIOD\"}, {\"access\": \"write\", \"address\": 1073875968, \"code\": \"mc",
+     "signals": [
+      "self-check",
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "",
+   "case": "clk_timer",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS TIM3 counting; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS TIM3 counting",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS TIM3 counting; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "missing peripheral clock enable",
+   "case": "clk_timer",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS TIM3 counting; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS TIM3 counting",
+     "signals": []
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL TIM3 counter stuck at 0; verdict=inconclusive stop=marker; issues=mcu.unclocked-access x5; note={\"accesses\": [{\"access\": \"write\", \"address\": 1073742888, \"code\": \"mcu.unclocked-access\", \"count\": 1, \"firstPc\": 134218452, \"peripheral\": \"TIM3\"}, {\"access\": \"write\", \"address\": 1073742892, \"code\": \"mc",
+     "signals": [
+      "self-check",
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "",
+   "case": "dma_m2m",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL no transfer-complete flag; unimplemented-device log: DMA2,GPIOA",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS 16 words copied; warnings=1 (dma2)",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS 16 words copied; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "DMA misconfiguration",
+   "case": "dma_m2m",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL no transfer-complete flag; unimplemented-device log: DMA2,GPIOA",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS 16 words copied; warnings=1 (dma2)",
+     "signals": []
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL no transfer-complete flag; verdict=inconclusive stop=marker; issues=mcu.unclocked-access x8; note={\"accesses\": [{\"access\": \"write\", \"address\": 1073898512, \"code\": \"mcu.unclocked-access\", \"count\": 2, \"firstPc\": 134218480, \"peripheral\": \"DMA2\"}, {\"access\": \"read\", \"address\": 1073898512, \"code\": \"mcu",
+     "signals": [
+      "self-check",
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "DMA misconfiguration",
+   "case": "dma_m2m",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL no transfer-complete flag; unimplemented-device log: DMA2,GPIOA",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS 16 words copied; warnings=1 (dma2)",
+     "signals": []
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH PASS 16 words copied; verdict=pass stop=marker; issues=peripheral.config.invalid x1",
+     "signals": [
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 2
+  },
+  {
+   "bugClass": "DMA misconfiguration",
+   "case": "dma_m2m",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL no transfer-complete flag; unimplemented-device log: DMA2,GPIOA",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL no transfer-complete flag; warnings=3 (dma2)",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL no transfer-complete flag; verdict=pass stop=marker; issues=peripheral.config.invalid x1",
+     "signals": [
+      "self-check",
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 3
+  },
+  {
+   "bugClass": "",
+   "case": "gpio_mode",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL PD12 reads low; unimplemented-device log: GPIOA,GPIOD",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS PD12 reads high",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS PD12 reads high; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "wrong register bit or field",
+   "case": "gpio_mode",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL PD12 reads low; unimplemented-device log: GPIOA,GPIOD",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS PD12 reads high",
+     "signals": []
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL PD12 reads low; verdict=pass stop=marker",
+     "signals": [
+      "self-check"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "",
+   "case": "i2c_nack",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL no start condition; unimplemented-device log: GPIOA,GPIOB,I2C1",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL no NACK and no ACK; warnings=4 (gpioPortB,i2c1)",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS NACK seen and handled; verdict=pass stop=marker; issues=bus.no-target x1",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "I2C NACK not handled",
+   "case": "i2c_nack",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL no start condition; unimplemented-device log: GPIOA,GPIOB,I2C1",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "no result line (time-limit); warnings=4 (gpioPortB,i2c1)",
+     "signals": [
+      "hang"
+     ]
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "no result line; verdict=fail stop=time_limit; issues=bus.no-target x1",
+     "signals": [
+      "hang",
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "I2C NACK not handled",
+   "case": "i2c_nack",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL no start condition; unimplemented-device log: GPIOA,GPIOB,I2C1",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS sensor read done; warnings=4 (gpioPortB,i2c1)",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS sensor read done; verdict=pass stop=marker; issues=bus.no-target x1",
+     "signals": []
+    }
+   },
+   "version": 2
+  },
+  {
+   "bugClass": "",
+   "case": "irq_chain",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS 3 ticks; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS 3 ticks",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS 3 ticks; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "forgotten interrupt enable",
+   "case": "irq_chain",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL timer interrupt did not run; unimplemented-device log: GPIOA",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL timer interrupt did not run",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL timer interrupt did not run; verdict=pass stop=marker",
+     "signals": [
+      "self-check"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "forgotten interrupt enable",
+   "case": "irq_chain",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL timer interrupt did not run; unimplemented-device log: GPIOA",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL timer interrupt did not run",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL timer interrupt did not run; verdict=pass stop=marker",
+     "signals": [
+      "self-check"
+     ]
+    }
+   },
+   "version": 2
+  },
+  {
+   "bugClass": "interrupt flag not cleared",
+   "case": "irq_chain",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS 3 ticks; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "no result line (time-limit)",
+     "signals": [
+      "hang"
+     ]
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "no result line; verdict=fail stop=time_limit",
+     "signals": [
+      "hang",
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 3
+  },
+  {
+   "bugClass": "forgotten interrupt enable",
+   "case": "irq_chain",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "no result line (QEMU-STATUS=killed-at-limit); unimplemented-device log: GPIOA",
+     "signals": [
+      "hang"
+     ]
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "no result line (time-limit)",
+     "signals": [
+      "hang"
+     ]
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "no result line; verdict=fail stop=time_limit",
+     "signals": [
+      "hang",
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 4
+  },
+  {
+   "bugClass": "",
+   "case": "nvic_prio",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS SysTick preempted the TIM3 handler; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS SysTick preempted the TIM3 handler",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS SysTick preempted the TIM3 handler; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "wrong NVIC priority",
+   "case": "nvic_prio",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL SysTick never ran inside the TIM3 handler; unimplemented-device log: GPIOA",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL SysTick never ran inside the TIM3 handler",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL SysTick never ran inside the TIM3 handler; verdict=pass stop=marker",
+     "signals": [
+      "self-check"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "",
+   "case": "pll",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL HSE not ready; unimplemented-device log: GPIOA",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS running from the PLL; warnings=2 (flash_controller,rcc)",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS running from the PLL; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "wrong register bit or field",
+   "case": "pll",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL HSE not ready; unimplemented-device log: GPIOA",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS running from the PLL; warnings=1 (rcc)",
+     "signals": []
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH PASS running from the PLL; verdict=pass stop=marker; issues=peripheral.flash.latency-insufficient x1",
+     "signals": [
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "polling a flag that never sets",
+   "case": "pll",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL HSE not ready; unimplemented-device log: GPIOA",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS running from the PLL; warnings=2 (flash_controller,rcc)",
+     "signals": []
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL SWS never showed the PLL; verdict=pass stop=marker",
+     "signals": [
+      "self-check"
+     ]
+    }
+   },
+   "version": 2
+  },
+  {
+   "bugClass": "",
+   "case": "poll_flag",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS byte sent; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS byte sent",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS byte sent; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "polling a flag that never sets",
+   "case": "poll_flag",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "no result line (QEMU-STATUS=killed-at-limit); unimplemented-device log: GPIOA",
+     "signals": [
+      "hang"
+     ]
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "no result line (time-limit)",
+     "signals": [
+      "hang"
+     ]
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "no result line; verdict=fail stop=time_limit",
+     "signals": [
+      "hang",
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "",
+   "case": "psc",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL TIM3 tick rate outside 2%; unimplemented-device log: GPIOA",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL TIM3 tick rate outside 2%",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS TIM3 at 1 MHz; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "timer prescaler off by one",
+   "case": "psc",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL TIM3 tick rate outside 2%; unimplemented-device log: GPIOA",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL TIM3 tick rate outside 2%",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL TIM3 tick rate outside 2%; verdict=pass stop=marker",
+     "signals": [
+      "self-check"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "",
+   "case": "race",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS pair consistent; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS pair consistent",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS pair consistent; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "race between ISR and main",
+   "case": "race",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS pair consistent; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL torn read",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL torn read; verdict=pass stop=marker",
+     "signals": [
+      "self-check"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "",
+   "case": "reset_vals",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS scratch zero; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS scratch zero",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS scratch zero; verdict=pass stop=marker",
+     "signals": []
+    },
+    "twin:seeded": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS scratch zero; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "reliance on undocumented reset values",
+   "case": "reset_vals",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS scratch zero; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS scratch zero",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS scratch zero; verdict=pass stop=marker",
+     "signals": []
+    },
+    "twin:seeded": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL scratch word is not zero; verdict=pass stop=marker",
+     "signals": [
+      "self-check"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "",
+   "case": "ro_write",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL PD12 low; unimplemented-device log: GPIOA,GPIOD",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS PD12 high",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS PD12 high; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "writing to a read-only register",
+   "case": "ro_write",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL PD12 low; unimplemented-device log: GPIOA,GPIOD",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL PD12 low",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL PD12 low; verdict=pass stop=marker; issues=peripheral.register.read-only-write x1",
+     "signals": [
+      "self-check"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "writing to a read-only register",
+   "case": "ro_write",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL flash word unchanged; unimplemented-device log: GPIOA",
+     "signals": [
+      "self-check"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS flash word stored",
+     "signals": []
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL flash word unchanged; verdict=pass stop=marker; issues=peripheral.flash.operation-error x1",
+     "signals": [
+      "self-check",
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 2
+  },
+  {
+   "bugClass": "",
+   "case": "stack",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS sum ok; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS sum ok",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS sum ok; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "stack overflow",
+   "case": "stack",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "no result line (QEMU-STATUS=killed-at-limit); log: BusFault with BFSR.STKERR; unimplemented-device log: GPIOA",
+     "signals": [
+      "fault",
+      "hang"
+     ]
+    },
+    "renode": {
+     "caught": true,
+     "evidence": "no result line (time-limit); errors=6 (flash_controller: Attempt to write 0x000007A4 to 192 in the option bytes region); warnings=515 (sysbus)",
+     "signals": [
+      "hang"
+     ]
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "no result line; verdict=fail stop=fault; fault=HardFault; issues=mcu.unmapped-access x3,run.fault x1; note={\"accesses\": [{\"access\": \"write\", \"address\": 536870848, \"code\": \"mcu.unmapped-access\", \"count\": 1, \"firstPc\": 134218448, \"peripheral\": \"bus\"}, {\"access\": \"write\", \"address\": 536870844, \"code\": \"mcu.un",
+     "signals": [
+      "fault",
+      "hang",
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "",
+   "case": "unaligned",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS loaded; unimplemented-device log: GPIOA",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS loaded",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS loaded; verdict=pass stop=marker",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "unaligned access",
+   "case": "unaligned",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "no result line (QEMU-STATUS=killed-at-limit); log: UsageFault with UFSR.UNALIGNED; unimplemented-device log: GPIOA",
+     "signals": [
+      "fault",
+      "hang"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS loaded",
+     "signals": []
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "no result line; verdict=fail stop=fault; fault=HardFault; issues=run.fault x1",
+     "signals": [
+      "fault",
+      "hang",
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 1
+  },
+  {
+   "bugClass": "unaligned access",
+   "case": "unaligned",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": true,
+     "evidence": "no result line (QEMU-STATUS=killed-at-limit); log: UsageFault with UFSR.UNALIGNED; unimplemented-device log: GPIOA",
+     "signals": [
+      "fault",
+      "hang"
+     ]
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS loaded",
+     "signals": []
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "no result line; verdict=fail stop=fault; fault=HardFault; issues=run.fault x1",
+     "signals": [
+      "fault",
+      "hang",
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 2
+  },
+  {
+   "bugClass": "",
+   "case": "wdg",
+   "kind": "correct",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS worked 200 ms; unimplemented-device log: GPIOA,I2S2ext",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS worked 200 ms",
+     "signals": []
+    },
+    "twin": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS worked 200 ms; verdict=pass stop=marker; issues=peripheral.watchdog.started x1",
+     "signals": []
+    }
+   },
+   "version": 0
+  },
+  {
+   "bugClass": "unkicked watchdog",
+   "case": "wdg",
+   "kind": "bug",
+   "platforms": {
+    "qemu": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS worked 200 ms; unimplemented-device log: GPIOA,I2S2ext",
+     "signals": []
+    },
+    "renode": {
+     "caught": false,
+     "evidence": "CT-BENCH PASS worked 200 ms",
+     "signals": []
+    },
+    "twin": {
+     "caught": true,
+     "evidence": "CT-BENCH FAIL booted after a watchdog reset; verdict=pass stop=marker; issues=peripheral.watchdog.reset x1,peripheral.watchdog.started x1",
+     "signals": [
+      "self-check",
+      "twin-diagnostic"
+     ]
+    }
+   },
+   "version": 1
+  }
+ ],
+ "schema": "ct.agent-bench-summary/1",
+ "totals": {
+  "bothCaught": 19,
+  "byBugClass": {
+   "DMA misconfiguration": {
+    "qemu": 3,
+    "renode": 1,
+    "twin": 3,
+    "versions": 3
+   },
+   "I2C NACK not handled": {
+    "qemu": 2,
+    "renode": 1,
+    "twin": 1,
+    "versions": 2
+   },
+   "forgotten interrupt enable": {
+    "qemu": 3,
+    "renode": 3,
+    "twin": 3,
+    "versions": 3
+   },
+   "interrupt flag not cleared": {
+    "qemu": 0,
+    "renode": 1,
+    "twin": 1,
+    "versions": 1
+   },
+   "missing peripheral clock enable": {
+    "qemu": 1,
+    "renode": 0,
+    "twin": 2,
+    "versions": 2
+   },
+   "polling a flag that never sets": {
+    "qemu": 2,
+    "renode": 1,
+    "twin": 2,
+    "versions": 2
+   },
+   "race between ISR and main": {
+    "qemu": 0,
+    "renode": 1,
+    "twin": 1,
+    "versions": 1
+   },
+   "reliance on undocumented reset values": {
+    "qemu": 0,
+    "renode": 0,
+    "twin": 0,
+    "versions": 1
+   },
+   "stack overflow": {
+    "qemu": 1,
+    "renode": 1,
+    "twin": 1,
+    "versions": 1
+   },
+   "timer prescaler off by one": {
+    "qemu": 1,
+    "renode": 1,
+    "twin": 1,
+    "versions": 1
+   },
+   "unaligned access": {
+    "qemu": 2,
+    "renode": 0,
+    "twin": 2,
+    "versions": 2
+   },
+   "unkicked watchdog": {
+    "qemu": 0,
+    "renode": 0,
+    "twin": 1,
+    "versions": 1
+   },
+   "writing to a read-only register": {
+    "qemu": 2,
+    "renode": 1,
+    "twin": 2,
+    "versions": 2
+   },
+   "wrong NVIC priority": {
+    "qemu": 1,
+    "renode": 1,
+    "twin": 1,
+    "versions": 1
+   },
+   "wrong UART baud versus the peer": {
+    "qemu": 0,
+    "renode": 0,
+    "twin": 1,
+    "versions": 1
+   },
+   "wrong register bit or field": {
+    "qemu": 2,
+    "renode": 0,
+    "twin": 2,
+    "versions": 2
+   }
+  },
+  "neither": 1,
+  "neitherTwinNorRenode": 2,
+  "platforms": {
+   "qemu": {
+    "buggyVersions": 26,
+    "caught": 20,
+    "caughtAndDifferentFromCorrect": 8,
+    "caughtByPlatformSignal": 5,
+    "correctVersions": 17,
+    "falseAlarms": 7,
+    "missed": 6
+   },
+   "renode": {
+    "buggyVersions": 26,
+    "caught": 12,
+    "caughtAndDifferentFromCorrect": 11,
+    "caughtByPlatformSignal": 5,
+    "correctVersions": 17,
+    "falseAlarms": 2,
+    "missed": 14
+   },
+   "twin": {
+    "buggyVersions": 26,
+    "caught": 24,
+    "caughtAndDifferentFromCorrect": 24,
+    "caughtByPlatformSignal": 16,
+    "correctVersions": 17,
+    "falseAlarms": 0,
+    "missed": 2
+   }
+  },
+  "qemuOnly": 1,
+  "renodeOnlyVsTwin": 0,
+  "twinAndRenode": 12,
+  "twinOnly": 5,
+  "twinOnlyVsRenode": 12
+ }
+}

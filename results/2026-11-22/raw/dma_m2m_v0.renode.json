@@ -1,0 +1,18 @@
+{
+ "errorCount": 0,
+ "errorsHead": [],
+ "faultLinesHead": [],
+ "logTail": "[17:45:32.5262]  [INFO] System bus created.\n[17:45:33.2305]  [INFO] SynopsysEthernetMAC: Bus width not specified, defaulting to Bits32\n[17:45:33.6219]  [INFO] sysbus: Loaded SVD: /tmp/renode-507/f52a0a97-f762-4444-9aae-6c5f63c13f72.tmp. Name: STM32F40x. Description: STM32F40x.\n[17:45:33.7609]  [INFO] sysbus: Loading block of 1088 bytes length at 0x8000000.\n[17:45:33.7732]  [INFO] sysbus: Loading block of 128 bytes length at 0x8000440.\n[17:45:33.7733]  [INFO] sysbus: Loading block of 1536 bytes length at 0x8000440.\n[17:45:33.8846]  [INFO] cpu: Guessing VectorTableOffset value to be 0x8000000.\n[17:45:33.8967]  [INFO] cpu: Setting initial values: PC = 0x8000269, SP = 0x20020000.\n[17:45:33.8987]  [INFO] stm32f4: Machine started.\n[17:45:33.9416]  [WARNING] dma2: Unhandled write to offset 0x8. Unhandled bits: [0, 2-4] when writing value 0x3D. Tags: CFEIF0 (0x1), CDMEIF0 (0x1), CTEIF0 (0x1), CHTIF0 (0x1).\n[17:45:33.9540]  [INFO] stm32f4: Machine paused.\n[17:45:33.9733]  [INFO] Got exception when writing to socket: System.IO.IOException: Unable to write data to the transport connection: Broken pipe.\n     ---> System.Net.Sockets.SocketException (32): Broken pipe\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       --- End of inner exception stack trace ---\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       at Antmicro.Renode.Utilities.SocketServerProvider.ProcessWriteTelnet(Stream stream, Byte[] data)\n       at Antmicro.Renode.Utilities.SocketServerProvider.WriterThreadBody(Stream stream)\n[17:45:34.0177]  [INFO] stm32f4: Disposed.\n",
+ "maxMs": 500,
+ "monitorErrors": [],
+ "platform": "platforms/boards/stm32f4_discovery.repl",
+ "renodeVersion": "Renode v1.17.0\n  build: 1.17.0+20260907gitf1dd1b4af\n  build type: Release\n  runtime: .NET 8.0.12",
+ "serial": "CT-BENCH dma_m2m_v0 PASS 16 words copied\nCT-BENCH-DONE\n",
+ "status": "marker",
+ "vtimeInfo": "emulation GetTimeSourceInfo\n\rElapsed Virtual Time: 00:00:00.005000000\r\nElapsed Host Time: 00:00:00.052800600\r\nCurrent load: 0.0692\r\nCumulative load: 10.56012\r\nState: Idle\r\nAdvance immediately: False\r\nQuantum: 00:00:00.000100000\r\r\n(stm32f4)",
+ "wallMs": 3425,
+ "warningCount": 1,
+ "warningsHead": [
+  "[17:45:33.9416]  [WARNING] dma2: Unhandled write to offset 0x8. Unhandled bits: [0, 2-4] when writing value 0x3D. Tags: CFEIF0 (0x1), CDMEIF0 (0x1), CTEIF0 (0x1), CHTIF0 (0x1)."
+ ]
+}

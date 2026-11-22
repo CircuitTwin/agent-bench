@@ -1,0 +1,16 @@
+{
+ "errorCount": 0,
+ "errorsHead": [],
+ "faultLinesHead": [],
+ "logTail": "[17:44:24.6247]  [INFO] System bus created.\n[17:44:25.3074]  [INFO] SynopsysEthernetMAC: Bus width not specified, defaulting to Bits32\n[17:44:25.6812]  [INFO] sysbus: Loaded SVD: /tmp/renode-257/81c000b3-f50f-443d-89c9-30a278b989a7.tmp. Name: STM32F40x. Description: STM32F40x.\n[17:44:25.8049]  [INFO] sysbus: Loading block of 960 bytes length at 0x8000000.\n[17:44:25.8149]  [INFO] sysbus: Loading block of 4 bytes length at 0x80003C0.\n[17:44:25.8151]  [INFO] sysbus: Loading block of 1540 bytes length at 0x80003C0.\n[17:44:25.9405]  [INFO] cpu: Guessing VectorTableOffset value to be 0x8000000.\n[17:44:25.9548]  [INFO] cpu: Setting initial values: PC = 0x8000269, SP = 0x20020000.\n[17:44:25.9565]  [INFO] stm32f4: Machine started.\n[17:44:26.0073]  [INFO] stm32f4: Machine paused.\n[17:44:26.0112]  [INFO] stm32f4: Machine resumed.\n[17:44:26.0138]  [INFO] stm32f4: Machine paused.\n[17:44:26.0162]  [INFO] stm32f4: Machine resumed.\n[17:44:26.0188]  [INFO] stm32f4: Machine paused.\n[17:44:26.0208]  [INFO] stm32f4: Machine resumed.\n[17:44:26.0234]  [INFO] stm32f4: Machine paused.\n[17:44:26.0253]  [INFO] stm32f4: Machine resumed.\n[17:44:26.0304]  [INFO] stm32f4: Machine paused.\n[17:44:26.0469]  [INFO] Got exception when writing to socket: System.IO.IOException: Unable to write data to the transport connection: Broken pipe.\n     ---> System.Net.Sockets.SocketException (32): Broken pipe\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       --- End of inner exception stack trace ---\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       at Antmicro.Renode.Utilities.SocketServerProvider.ProcessWriteTelnet(Stream stream, Byte[] data)\n       at Antmicro.Renode.Utilities.SocketServerProvider.WriterThreadBody(Stream stream)\n[17:44:26.0899]  [INFO] stm32f4: Disposed.\n",
+ "maxMs": 1000,
+ "monitorErrors": [],
+ "platform": "platforms/boards/stm32f4_discovery.repl",
+ "renodeVersion": "Renode v1.17.0\n  build: 1.17.0+20260907gitf1dd1b4af\n  build type: Release\n  runtime: .NET 8.0.12",
+ "serial": "CT-BENCH irq_chain_v1 FAIL timer interrupt did not run\nCT-BENCH-DONE\n",
+ "status": "marker",
+ "vtimeInfo": "emulation GetTimeSourceInfo\n\rElapsed Virtual Time: 00:00:00.025000000\r\nElapsed Host Time: 00:00:00.061851600\r\nCurrent load: 0.1195\r\nCumulative load: 2.474064\r\nState: Idle\r\nAdvance immediately: False\r\nQuantum: 00:00:00.000100000\r\r\n(stm32f4)",
+ "wallMs": 3388,
+ "warningCount": 0,
+ "warningsHead": []
+}

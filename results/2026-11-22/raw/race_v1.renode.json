@@ -1,0 +1,16 @@
+{
+ "errorCount": 0,
+ "errorsHead": [],
+ "faultLinesHead": [],
+ "logTail": "[17:46:52.0555]  [INFO] System bus created.\n[17:46:52.8472]  [INFO] SynopsysEthernetMAC: Bus width not specified, defaulting to Bits32\n[17:46:53.2206]  [INFO] sysbus: Loaded SVD: /tmp/renode-1034/4edd0aa6-8578-41c3-a88e-c02f8b2cd600.tmp. Name: STM32F40x. Description: STM32F40x.\n[17:46:53.3645]  [INFO] sysbus: Loading block of 968 bytes length at 0x8000000.\n[17:46:53.3768]  [INFO] sysbus: Loading block of 12 bytes length at 0x80003C8.\n[17:46:53.3769]  [INFO] sysbus: Loading block of 1540 bytes length at 0x80003C8.\n[17:46:53.5018]  [INFO] cpu: Guessing VectorTableOffset value to be 0x8000000.\n[17:46:53.5129]  [INFO] cpu: Setting initial values: PC = 0x8000269, SP = 0x20020000.\n[17:46:53.5150]  [INFO] stm32f4: Machine started.\n[17:46:53.6104]  [INFO] stm32f4: Machine paused.\n[17:46:53.6263]  [INFO] Got exception when writing to socket: System.IO.IOException: Unable to write data to the transport connection: Broken pipe.\n     ---> System.Net.Sockets.SocketException (32): Broken pipe\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       --- End of inner exception stack trace ---\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       at Antmicro.Renode.Utilities.SocketServerProvider.ProcessWriteTelnet(Stream stream, Byte[] data)\n       at Antmicro.Renode.Utilities.SocketServerProvider.WriterThreadBody(Stream stream)\n[17:46:53.6693]  [INFO] stm32f4: Disposed.\n",
+ "maxMs": 500,
+ "monitorErrors": [],
+ "platform": "platforms/boards/stm32f4_discovery.repl",
+ "renodeVersion": "Renode v1.17.0\n  build: 1.17.0+20260907gitf1dd1b4af\n  build type: Release\n  runtime: .NET 8.0.12",
+ "serial": "CT-BENCH race_v1 FAIL torn read\nCT-BENCH-DONE\n",
+ "status": "marker",
+ "vtimeInfo": "emulation GetTimeSourceInfo\n\rElapsed Virtual Time: 00:00:00.005000000\r\nElapsed Host Time: 00:00:00.093020800\r\nCurrent load: 4.801512287334593\r\nCumulative load: 18.60416\r\nState: Idle\r\nAdvance immediately: False\r\nQuantum: 00:00:00.000100000\r\r\n(stm32f4)",
+ "wallMs": 3850,
+ "warningCount": 0,
+ "warningsHead": []
+}

@@ -1,0 +1,15 @@
+{
+  "$comment": "Pinned reference emulator of the benchmark: official Antmicro Renode v1.17.0 portable Linux build, run as an external process in the container image built from renode/Dockerfile (base image, Debian snapshot, and release archive SHA-256 pinned there). Nothing of it is linked into, vendored by or redistributed with this repository. License: BSD-3-Clause (Renode), used as a test oracle only. tools/run_renode.py and tools/run.py refuse an image whose /opt/renode/renode binary differs from binarySha256.",
+  "name": "renode",
+  "version": "1.17.0",
+  "build": "1.17.0+20260907gitf1dd1b4af",
+  "archiveUrl": "https://github.com/renode/renode/releases/download/v1.17.0/renode-1.17.0.linux-portable.tar.gz",
+  "archiveSha256": "4ba7c68b59e2447f188ef4b4b112fcccd2802582c460beedceb63b84e5605a5f",
+  "debianSnapshot": "20261026T000000Z",
+  "baseImage": "debian@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f",
+  "dockerfile": "renode/Dockerfile",
+  "image": "agent-bench/renode:1.17.0-1",
+  "binary": "/opt/renode/renode",
+  "binarySha256": "822209a27168e2ce2e5e679ed481686b555c8e154745431b25d8b4104c34138f",
+  "platform": "platforms/boards/stm32f4_discovery.repl"
+}

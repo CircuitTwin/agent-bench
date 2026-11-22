@@ -20,6 +20,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(HERE, ".."))
 QEMU_LOCK = os.path.join(ROOT, "qemu", "qemu-system-arm.lock.json")
+RENODE_LOCK = os.path.join(ROOT, "renode", "renode.lock.json")
 CT_RELEASE = os.path.join(ROOT, "ct-release.json")
 TWIN_BOARD = "stm32f4-discovery"
 QEMU_MACHINE = "olimex-stm32-h405"
@@ -209,6 +210,7 @@ def main():
     ap.add_argument("--only", help="comma list of case ids")
     ap.add_argument("--skip-twin", action="store_true")
     ap.add_argument("--skip-qemu", action="store_true")
+    ap.add_argument("--with-renode", action="store_true", help="also run every image on pinned Renode (tools/run_renode.py)")
     ap.add_argument("--qemu-limit-s", type=float, default=4.0, help="wall limit of one QEMU run (default 4); a run that reaches it is "
                     "repeated once with five times the limit, and only a run that stops again counts as a hang")
     a = ap.parse_args()
@@ -292,9 +294,18 @@ def main():
         qemu_meta = old_meta["qemu"]
     meta = {"schema": "ct.agent-bench-results/1", "date": a.date, "twinBoard": TWIN_BOARD, "qemu": qemu_meta,
             "ct": info, "label": "provisional", "harness": git_state(), "records": [merged[k] for k in sorted(merged)]}
+    if old_meta.get("renode"):
+        meta["renode"] = old_meta["renode"]
     with open(results_path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(meta, f, indent=1, sort_keys=True)
     print("wrote", results_path)
+    if a.with_renode:
+        rn_cmd = [sys.executable, os.path.join(HERE, "run_renode.py"), "--fw", a.fw, "--out", a.out, "--date", a.date]
+        if a.only:
+            rn_cmd += ["--only", a.only]
+        p = subprocess.run(rn_cmd)
+        if p.returncode != 0:
+            sys.exit(p.returncode)
     if no_verdict:
         print("%d twin run(s) produced no verdict (sign-in, server or twin inputs?), so they are no result; fix the cause and run them again:" % len(no_verdict))
         for line in no_verdict[:10]:

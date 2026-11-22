@@ -1,0 +1,16 @@
+{
+ "errorCount": 0,
+ "errorsHead": [],
+ "faultLinesHead": [],
+ "logTail": "m32f4: Machine resumed.\n[17:45:11.3071]  [INFO] stm32f4: Machine paused.\n[17:45:11.3094]  [INFO] stm32f4: Machine resumed.\n[17:45:12.4229]  [INFO] stm32f4: Machine paused.\n[17:45:12.4250]  [INFO] stm32f4: Machine resumed.\n[17:45:13.4419]  [INFO] stm32f4: Machine paused.\n[17:45:13.4437]  [INFO] stm32f4: Machine resumed.\n[17:45:14.4804]  [INFO] stm32f4: Machine paused.\n[17:45:14.4821]  [INFO] stm32f4: Machine resumed.\n[17:45:15.5420]  [INFO] stm32f4: Machine paused.\n[17:45:15.5450]  [INFO] stm32f4: Machine resumed.\n[17:45:16.6147]  [INFO] stm32f4: Machine paused.\n[17:45:16.6165]  [INFO] stm32f4: Machine resumed.\n[17:45:17.6201]  [INFO] stm32f4: Machine paused.\n[17:45:17.6218]  [INFO] stm32f4: Machine resumed.\n[17:45:18.7335]  [INFO] stm32f4: Machine paused.\n[17:45:18.7355]  [INFO] stm32f4: Machine resumed.\n[17:45:19.8974]  [INFO] stm32f4: Machine paused.\n[17:45:19.9153]  [INFO] Got exception when writing to socket: System.IO.IOException: Unable to write data to the transport connection: Broken pipe.\n     ---> System.Net.Sockets.SocketException (32): Broken pipe\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       --- End of inner exception stack trace ---\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       at Antmicro.Renode.Utilities.SocketServerProvider.WriterThreadBody(Stream stream)\n[17:45:19.9153]  [INFO] Got exception when reading from socket: System.IO.IOException: Unable to read data from the transport connection: Connection reset by peer.\n     ---> System.Net.Sockets.SocketException (104): Connection reset by peer\n       at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 count)\n       --- End of inner exception stack trace ---\n       at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 count)\n       at Antmicro.Renode.Utilities.SocketServerProvider.ReaderThreadBody(Stream stream)\n[17:45:19.9485]  [INFO] stm32f4: Disposed.\n",
+ "maxMs": 1000,
+ "monitorErrors": [],
+ "platform": "platforms/boards/stm32f4_discovery.repl",
+ "renodeVersion": "Renode v1.17.0\n  build: 1.17.0+20260907gitf1dd1b4af\n  build type: Release\n  runtime: .NET 8.0.12",
+ "serial": "",
+ "status": "time-limit",
+ "vtimeInfo": "emulation GetTimeSourceInfo\n\rElapsed Virtual Time: 00:00:01.000000000\r\nElapsed Host Time: 00:00:46.875869600\r\nCurrent load: 57.2\r\nCumulative load: 46.8758696\r\nState: Idle\r\nAdvance immediately: False\r\nQuantum: 00:00:00.000100000\r\r\n(stm32f4)",
+ "wallMs": 50469,
+ "warningCount": 0,
+ "warningsHead": []
+}

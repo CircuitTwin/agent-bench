@@ -1,0 +1,12 @@
+{
+ "dockerExit": 0,
+ "faults": "Taking exception 4 [Data Abort] on CPU 0\n...at fault address 0x20000002\n...really UsageFault with UFSR.UNALIGNED\n...taking pending nonsecure exception 3",
+ "guest": "",
+ "image": "circuittwin/refs-qemu-system-arm:10.0.13-1",
+ "machine": "olimex-stm32-h405",
+ "serial": "",
+ "status": "QEMU-STATUS=killed-at-limit",
+ "stderr": "",
+ "stdout": "",
+ "unimp": "      2 GPIOA: unimplemented device read \n      2 GPIOA: unimplemented device write"
+}

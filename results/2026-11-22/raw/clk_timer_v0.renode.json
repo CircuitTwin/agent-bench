@@ -1,0 +1,16 @@
+{
+ "errorCount": 0,
+ "errorsHead": [],
+ "faultLinesHead": [],
+ "logTail": "[17:43:48.6772]  [INFO] System bus created.\n[17:43:49.3692]  [INFO] SynopsysEthernetMAC: Bus width not specified, defaulting to Bits32\n[17:43:49.7434]  [INFO] sysbus: Loaded SVD: /tmp/renode-63/43ff5569-f15c-4fab-ad9e-f67185ac8d06.tmp. Name: STM32F40x. Description: STM32F40x.\n[17:43:49.8726]  [INFO] sysbus: Loading block of 912 bytes length at 0x8000000.\n[17:43:49.8855]  [INFO] sysbus: Loading block of 1536 bytes length at 0x8000390.\n[17:43:49.9964]  [INFO] cpu: Guessing VectorTableOffset value to be 0x8000000.\n[17:43:50.0076]  [INFO] cpu: Setting initial values: PC = 0x8000269, SP = 0x20020000.\n[17:43:50.0094]  [INFO] stm32f4: Machine started.\n[17:43:50.0658]  [INFO] stm32f4: Machine paused.\n[17:43:50.0866]  [INFO] Got exception when reading from socket: System.IO.IOException: Unable to read data from the transport connection: Connection reset by peer.\n     ---> System.Net.Sockets.SocketException (104): Connection reset by peer\n       at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 count)\n       --- End of inner exception stack trace ---\n       at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 count)\n       at Antmicro.Renode.Utilities.SocketServerProvider.ReaderThreadBody(Stream stream)\n[17:43:50.0866]  [INFO] Got exception when writing to socket: System.IO.IOException: Unable to write data to the transport connection: Broken pipe.\n     ---> System.Net.Sockets.SocketException (32): Broken pipe\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       --- End of inner exception stack trace ---\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       at Antmicro.Renode.Utilities.SocketServerProvider.ProcessWriteTelnet(Stream stream, Byte[] data)\n       at Antmicro.Renode.Utilities.SocketServerProvider.WriterThreadBody(Stream stream)\n[17:43:50.1513]  [INFO] stm32f4: Disposed.\n",
+ "maxMs": 500,
+ "monitorErrors": [],
+ "platform": "platforms/boards/stm32f4_discovery.repl",
+ "renodeVersion": "Renode v1.17.0\n  build: 1.17.0+20260907gitf1dd1b4af\n  build type: Release\n  runtime: .NET 8.0.12",
+ "serial": "CT-BENCH clk_timer_v0 PASS TIM3 counting\nCT-BENCH-DONE\n",
+ "status": "marker",
+ "vtimeInfo": "emulation GetTimeSourceInfo\n\rElapsed Virtual Time: 00:00:00.005000000\r\nElapsed Host Time: 00:00:00.052876300\r\nCurrent load: 0.089\r\nCumulative load: 10.57526\r\nState: Idle\r\nAdvance immediately: False\r\nQuantum: 00:00:00.000100000\r\r\n(stm32f4)",
+ "wallMs": 3447,
+ "warningCount": 0,
+ "warningsHead": []
+}

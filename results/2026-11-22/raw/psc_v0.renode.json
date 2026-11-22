@@ -1,0 +1,16 @@
+{
+ "errorCount": 0,
+ "errorsHead": [],
+ "faultLinesHead": [],
+ "logTail": "[17:46:58.1248]  [INFO] System bus created.\n[17:47:00.7998]  [INFO] SynopsysEthernetMAC: Bus width not specified, defaulting to Bits32\n[17:47:01.2666]  [INFO] Reading cache\n[17:47:02.3812]  [INFO] sysbus: Loaded SVD: /tmp/renode-1058/d9d38fb5-683f-44eb-9607-fa6f52836e2f.tmp. Name: STM32F40x. Description: STM32F40x.\n[17:47:04.3239]  [INFO] sysbus: Loading block of 1112 bytes length at 0x8000000.\n[17:47:04.3414]  [INFO] sysbus: Loading block of 1536 bytes length at 0x8000458.\n[17:47:04.4846]  [INFO] cpu: Guessing VectorTableOffset value to be 0x8000000.\n[17:47:04.4991]  [INFO] cpu: Setting initial values: PC = 0x80002A5, SP = 0x20020000.\n[17:47:04.5014]  [INFO] stm32f4: Machine started.\n[17:47:04.5684]  [INFO] stm32f4: Machine paused.\n[17:47:04.5891]  [INFO] Got exception when writing to socket: System.IO.IOException: Unable to write data to the transport connection: Broken pipe.\n     ---> System.Net.Sockets.SocketException (32): Broken pipe\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       --- End of inner exception stack trace ---\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       at Antmicro.Renode.Utilities.SocketServerProvider.ProcessWriteTelnet(Stream stream, Byte[] data)\n       at Antmicro.Renode.Utilities.SocketServerProvider.ProcessWrite(Stream stream, Byte[] data)\n       at Antmicro.Renode.Utilities.SocketServerProvider.WriterThreadBody(Stream stream)\n[17:47:04.6539]  [INFO] stm32f4: Disposed.\n",
+ "maxMs": 500,
+ "monitorErrors": [],
+ "platform": "platforms/boards/stm32f4_discovery.repl",
+ "renodeVersion": "Renode v1.17.0\n  build: 1.17.0+20260907gitf1dd1b4af\n  build type: Release\n  runtime: .NET 8.0.12",
+ "serial": "sys=0x000010F1 tim=0x00000025 CT-BENCH psc_v0 FAIL TIM3 tick rate outside 2%\nCT-BENCH-DONE\n",
+ "status": "marker",
+ "vtimeInfo": "emulation GetTimeSourceInfo\n\rElapsed Virtual Time: 00:00:00.005000000\r\nElapsed Host Time: 00:00:00.064038700\r\nCurrent load: 0.1441\r\nCumulative load: 12.80774\r\nState: Idle\r\nAdvance immediately: False\r\nQuantum: 00:00:00.000100000\r\r\n(stm32f4)",
+ "wallMs": 11008,
+ "warningCount": 0,
+ "warningsHead": []
+}

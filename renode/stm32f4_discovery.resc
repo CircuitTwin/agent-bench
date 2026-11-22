@@ -1,0 +1,20 @@
+:name: agent-bench STM32F4 Discovery (unmodified official Renode platform)
+:description: Loads Renode's built-in platforms/boards/stm32f4_discovery.repl unchanged and runs an agent-bench ELF with USART2 captured to a file.
+
+$bin?=@/fw/clk_gpio_v0.elf
+$serial?=@/tmp/serial.txt
+$log?=@/tmp/renode.log
+
+logFile $log
+logLevel 1
+
+mach create "stm32f4"
+machine LoadPlatformDescription @platforms/boards/stm32f4_discovery.repl
+sysbus.usart2 CreateFileBackend $serial true
+
+macro reset
+"""
+    sysbus LoadELF $bin
+"""
+
+runMacro $reset

@@ -7,9 +7,10 @@ It holds 17 small tasks for an STM32F407 board (drive a GPIO pin, count timer in
 an I2C sensor that is not on the bus, ...). Each task has a correct firmware (`v0`) and one to four buggy versions, each
 with a bug of a kind agents commonly write: a peripheral clock never enabled, an interrupt flag never cleared, an
 unbounded poll on a flag that never sets, a wrong register field, ... In total **43 firmware images, 26 of them buggy**.
-Every image is built once and runs unchanged on two platforms:
+Every image is built once and runs unchanged on three platforms:
 
 * **CircuitTwin**: `ct run <elf> --board stm32f4-discovery`, the digital twin of the STM32F4DISCOVERY board;
+* **Renode** 1.17.0, unmodified built-in platform `platforms/boards/stm32f4_discovery.repl`, from a pinned container image;
 * **QEMU** 10.0.13, machine `olimex-stm32-h405`, from a pinned container image.
 
 The scorer counts, per platform, the buggy versions it **catches**, the ones it **misses**, and the correct versions it
@@ -25,10 +26,15 @@ The record is [`results/2026-11-21/`](results/2026-11-21): `report.md` has every
 | platform | buggy versions | caught | missed | correct versions | false alarms | caught and different from the correct version | caught by a platform signal |
 |---|---|---|---|---|---|---|---|
 | CircuitTwin | 26 | 24 | 2 | 17 | 0 | 24 | 16 |
-| QEMU | 26 | 20 | 6 | 17 | 7 | 8 | 5 |
+| Renode 1.17.0 | 26 | 12 | 14 | 17 | 2 | 11 | 5 |
+| QEMU 10.0.13 | 26 | 20 | 6 | 17 | 7 | 8 | 5 |
 
-Caught by both: 19. CircuitTwin only: 5 (`baud` v1, `clk_timer` v1, `irq_chain` v3, `race` v1, `wdg` v1). QEMU only: 1
-(`i2c_nack` v2). Neither: 1 (`reset_vals` v1).
+The three-way record is [`results/2026-11-22/`](results/2026-11-22) (Renode 1.17.0 recorded on 2026-11-22 on the exact same byte-identical 43 ELFs as the 2026-11-21 CircuitTwin and QEMU record in [`results/2026-11-21/`](results/2026-11-21)).
+
+Caught by CircuitTwin & QEMU: 19; CircuitTwin only: 5 (`baud` v1, `clk_timer` v1, `irq_chain` v3, `race` v1, `wdg` v1); QEMU only: 1 (`i2c_nack` v2); neither: 1 (`reset_vals` v1).
+Caught by CircuitTwin & Renode: 12; CircuitTwin only: 12; Renode only: 0; neither: 2 (`i2c_nack` v2, `reset_vals` v1).
+
+* **Renode 1.17.0 vs QEMU 10.0.13:** Renode models STM32F4 GPIO, DMA2, RCC/PLL, and TIM3 level-triggered interrupts, so it drops false alarms from 7/17 to **2/17** (`i2c_nack` v0 and `psc` v0) and raises distinct bug catches from 8/26 to **11/26** (catching `irq_chain` v3 and `race` v1 that QEMU misses). However, Renode does not enforce RCC clock gating (`clk_gpio` v1, `clk_timer` v1, `dma_m2m` v1), GPIO `MODER` direction (`gpio_mode` v1), DMA FIFO `DMDIS` (`dma_m2m` v2), Cortex-M4 unaligned-access faults (`unaligned` v1/v2), flash write protection (`ro_write` v2), flash wait states (`pll` v1), PLLRDY gating (`pll` v2), or UART baud checking (`baud` v1); its default 100 MIPS CPU also finishes `wdg` v1 in 20 ms (< 31 ms IWDG), and hardcoded `systickFrequency` (72 MHz) vs `timer3` (10 MHz) cause the `psc` v0 false alarm.
 
 * **Missed by CircuitTwin:** `i2c_nack` v2 (a bounded wait that never checks the NACK: the twin cannot tell it from the
   correct version once the NACK of an absent address is only informational) and `reset_vals` v1 (SRAM reads 0 in the
@@ -159,6 +165,16 @@ docker build -t agent-bench/qemu-system-arm:10.0.13-1 qemu
 `tools/run.py` refuses an image whose `/usr/bin/qemu-system-arm` is not the one pinned in
 `qemu/qemu-system-arm.lock.json`.
 
+**3b. Build and run the Renode 1.17.0 baseline** (optional; requires neither `ct` nor a server, runs offline with `--network none` after image build):
+
+```text
+docker build -t agent-bench/renode:1.17.0-1 renode
+python tools/run_renode.py --fw build/fw --out out/renode
+python tools/report.py --out out/renode
+```
+
+`tools/run_renode.py` refuses an image whose `/opt/renode/renode` binary does not match `renode/renode.lock.json`. Pass `--with-renode` to `tools/run.py` to run all three platforms together.
+
 **4. Start a server for `ct`.** Every `ct` command needs a signed-in CircuitTwin account. For the record that was a local
 server of the pinned release, with development sign-in (loopback only; any well-formed e-mail address signs in). In a separate
 terminal, and leave it running:
@@ -239,12 +255,15 @@ The SVD and the manual are ST's; check the digest of every file you use. Two thi
 | `cases.json` | the task set: tasks, versions, bug classes and descriptions, the `ct` options of the twin runs |
 | `firmware/` | the firmware: `src/` (one file per task, shared runtime), `ld/stm32f407.ld`, `CMakeLists.txt`, `cmake/arm-gcc-toolchain.cmake`, `toolchain/Dockerfile` (the pinned toolchain image) |
 | `qemu/` | `Dockerfile` and `qemu-system-arm.lock.json` (the pinned QEMU image), `run.sh` (runs one ELF inside it) |
+| `renode/` | `Dockerfile`, `renode.lock.json` (the pinned Renode v1.17.0 image), `stm32f4_discovery.resc` (unmodified official platform), `run_one.py` |
 | `ct-release.json` | the pinned `ct` build: version, source revision, SHA-256 of the binaries |
 | `tools/build-firmware.py` | builds the 43 ELFs in the container and writes `firmware-build.json` |
-| `tools/run.py` | the runner: every image on `ct` and on QEMU, raw records and `results.json` |
+| `tools/run.py` | the runner: every image on `ct`, QEMU, and (with `--with-renode`) Renode |
+| `tools/run_renode.py` | runs every image on pinned Renode v1.17.0 (`--network none`) and merges into `results.json` |
 | `tools/report.py` | the scorer and report generator: `report.md`, `summary.json`, comparison with a reference record |
 | `tools/local-server.py` | a throwaway local server with development sign-in, and a token for it |
-| `results/2026-11-21/` | the published record |
+| `results/2026-11-21/` | the published two-platform record (CircuitTwin + QEMU) |
+| `results/2026-11-22/` | the three-platform record adding Renode 1.17.0 on the exact same 43 ELFs |
 
 How a run is made:
 

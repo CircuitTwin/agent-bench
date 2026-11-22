@@ -1,0 +1,18 @@
+{
+ "errorCount": 0,
+ "errorsHead": [],
+ "faultLinesHead": [],
+ "logTail": "[17:47:27.2349]  [INFO] System bus created.\n[17:47:27.8789]  [INFO] SynopsysEthernetMAC: Bus width not specified, defaulting to Bits32\n[17:47:28.2851]  [INFO] sysbus: Loaded SVD: /tmp/renode-1202/46a19852-a3e9-478a-8382-980eefeca4e8.tmp. Name: STM32F40x. Description: STM32F40x.\n[17:47:28.4009]  [INFO] sysbus: Loading block of 1168 bytes length at 0x8000000.\n[17:47:28.4104]  [INFO] sysbus: Loading block of 1536 bytes length at 0x8000490.\n[17:47:28.5091]  [INFO] cpu: Guessing VectorTableOffset value to be 0x8000000.\n[17:47:28.5251]  [INFO] cpu: Setting initial values: PC = 0x8000269, SP = 0x20020000.\n[17:47:28.5272]  [INFO] stm32f4: Machine started.\n[17:47:28.5638]  [WARNING] rcc: Unhandled write to offset 0x4. Unhandled bits: [29] when writing value 0x7405408. Tags: RESERVED (0x0).\n[17:47:28.5701]  [INFO] stm32f4: Machine paused.\n[17:47:28.5901]  [INFO] Got exception when writing to socket: System.IO.IOException: Unable to write data to the transport connection: Broken pipe.\n     ---> System.Net.Sockets.SocketException (32): Broken pipe\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       --- End of inner exception stack trace ---\n       at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 count)\n       at Antmicro.Renode.Utilities.SocketServerProvider.ProcessWriteTelnet(Stream stream, Byte[] data)\n       at Antmicro.Renode.Utilities.SocketServerProvider.WriterThreadBody(Stream stream)\n[17:47:28.6303]  [INFO] stm32f4: Disposed.\n",
+ "maxMs": 500,
+ "monitorErrors": [],
+ "platform": "platforms/boards/stm32f4_discovery.repl",
+ "renodeVersion": "Renode v1.17.0\n  build: 1.17.0+20260907gitf1dd1b4af\n  build type: Release\n  runtime: .NET 8.0.12",
+ "serial": "CT-BENCH pll_v1 PASS running from the PLL\nCT-BENCH-DONE\n",
+ "status": "marker",
+ "vtimeInfo": "emulation GetTimeSourceInfo\n\rElapsed Virtual Time: 00:00:00.005000000\r\nElapsed Host Time: 00:00:00.040404300\r\nCurrent load: 0.0653\r\nCumulative load: 8.08086\r\nState: Idle\r\nAdvance immediately: False\r\nQuantum: 00:00:00.000100000\r\r\n(stm32f4)",
+ "wallMs": 3330,
+ "warningCount": 1,
+ "warningsHead": [
+  "[17:47:28.5638]  [WARNING] rcc: Unhandled write to offset 0x4. Unhandled bits: [29] when writing value 0x7405408. Tags: RESERVED (0x0)."
+ ]
+}
