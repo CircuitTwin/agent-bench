@@ -1,0 +1,136 @@
+{
+  "schema": "agent-bench.embedgym-pin/1",
+  "benchmark": "EmbedGym-Bench",
+  "paper": {
+    "title": "EmbedGym: Letting Coding Agents Develop and Debug Embedded Firmware Without Physical Hardware",
+    "authors": [
+      "Minghui Zhao",
+      "Yiming Li",
+      "Sophie Zhu",
+      "Maxwell Khor",
+      "Lauren Ouyang",
+      "Hai \"Helen\" Li",
+      "Yiran Chen",
+      "Tingjun Chen"
+    ],
+    "arxivId": "2611.21845v1",
+    "publishedDate": "2026-11-16",
+    "url": "https://arxiv.org/abs/2611.21845"
+  },
+  "upstream": {
+    "website": "https://embedgym.github.io",
+    "dataBaseUrl": "https://embedgym.github.io/data",
+    "repository": "https://github.com/EmbedGym/EmbedGym.github.io",
+    "commitSha": "2d69dcf705344b671c3327b6f0f8de9a47c1b98a",
+    "manifestSourceCommit": "8162351a66be2ff531de9ed9143b06ede4da4752",
+    "counts": {
+      "specifications": 117,
+      "taskInstances": 598,
+      "peripherals": 41,
+      "runs": 14352,
+      "byTarget": {
+        "atmega328p_arduino": 92,
+        "atmega2560_arduino": 92,
+        "esp32s3_arduino": 100,
+        "esp32s3_espidf": 100,
+        "nrf52840_arduino": 107,
+        "nrf52840_zephyr": 107
+      }
+    }
+  },
+  "targets": {
+    "atmega328p_arduino": {
+      "status": "supported_subset",
+      "ctBoard": "arduino-uno",
+      "mcu": "ATmega328P",
+      "totalTasks": 92,
+      "supportedTasks": 29,
+      "prebuiltHexAvailable": true,
+      "notes": "MCU twin ATMEGA328P is in CircuitTwin catalog; 29/92 tasks use built-in GPIO/PWM/ADC/UART or official catalog I2C twins (MPU6050, VL53L0X). Remaining 63 tasks require external peripheral models not yet in CircuitTwin catalog."
+    },
+    "atmega2560_arduino": {
+      "status": "supported_subset",
+      "ctBoard": "arduino-mega2560",
+      "mcu": "ATmega2560",
+      "totalTasks": 92,
+      "supportedTasks": 29,
+      "prebuiltHexAvailable": true,
+      "notes": "MCU twin ATMEGA2560 is in CircuitTwin catalog; 29/92 tasks use built-in GPIO/PWM/ADC/UART or official catalog I2C twins (MPU6050, VL53L0X). Remaining 63 tasks require external peripheral models not yet in CircuitTwin catalog."
+    },
+    "esp32s3_arduino": {
+      "status": "excluded_upstream_artifacts",
+      "ctBoard": "esp32s3-devkitc",
+      "mcu": "ESP32-S3",
+      "totalTasks": 100,
+      "supportedTasks": 0,
+      "prebuiltHexAvailable": false,
+      "notes": "CircuitTwin ships esp32s3-devkitc (ESP32-S3) in its catalog, but upstream EmbedGym does not publish prebuilt .bin binaries (hasFirmware=false for all 2400 runs) and builds with patched Arduino ESP32 v2.0.17 / ESP-IDF v4.4.7 app-start markers not published in EmbedGym.github.io."
+    },
+    "esp32s3_espidf": {
+      "status": "excluded_upstream_artifacts",
+      "ctBoard": "esp32s3-devkitc",
+      "mcu": "ESP32-S3",
+      "totalTasks": 100,
+      "supportedTasks": 0,
+      "prebuiltHexAvailable": false,
+      "notes": "CircuitTwin ships esp32s3-devkitc (ESP32-S3) in its catalog, but upstream EmbedGym does not publish prebuilt .bin binaries (hasFirmware=false for all 2400 runs) and requires patched ESP-IDF v4.4.7 build scripts not published in EmbedGym.github.io."
+    },
+    "nrf52840_arduino": {
+      "status": "unsupported_mcu",
+      "ctBoard": "nrf52840-dk",
+      "mcu": "nRF52840",
+      "totalTasks": 107,
+      "supportedTasks": 0,
+      "prebuiltHexAvailable": false,
+      "notes": "CircuitTwin does not currently ship an nRF52840-QIAA twin in its catalog (ct board list reports nrf52840-dk as 'needs twin'; catalog ships nRF52833-QIAA only). Upstream EmbedGym also does not publish prebuilt ELFs for nRF52840 (hasFirmware=false)."
+    },
+    "nrf52840_zephyr": {
+      "status": "unsupported_mcu",
+      "ctBoard": "nrf52840-dk",
+      "mcu": "nRF52840",
+      "totalTasks": 107,
+      "supportedTasks": 0,
+      "prebuiltHexAvailable": false,
+      "notes": "CircuitTwin does not currently ship an nRF52840-QIAA twin in its catalog (ct board list reports nrf52840-dk as 'needs twin'; catalog ships nRF52833-QIAA only). Upstream EmbedGym also does not publish prebuilt ELFs for nRF52840 (hasFirmware=false)."
+    }
+  },
+  "supportedTasks": {
+    "gpio_pwm_output": [
+      "blink_led_1hz",
+      "blink_led_morse_code",
+      "blink_led_no_delay",
+      "blink_two_leds",
+      "breathing_led"
+    ],
+    "gpio_input_output": [
+      "button_press_debounce",
+      "button_status_count",
+      "button_status_display",
+      "buzzer_button",
+      "buzzer_doorbell",
+      "buzzer_toggle_led_freq",
+      "clap_switch",
+      "hcsr501_motion_alarm",
+      "sensor_pir_human_motion",
+      "tilt_detection_alarm"
+    ],
+    "analog_adc": [
+      "buzzer_laser_tripwire",
+      "gas_ventilation_fan_control",
+      "joystick_buzzer_pitch",
+      "mq2_gas_analog_read",
+      "mq2_gas_leak_detector",
+      "photoresistor_nightlight",
+      "sen0244_quality_led_indicator",
+      "sen0244_stable_reading",
+      "sen0244_tds_read",
+      "sen0244_water_quality_monitor",
+      "tmp36_read"
+    ],
+    "catalog_i2c_sensors": [
+      "mpu6050_read_i2c",
+      "step_counter_print",
+      "tof_distance_pulling"
+    ]
+  }
+}
