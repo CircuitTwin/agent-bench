@@ -1,0 +1,4604 @@
+{
+  "schema": "agent-bench.embedgym-eval/1",
+  "recordedAt": "2026-11-23T01:06:03Z",
+  "filtered": false,
+  "harnessGit": {
+    "revision": "48ae27612fb8c75e4eede087f7bd7233d3ed5fe2",
+    "dirtyTree": false
+  },
+  "upstream": {
+    "benchmark": "EmbedGym-Bench",
+    "paper": {
+      "title": "EmbedGym: Letting Coding Agents Develop and Debug Embedded Firmware Without Physical Hardware",
+      "authors": [
+        "Minghui Zhao",
+        "Yiming Li",
+        "Sophie Zhu",
+        "Maxwell Khor",
+        "Lauren Ouyang",
+        "Hai \"Helen\" Li",
+        "Yiran Chen",
+        "Tingjun Chen"
+      ],
+      "arxivId": "2611.21845v1",
+      "publishedDate": "2026-11-16",
+      "url": "https://arxiv.org/abs/2611.21845"
+    },
+    "repository": "https://github.com/EmbedGym/EmbedGym.github.io",
+    "commitSha": "2d69dcf705344b671c3327b6f0f8de9a47c1b98a",
+    "manifestSourceCommit": "8162351a66be2ff531de9ed9143b06ede4da4752",
+    "manifestSha256": "0d5a99152cefd1819607e98770c232a1b6d0e363d0070c0a6f6e08761b48de88"
+  },
+  "ct": {
+    "exe": "ct.exe",
+    "exeSha256": "25f7bdc43645b13a1da0d587db9916f083861e18e28f5a9abc51ac94f85b757c",
+    "version": "ct 0.1.0",
+    "sourceRevision": "176c4df5ec5bae5ecf7ccf51f13e9a44047a5ff3",
+    "cleanTree": true,
+    "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9"
+  },
+  "coverage": {
+    "totalUpstreamSpecs": 117,
+    "totalUpstreamInstances": 598,
+    "supportedSpecs": 29,
+    "supportedInstances": 58,
+    "unsupportedAvrSpecs": 63,
+    "unsupportedAvrInstances": 126,
+    "excludedEsp32s3Instances": 200,
+    "unsupportedNrf52840Instances": 214,
+    "targets": {
+      "atmega328p_arduino": {
+        "status": "supported_subset",
+        "ctBoard": "arduino-uno",
+        "mcu": "ATmega328P",
+        "totalTasks": 92,
+        "supportedTasks": 29,
+        "prebuiltHexAvailable": true,
+        "notes": "MCU twin ATMEGA328P is in CircuitTwin catalog; 29/92 tasks use built-in GPIO/PWM/ADC/UART or official catalog I2C twins (MPU6050, VL53L0X). Remaining 63 tasks require external peripheral models not yet in CircuitTwin catalog."
+      },
+      "atmega2560_arduino": {
+        "status": "supported_subset",
+        "ctBoard": "arduino-mega2560",
+        "mcu": "ATmega2560",
+        "totalTasks": 92,
+        "supportedTasks": 29,
+        "prebuiltHexAvailable": true,
+        "notes": "MCU twin ATMEGA2560 is in CircuitTwin catalog; 29/92 tasks use built-in GPIO/PWM/ADC/UART or official catalog I2C twins (MPU6050, VL53L0X). Remaining 63 tasks require external peripheral models not yet in CircuitTwin catalog."
+      },
+      "esp32s3_arduino": {
+        "status": "excluded_upstream_artifacts",
+        "ctBoard": "esp32s3-devkitc",
+        "mcu": "ESP32-S3",
+        "totalTasks": 100,
+        "supportedTasks": 0,
+        "prebuiltHexAvailable": false,
+        "notes": "CircuitTwin ships esp32s3-devkitc (ESP32-S3) in its catalog, but upstream EmbedGym does not publish prebuilt .bin binaries (hasFirmware=false for all 2400 runs) and builds with patched Arduino ESP32 v2.0.17 / ESP-IDF v4.4.7 app-start markers not published in EmbedGym.github.io."
+      },
+      "esp32s3_espidf": {
+        "status": "excluded_upstream_artifacts",
+        "ctBoard": "esp32s3-devkitc",
+        "mcu": "ESP32-S3",
+        "totalTasks": 100,
+        "supportedTasks": 0,
+        "prebuiltHexAvailable": false,
+        "notes": "CircuitTwin ships esp32s3-devkitc (ESP32-S3) in its catalog, but upstream EmbedGym does not publish prebuilt .bin binaries (hasFirmware=false for all 2400 runs) and requires patched ESP-IDF v4.4.7 build scripts not published in EmbedGym.github.io."
+      },
+      "nrf52840_arduino": {
+        "status": "unsupported_mcu",
+        "ctBoard": "nrf52840-dk",
+        "mcu": "nRF52840",
+        "totalTasks": 107,
+        "supportedTasks": 0,
+        "prebuiltHexAvailable": false,
+        "notes": "CircuitTwin does not currently ship an nRF52840-QIAA twin in its catalog (ct board list reports nrf52840-dk as 'needs twin'; catalog ships nRF52833-QIAA only). Upstream EmbedGym also does not publish prebuilt ELFs for nRF52840 (hasFirmware=false)."
+      },
+      "nrf52840_zephyr": {
+        "status": "unsupported_mcu",
+        "ctBoard": "nrf52840-dk",
+        "mcu": "nRF52840",
+        "totalTasks": 107,
+        "supportedTasks": 0,
+        "prebuiltHexAvailable": false,
+        "notes": "CircuitTwin does not currently ship an nRF52840-QIAA twin in its catalog (ct board list reports nrf52840-dk as 'needs twin'; catalog ships nRF52833-QIAA only). Upstream EmbedGym also does not publish prebuilt ELFs for nRF52840 (hasFirmware=false)."
+      }
+    },
+    "supportedTasksByCategory": {
+      "gpio_pwm_output": [
+        "blink_led_1hz",
+        "blink_led_morse_code",
+        "blink_led_no_delay",
+        "blink_two_leds",
+        "breathing_led"
+      ],
+      "gpio_input_output": [
+        "button_press_debounce",
+        "button_status_count",
+        "button_status_display",
+        "buzzer_button",
+        "buzzer_doorbell",
+        "buzzer_toggle_led_freq",
+        "clap_switch",
+        "hcsr501_motion_alarm",
+        "sensor_pir_human_motion",
+        "tilt_detection_alarm"
+      ],
+      "analog_adc": [
+        "buzzer_laser_tripwire",
+        "gas_ventilation_fan_control",
+        "joystick_buzzer_pitch",
+        "mq2_gas_analog_read",
+        "mq2_gas_leak_detector",
+        "photoresistor_nightlight",
+        "sen0244_quality_led_indicator",
+        "sen0244_stable_reading",
+        "sen0244_tds_read",
+        "sen0244_water_quality_monitor",
+        "tmp36_read"
+      ],
+      "catalog_i2c_sensors": [
+        "mpu6050_read_i2c",
+        "step_counter_print",
+        "tof_distance_pulling"
+      ]
+    },
+    "skippedAvrTasks": [
+      {
+        "task": "16key_keypad",
+        "interface": "GPIO Input",
+        "parts": [
+          "membrane-keypad"
+        ],
+        "missingParts": [
+          "membrane-keypad"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: membrane-keypad"
+      },
+      {
+        "task": "air_quality_read",
+        "interface": "I2C/SPI",
+        "parts": [
+          "pmsa003i"
+        ],
+        "missingParts": [
+          "pmsa003i"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: pmsa003i"
+      },
+      {
+        "task": "amg8833_ambient_thermistor_read",
+        "interface": "I2C/SPI",
+        "parts": [
+          "amg8833"
+        ],
+        "missingParts": [
+          "amg8833"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: amg8833"
+      },
+      {
+        "task": "amg8833_hotspot_presence_alarm",
+        "interface": "I2C/SPI",
+        "parts": [
+          "amg8833",
+          "led"
+        ],
+        "missingParts": [
+          "amg8833"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: amg8833"
+      },
+      {
+        "task": "amg8833_hotspot_zone",
+        "interface": "I2C/SPI",
+        "parts": [
+          "amg8833"
+        ],
+        "missingParts": [
+          "amg8833"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: amg8833"
+      },
+      {
+        "task": "amg8833_motion_detector",
+        "interface": "I2C/SPI",
+        "parts": [
+          "amg8833"
+        ],
+        "missingParts": [
+          "amg8833"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: amg8833"
+      },
+      {
+        "task": "amg8833_pixel_min_max_average",
+        "interface": "I2C/SPI",
+        "parts": [
+          "amg8833"
+        ],
+        "missingParts": [
+          "amg8833"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: amg8833"
+      },
+      {
+        "task": "bme280_read_i2c",
+        "interface": "I2C/SPI",
+        "parts": [
+          "bme280"
+        ],
+        "missingParts": [
+          "bme280"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: bme280"
+      },
+      {
+        "task": "bme280_read_spi",
+        "interface": "I2C/SPI",
+        "parts": [
+          "bme280"
+        ],
+        "missingParts": [
+          "bme280"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: bme280"
+      },
+      {
+        "task": "compass_heading_logger",
+        "interface": "I2C/SPI",
+        "parts": [
+          "ds1307",
+          "hmc5883l"
+        ],
+        "missingParts": [
+          "ds1307",
+          "hmc5883l"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: ds1307, hmc5883l"
+      },
+      {
+        "task": "dht11_read",
+        "interface": "Pulse Timing",
+        "parts": [
+          "dht11"
+        ],
+        "missingParts": [
+          "dht11"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: dht11"
+      },
+      {
+        "task": "dht11_read_button_display",
+        "interface": "Pulse Timing",
+        "parts": [
+          "dht11",
+          "lcd1602",
+          "pushbutton"
+        ],
+        "missingParts": [
+          "dht11",
+          "lcd1602"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: dht11, lcd1602"
+      },
+      {
+        "task": "drv2605l_click_once_per_second",
+        "interface": "I2C/SPI",
+        "parts": [
+          "drv2605l"
+        ],
+        "missingParts": [
+          "drv2605l"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: drv2605l"
+      },
+      {
+        "task": "drv2605l_effect_browser",
+        "interface": "I2C/SPI",
+        "parts": [
+          "drv2605l"
+        ],
+        "missingParts": [
+          "drv2605l"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: drv2605l"
+      },
+      {
+        "task": "drv2605l_effect_sequence",
+        "interface": "I2C/SPI",
+        "parts": [
+          "drv2605l"
+        ],
+        "missingParts": [
+          "drv2605l"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: drv2605l"
+      },
+      {
+        "task": "drv2605l_rtp_swell",
+        "interface": "I2C/SPI",
+        "parts": [
+          "drv2605l"
+        ],
+        "missingParts": [
+          "drv2605l"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: drv2605l"
+      },
+      {
+        "task": "ds1307_rtc",
+        "interface": "I2C/SPI",
+        "parts": [
+          "ds1307"
+        ],
+        "missingParts": [
+          "ds1307"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: ds1307"
+      },
+      {
+        "task": "ds18b20_heat_alarm",
+        "interface": "Pulse Timing",
+        "parts": [
+          "buzzer",
+          "ds18b20",
+          "led"
+        ],
+        "missingParts": [
+          "ds18b20"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: ds18b20"
+      },
+      {
+        "task": "fire_detector",
+        "interface": "I2C/SPI",
+        "parts": [
+          "active-buzzer",
+          "led",
+          "mlx90614",
+          "mq2"
+        ],
+        "missingParts": [
+          "mlx90614"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: mlx90614"
+      },
+      {
+        "task": "gas_alarm_haptic",
+        "interface": "I2C/SPI",
+        "parts": [
+          "drv2605l",
+          "led",
+          "mq2"
+        ],
+        "missingParts": [
+          "drv2605l"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: drv2605l"
+      },
+      {
+        "task": "gps_fix_status",
+        "interface": "UART",
+        "parts": [
+          "pa1616s"
+        ],
+        "missingParts": [
+          "pa1616s"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: pa1616s"
+      },
+      {
+        "task": "gps_gga_msg",
+        "interface": "UART",
+        "parts": [
+          "pa1616s"
+        ],
+        "missingParts": [
+          "pa1616s"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: pa1616s"
+      },
+      {
+        "task": "gps_latlon",
+        "interface": "UART",
+        "parts": [
+          "pa1616s"
+        ],
+        "missingParts": [
+          "pa1616s"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: pa1616s"
+      },
+      {
+        "task": "gps_raw_msg",
+        "interface": "UART",
+        "parts": [
+          "pa1616s"
+        ],
+        "missingParts": [
+          "pa1616s"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: pa1616s"
+      },
+      {
+        "task": "haptic_compass",
+        "interface": "I2C/SPI",
+        "parts": [
+          "drv2605l",
+          "hmc5883l"
+        ],
+        "missingParts": [
+          "drv2605l",
+          "hmc5883l"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: drv2605l, hmc5883l"
+      },
+      {
+        "task": "hcsr04_find_distance",
+        "interface": "Pulse Timing",
+        "parts": [
+          "hc-sr04"
+        ],
+        "missingParts": [
+          "hc-sr04"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: hc-sr04"
+      },
+      {
+        "task": "hm10_at_ready_check",
+        "interface": "UART",
+        "parts": [
+          "hm10"
+        ],
+        "missingParts": [
+          "hm10"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: hm10"
+      },
+      {
+        "task": "hm10_ble_serial_passthrough",
+        "interface": "UART",
+        "parts": [
+          "hm10"
+        ],
+        "missingParts": [
+          "hm10"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: hm10"
+      },
+      {
+        "task": "hm10_command_controlled_led",
+        "interface": "UART",
+        "parts": [
+          "hm10",
+          "led"
+        ],
+        "missingParts": [
+          "hm10"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: hm10"
+      },
+      {
+        "task": "hmc5883l_cardinal_direction_indicator",
+        "interface": "I2C/SPI",
+        "parts": [
+          "hmc5883l",
+          "led"
+        ],
+        "missingParts": [
+          "hmc5883l"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: hmc5883l"
+      },
+      {
+        "task": "hmc5883l_compass_heading",
+        "interface": "I2C/SPI",
+        "parts": [
+          "hmc5883l"
+        ],
+        "missingParts": [
+          "hmc5883l"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: hmc5883l"
+      },
+      {
+        "task": "hmc5883l_raw_axis_read",
+        "interface": "I2C/SPI",
+        "parts": [
+          "hmc5883l"
+        ],
+        "missingParts": [
+          "hmc5883l"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: hmc5883l"
+      },
+      {
+        "task": "l298n_line_follower",
+        "interface": "GPIO Input",
+        "parts": [
+          "l298n",
+          "line-sensor"
+        ],
+        "missingParts": [
+          "l298n",
+          "line-sensor"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: l298n, line-sensor"
+      },
+      {
+        "task": "l298n_motor_speed_button_cycle",
+        "interface": "GPIO Input",
+        "parts": [
+          "l298n",
+          "pushbutton"
+        ],
+        "missingParts": [
+          "l298n"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: l298n"
+      },
+      {
+        "task": "l298n_single_motor_forward",
+        "interface": "GPIO/PWM Output",
+        "parts": [
+          "l298n"
+        ],
+        "missingParts": [
+          "l298n"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: l298n"
+      },
+      {
+        "task": "lcd1602_auto_brightness_control",
+        "interface": "ADC",
+        "parts": [
+          "ky-018-photoresistor",
+          "lcd1602"
+        ],
+        "missingParts": [
+          "lcd1602"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: lcd1602"
+      },
+      {
+        "task": "lcd1602_display_hello_world",
+        "interface": "GPIO/PWM Output",
+        "parts": [
+          "lcd1602"
+        ],
+        "missingParts": [
+          "lcd1602"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: lcd1602"
+      },
+      {
+        "task": "ltr390_light_measure",
+        "interface": "I2C/SPI",
+        "parts": [
+          "ltr390"
+        ],
+        "missingParts": [
+          "ltr390"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: ltr390"
+      },
+      {
+        "task": "ltr390_measure_both",
+        "interface": "I2C/SPI",
+        "parts": [
+          "ltr390"
+        ],
+        "missingParts": [
+          "ltr390"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: ltr390"
+      },
+      {
+        "task": "ltr390_uv_measure",
+        "interface": "I2C/SPI",
+        "parts": [
+          "ltr390"
+        ],
+        "missingParts": [
+          "ltr390"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: ltr390"
+      },
+      {
+        "task": "max17048_low_battery_alarm",
+        "interface": "I2C/SPI",
+        "parts": [
+          "buzzer",
+          "led",
+          "max17048"
+        ],
+        "missingParts": [
+          "max17048"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: max17048"
+      },
+      {
+        "task": "max17048_read_cell_voltage",
+        "interface": "I2C/SPI",
+        "parts": [
+          "max17048"
+        ],
+        "missingParts": [
+          "max17048"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: max17048"
+      },
+      {
+        "task": "max17048_read_soc_percent",
+        "interface": "I2C/SPI",
+        "parts": [
+          "max17048"
+        ],
+        "missingParts": [
+          "max17048"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: max17048"
+      },
+      {
+        "task": "mlx90614_hot_object_monitor",
+        "interface": "I2C/SPI",
+        "parts": [
+          "mlx90614"
+        ],
+        "missingParts": [
+          "mlx90614"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: mlx90614"
+      },
+      {
+        "task": "mlx90614_read_temperatures",
+        "interface": "I2C/SPI",
+        "parts": [
+          "mlx90614"
+        ],
+        "missingParts": [
+          "mlx90614"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: mlx90614"
+      },
+      {
+        "task": "mlx90614_trigger_measurement",
+        "interface": "I2C/SPI",
+        "parts": [
+          "mlx90614",
+          "pushbutton"
+        ],
+        "missingParts": [
+          "mlx90614"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: mlx90614"
+      },
+      {
+        "task": "mpr121_four_button_menu",
+        "interface": "I2C/SPI",
+        "parts": [
+          "mpr121"
+        ],
+        "missingParts": [
+          "mpr121"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: mpr121"
+      },
+      {
+        "task": "mpr121_single_touch_detect",
+        "interface": "I2C/SPI",
+        "parts": [
+          "mpr121"
+        ],
+        "missingParts": [
+          "mpr121"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: mpr121"
+      },
+      {
+        "task": "mpr121_touch_passcode_lock",
+        "interface": "I2C/SPI",
+        "parts": [
+          "mpr121",
+          "relay-module"
+        ],
+        "missingParts": [
+          "mpr121"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: mpr121"
+      },
+      {
+        "task": "mpu6050_read_button_display",
+        "interface": "I2C/SPI",
+        "parts": [
+          "lcd1602",
+          "mpu6050",
+          "pushbutton"
+        ],
+        "missingParts": [
+          "lcd1602"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: lcd1602"
+      },
+      {
+        "task": "mpu6050_read_periodic_display",
+        "interface": "I2C/SPI",
+        "parts": [
+          "lcd1602",
+          "mpu6050"
+        ],
+        "missingParts": [
+          "lcd1602"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: lcd1602"
+      },
+      {
+        "task": "parking_sensor",
+        "interface": "Pulse Timing",
+        "parts": [
+          "buzzer",
+          "hc-sr04",
+          "led"
+        ],
+        "missingParts": [
+          "hc-sr04"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: hc-sr04"
+      },
+      {
+        "task": "reaction_timer_display",
+        "interface": "GPIO Input",
+        "parts": [
+          "lcd1602",
+          "pushbutton",
+          "shock-sensor"
+        ],
+        "missingParts": [
+          "lcd1602",
+          "shock-sensor"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: lcd1602, shock-sensor"
+      },
+      {
+        "task": "reverse_parking_sensor",
+        "interface": "Pulse Timing",
+        "parts": [
+          "buzzer",
+          "hc-sr04"
+        ],
+        "missingParts": [
+          "hc-sr04"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: hc-sr04"
+      },
+      {
+        "task": "rotary_encoder",
+        "interface": "GPIO Input",
+        "parts": [
+          "ky-040"
+        ],
+        "missingParts": [
+          "ky-040"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: ky-040"
+      },
+      {
+        "task": "safebox",
+        "interface": "GPIO Input",
+        "parts": [
+          "membrane-keypad",
+          "relay-module"
+        ],
+        "missingParts": [
+          "membrane-keypad"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: membrane-keypad"
+      },
+      {
+        "task": "safebox_display",
+        "interface": "GPIO Input",
+        "parts": [
+          "lcd1602",
+          "membrane-keypad",
+          "relay-module"
+        ],
+        "missingParts": [
+          "lcd1602",
+          "membrane-keypad"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: lcd1602, membrane-keypad"
+      },
+      {
+        "task": "sensor_water_level_display",
+        "interface": "ADC",
+        "parts": [
+          "lcd1602",
+          "water-level-sensor"
+        ],
+        "missingParts": [
+          "lcd1602",
+          "water-level-sensor"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: lcd1602, water-level-sensor"
+      },
+      {
+        "task": "spo2_hr_read",
+        "interface": "I2C/SPI",
+        "parts": [
+          "max32664"
+        ],
+        "missingParts": [
+          "max32664"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: max32664"
+      },
+      {
+        "task": "surface_condensation_risk",
+        "interface": "I2C/SPI",
+        "parts": [
+          "dht11",
+          "led",
+          "mlx90614"
+        ],
+        "missingParts": [
+          "dht11",
+          "mlx90614"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: dht11, mlx90614"
+      },
+      {
+        "task": "tmp36_read_button_display",
+        "interface": "ADC",
+        "parts": [
+          "lcd1602",
+          "pushbutton",
+          "tmp36"
+        ],
+        "missingParts": [
+          "lcd1602"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: lcd1602"
+      },
+      {
+        "task": "tmp36_read_periodic_display",
+        "interface": "ADC",
+        "parts": [
+          "lcd1602",
+          "pushbutton",
+          "tmp36"
+        ],
+        "missingParts": [
+          "lcd1602"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: lcd1602"
+      },
+      {
+        "task": "voc_raw",
+        "interface": "I2C/SPI",
+        "parts": [
+          "sgp40"
+        ],
+        "missingParts": [
+          "sgp40"
+        ],
+        "reason": "external peripheral model(s) not in CircuitTwin catalog: sgp40"
+      }
+    ]
+  },
+  "summary": {
+    "evaluatedTaskInstances": 58,
+    "totalRuns": 80,
+    "passingControlsTotal": 58,
+    "passingControlsPassed": 56,
+    "passingControlsFailed": 2,
+    "passingControlAgreementPct": 96.55,
+    "failingControlsTotal": 22,
+    "failingControlsCaught": 22,
+    "failingControlsMissed": 0,
+    "failingControlCatchPct": 100.0,
+    "inconclusiveRuns": 0,
+    "errorRuns": 0,
+    "agreedRuns": 78,
+    "overallAgreementPct": 97.5,
+    "totalWallSeconds": 409.65,
+    "byCategory": {
+      "gpio_pwm_output": {
+        "tasks": 5,
+        "passTotal": 10,
+        "passPassed": 10,
+        "failTotal": 4,
+        "failCaught": 4
+      },
+      "gpio_input_output": {
+        "tasks": 10,
+        "passTotal": 20,
+        "passPassed": 18,
+        "failTotal": 6,
+        "failCaught": 6
+      },
+      "analog_adc": {
+        "tasks": 11,
+        "passTotal": 22,
+        "passPassed": 22,
+        "failTotal": 9,
+        "failCaught": 9
+      },
+      "catalog_i2c_sensors": {
+        "tasks": 3,
+        "passTotal": 6,
+        "passPassed": 6,
+        "failTotal": 3,
+        "failCaught": 3
+      }
+    },
+    "byTarget": {
+      "atmega2560_arduino": {
+        "passTotal": 29,
+        "passPassed": 28,
+        "failTotal": 10,
+        "failCaught": 10,
+        "agreed": 38,
+        "total": 39
+      },
+      "atmega328p_arduino": {
+        "passTotal": 29,
+        "passPassed": 28,
+        "failTotal": 12,
+        "failCaught": 12,
+        "agreed": 40,
+        "total": 41
+      }
+    }
+  },
+  "results": [
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/blink_led_1hz",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "blink_led_1hz",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "505ed639ff4880ffc2b5d3b376e9769bb1b9b780b131f7ef468e0c80cffd43e0",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 6 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 6,
+        "passedAssertions": 6,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 34550330,
+        "virtualTimeNs": 2900000000,
+        "ctWallMs": 2906,
+        "harnessWallMs": 8811
+      },
+      "digests": {
+        "finalState": "bcecc8397c5b1156f0bf12595c9a07bed2301baab08b61a2221b449d2d7d9de3",
+        "inputs": "885419ce328077c618178e0cf8a97fd6f38bc7cf820a5da05a0fe7a178f29c48"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/openai__gpt-6-luna/blink_led_morse_code",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "blink_led_morse_code",
+      "model": "openai__gpt-6-luna",
+      "mode": "nosim",
+      "firmwareSha256": "7eef074cb24ce75538cf0ea476330fd019ffd2f1d69005ed3ff73dd7f8b90306",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 15 passed, 5 failed",
+      "embedgymFailing": [
+        "[FAIL] @6900ms  led.value == true  (got false)",
+        "[FAIL] @7300ms  led.value == true  (got false)",
+        "[FAIL] @7700ms  led.value == true  (got false)",
+        "[FAIL] @8700ms  led.value == true  (got false)",
+        "[FAIL] @9100ms  led.value == false  (got true)"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 20,
+        "passedAssertions": 15,
+        "failedAssertions": 5,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 6900,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 7300,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 7700,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 8700,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 9100,
+            "expect": "led.value == false",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 110203545,
+        "virtualTimeNs": 9250000000,
+        "ctWallMs": 9339,
+        "harnessWallMs": 17474
+      },
+      "digests": {
+        "finalState": "3da67d264e3f08ac264810a23f0795b956a6d6e26e9103ed56b4df48f2c1a02a",
+        "inputs": "a916682d614cc8ca219d4d314878b1e63ef4d1bfc5f1cf852bb63ea6761955e7"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/blink_led_morse_code",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "blink_led_morse_code",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "4ae6d564f27fbf5d427fe609095edc92b22d429638a26c6723a5f1ac480f18f8",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 20 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 20,
+        "passedAssertions": 20,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 110203542,
+        "virtualTimeNs": 9250000000,
+        "ctWallMs": 11001,
+        "harnessWallMs": 16898
+      },
+      "digests": {
+        "finalState": "5b68f7811ce1a7db1be6f06cafc2eeb0ff907f750333c8a27ded3102bb1a2a61",
+        "inputs": "8be7a3845568adb99d927638d60f59cdbc3badd95cbb02384afe5fc844004c79"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/blink_led_no_delay",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "blink_led_no_delay",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "6e9bcae18027835defc4da77a1f6817c8ff7582bcb4a987e80c489cdd6c3f2b9",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 6 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 6,
+        "passedAssertions": 6,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 30890801,
+        "virtualTimeNs": 2900000000,
+        "ctWallMs": 2218,
+        "harnessWallMs": 8319
+      },
+      "digests": {
+        "finalState": "a5122b3e8a449c31a2ed9823c0a8e539d634d4574a4c00a03c880c84847c6aea",
+        "inputs": "46f53854276ea53d48fca3ef760e432b05dc48f12883bde15270eff934fb9de1"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/blink_two_leds",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "blink_two_leds",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "ea240f1c89e649e7611e225825b7fdafa5d37e51047c445075bec0e9429e5424",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 14 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 14,
+        "passedAssertions": 14,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 20104781,
+        "virtualTimeNs": 1775000062,
+        "ctWallMs": 1525,
+        "harnessWallMs": 5246
+      },
+      "digests": {
+        "finalState": "c63b456f01aa4265e34917ad0b20bebe29f14900b593bc285eca00442a88f70f",
+        "inputs": "f0c5eb37faaaa33f8e27318add0756e98b57a7ca7b312824a0411ea45b5185ec"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/sim_s/openai__gpt-5.6-luna/breathing_led",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "breathing_led",
+      "model": "openai__gpt-5.6-luna",
+      "mode": "sim_s",
+      "firmwareSha256": "af8a416c51dcae83f3f91014a2c337b89b65c5b92e45f83f3b3e5dc16da0662b",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 2 passed, 2 failed",
+      "embedgymFailing": [
+        "[FAIL] @900ms  led.brightness < @f1  (got 0.9098039215686274 [@f1 = 0.611764705882353])",
+        "[FAIL] @1250ms  led.brightness > @f2  (got 0.7411764705882353 [@f2 = 0.9098039215686274])"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 2,
+        "failedAssertions": 2,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 900,
+            "expect": "led.brightness < @f1",
+            "passed": false
+          },
+          {
+            "at": 1250,
+            "expect": "led.brightness > @f2",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 17046134,
+        "virtualTimeNs": 1600000062,
+        "ctWallMs": 659,
+        "harnessWallMs": 5097
+      },
+      "digests": {
+        "finalState": "98403eb095374d808b56639050c456eede681ebdd615ba9b6070b7d7b0a65edb",
+        "inputs": "beead81c87052d4fa2ee2912d4dc55f470a38815fa847498084a8e0e2067e29b"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/breathing_led",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "breathing_led",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "a6bdffdc6bcc3948338cf28c70164a7a865054c061974284d87045b00002b4dc",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 4 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 4,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 19058007,
+        "virtualTimeNs": 1600000125,
+        "ctWallMs": 1857,
+        "harnessWallMs": 8134
+      },
+      "digests": {
+        "finalState": "68dbce31b0054cc82eb2540dddf3c83f75af9c460ece7f21935bd46d3dfd29d3",
+        "inputs": "3968befb1a2180056908b70e69e85f6662b7079742a7e5723ae5432749a70652"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/button_press_debounce",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "button_press_debounce",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "653ed43683a9f04133172c4e53a461a0797d8f24575dd65c7081ccc7af5c4579",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 7 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 7,
+        "passedAssertions": 7,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 28707928,
+        "virtualTimeNs": 2750000000,
+        "ctWallMs": 3188,
+        "harnessWallMs": 8066
+      },
+      "digests": {
+        "finalState": "8e4db7e89c9cdee218143e0ec038ed169248340c3458f56edbea2686ffad9873",
+        "inputs": "080f603e6390230401a31215c316a92e60e5310dcb2ea77bfb5dc471a6c7b19a"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/button_status_count",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "button_status_count",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "8d02c752d31ad6821594affd9684ea4605d46a2aeec5a57cd0c58ee35a2528e1",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 8 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 8,
+        "passedAssertions": 8,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 25544570,
+        "virtualTimeNs": 2450000062,
+        "ctWallMs": 2801,
+        "harnessWallMs": 7523
+      },
+      "digests": {
+        "finalState": "6b816e31b82421411dafc174318a86e9a7ad1590bcd7e207ead4491f517ad422",
+        "inputs": "24c270707a2d8700614ff4edb527ead3cc72fc17507e931cc9261e6a5a991c52"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/button_status_display",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "button_status_display",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "bc52d8465253448bb7b036d2495b98a9109c0520d95de0e85446bae21c73b743",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 4 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 4,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 19406838,
+        "virtualTimeNs": 1950000125,
+        "ctWallMs": 2242,
+        "harnessWallMs": 6502
+      },
+      "digests": {
+        "finalState": "04989c3909a90a05fde615271e43e0767d41ea9356a32fdffd054d7906a7441f",
+        "inputs": "02572a4ab54ce299d4979107de6a71bf5faa132f040c19f7dce4d6debae90dbc"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/buzzer_button",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "buzzer_button",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "b397f390e7a8826e685c1dc33d1a5d7034439d932c994c1dfd472ed88d28e5bd",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 10 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 10,
+        "passedAssertions": 10,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 41096442,
+        "virtualTimeNs": 3950000000,
+        "ctWallMs": 3122,
+        "harnessWallMs": 7397
+      },
+      "digests": {
+        "finalState": "064a3207ca27b775dce9ddb84b21dedbed723ef4f488603cbdbd3e0f3df1d668",
+        "inputs": "26ffdbbae6eec73c456693a077d05751ac334d635da9c0e850d78c29f3c9ad94"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/buzzer_doorbell",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "buzzer_doorbell",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "d487dafa7f5ed9119525a37e0f76e2c3d924235f4c5bde75bb78bf66673191f9",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 5 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 5,
+        "passedAssertions": 5,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 28116384,
+        "virtualTimeNs": 2950000125,
+        "ctWallMs": 3978,
+        "harnessWallMs": 10348
+      },
+      "digests": {
+        "finalState": "806dca92fde940ba99e7843d8fb23a3cc31033d45e1dcf326bfc13e525dd4a1c",
+        "inputs": "6380858d901ac814de1b7fc0e34e9760879bc775370b905cc1fd02ea78bbf067"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/buzzer_laser_tripwire",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "buzzer_laser_tripwire",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "bf1eb2cc0f6d36c3f47c3747bfd193fc2b7305dcdbbbe1b73a719fd70a581fe1",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 4 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 4,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 89624442,
+        "virtualTimeNs": 7550000000,
+        "ctWallMs": 10317,
+        "harnessWallMs": 16258
+      },
+      "digests": {
+        "finalState": "89b52622e98264358027da7f086688a031a5aa2143abeda0faf0e5303c9a2060",
+        "inputs": "651ca604b9a68d3e779ad6fceb883ad589bbf8c15d9b4432569850ef5942d9f7"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/nvidia__nemotron-3.5-super-vl/buzzer_toggle_led_freq",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "buzzer_toggle_led_freq",
+      "model": "nvidia__nemotron-3.5-super-vl",
+      "mode": "nosim",
+      "firmwareSha256": "c33bdabc8edac4c0478e2b16303cf4d19f3fbba666024607ef9483f6051a3622",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 10 passed, 10 failed",
+      "embedgymFailing": [
+        "[FAIL] @1875ms  (@c0 != @c1 && @c1 != @c2 && @c2 != @c3) || (@d0 != @d1 && @d1 != @d2 && @d2 != @d3)  (got @c0 = 0, @c1 = 0, @c2 = 0, @c3 = 0, @d0 = 1, @d1 = 1, @d2 = 1, @d3 = 1)",
+        "[FAIL] @2080ms  buzzer.hasSignal == true  (got false)",
+        "[FAIL] @2225ms  led.value == false  (got true)",
+        "[FAIL] @2475ms  led.value == true  (got false)",
+        "[FAIL] @2975ms  led.value == true  (got false)"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 20,
+        "passedAssertions": 11,
+        "failedAssertions": 9,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 2080,
+            "expect": "buzzer.hasSignal == true",
+            "passed": false
+          },
+          {
+            "at": 2475,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 2725,
+            "expect": "led.value == false",
+            "passed": false
+          },
+          {
+            "at": 3180,
+            "expect": "buzzer.hasSignal == true",
+            "passed": false
+          },
+          {
+            "at": 3787,
+            "expect": "(@a0 != @a1 && @a1 != @a2 && @a2 != @a3) || (@b0 != @b1 && @b1 != @b2 && @b2 != @b3)",
+            "passed": false
+          },
+          {
+            "at": 3980,
+            "expect": "buzzer.hasSignal == true",
+            "passed": false
+          },
+          {
+            "at": 4520,
+            "expect": "led.value == false",
+            "passed": false
+          },
+          {
+            "at": 4800,
+            "expect": "led.value == false",
+            "passed": false
+          },
+          {
+            "at": 5080,
+            "expect": "buzzer.hasSignal == true",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 61452688,
+        "virtualTimeNs": 6000000000,
+        "ctWallMs": 7343,
+        "harnessWallMs": 11960
+      },
+      "digests": {
+        "finalState": "ab18e889bace39dd9f2601e37805ee1e610fe56ac3cde7565840dd5fd7e694c0",
+        "inputs": "9571cb14b94f05e09c5fb8ff08794427f973f5a4cf29f7f533eaa3c77712f4e4"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [
+        {
+          "code": "electrical.contention",
+          "severity": "warning",
+          "message": "net PE4 (rail VCC): held high by the MCU's PORTE and low by scripted driver button; it sits at 2.495 V and reads low"
+        },
+        {
+          "code": "electrical.indeterminate-level",
+          "severity": "warning",
+          "message": "net PE4: sits at 2.495 V, between the input thresholds 1.500 V and 3.500 V of rail VCC; it keeps its previous level (low)"
+        },
+        {
+          "code": "electrical.contention",
+          "severity": "warning",
+          "message": "net PE4 (rail VCC): held high by the MCU's PORTE and low by scripted driver button; it sits at 2.495 V and reads high"
+        },
+        {
+          "code": "electrical.indeterminate-level",
+          "severity": "warning",
+          "message": "net PE4: sits at 2.495 V, between the input thresholds 1.500 V and 3.500 V of rail VCC; it keeps its previous level (high)"
+        },
+        {
+          "code": "electrical.contention",
+          "severity": "warning",
+          "message": "net PE4 (rail VCC): held high by the MCU's PORTE and low by scripted driver button; it sits at 2.495 V and reads high"
+        },
+        {
+          "code": "electrical.indeterminate-level",
+          "severity": "warning",
+          "message": "net PE4: sits at 2.495 V, between the input thresholds 1.500 V and 3.500 V of rail VCC; it keeps its previous level (high)"
+        },
+        {
+          "code": "electrical.contention",
+          "severity": "warning",
+          "message": "net PE4 (rail VCC): held high by the MCU's PORTE and low by scripted driver button; it sits at 2.495 V and reads high"
+        },
+        {
+          "code": "electrical.indeterminate-level",
+          "severity": "warning",
+          "message": "net PE4: sits at 2.495 V, between the input thresholds 1.500 V and 3.500 V of rail VCC; it keeps its previous level (high); this net lists no further electrical issues, the run's electrical report kee"
+        }
+      ],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/buzzer_toggle_led_freq",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "buzzer_toggle_led_freq",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "22a9ae7839098c3f25b9b56c3aa0bb48413d4c6018b5463505240d439876c6f9",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 20 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 20,
+        "passedAssertions": 20,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 61880232,
+        "virtualTimeNs": 6000000062,
+        "ctWallMs": 7762,
+        "harnessWallMs": 13311
+      },
+      "digests": {
+        "finalState": "4bfb82b3595ec8ee4d699d687e53f6938195d8957ff5a5b429327200f5a4ff18",
+        "inputs": "db24e19cf99c839b5645a3ed594f772556f89fa49c6fcf4c3667f4c98328896d"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/openai__gpt-6.1-sol/clap_switch",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "clap_switch",
+      "model": "openai__gpt-6.1-sol",
+      "mode": "nosim",
+      "firmwareSha256": "6db07279e5ab72e85d60efa62bdd92f2d9874df8fbe289592a0e3d139524fa88",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 2 passed, 2 failed",
+      "embedgymFailing": [
+        "[FAIL] @900ms  relay.energized == true  (got false)",
+        "[FAIL] @2100ms  relay.energized == true  (got false)"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 2,
+        "failedAssertions": 2,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 900,
+            "expect": "relay.energized == true",
+            "passed": false
+          },
+          {
+            "at": 2100,
+            "expect": "relay.energized == true",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 21282806,
+        "virtualTimeNs": 2250000000,
+        "ctWallMs": 3871,
+        "harnessWallMs": 7410
+      },
+      "digests": {
+        "finalState": "ab53e4095a0da9350a3135f81bbf44e33c3476ec44020666adc72fc18b9591f4",
+        "inputs": "4cd907d7c83f27eb13dd96173fb7ce8db7868300c8d360158634281ab2f6997f"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/clap_switch",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "clap_switch",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "4b40c3020a9e9288735b2a8ce1d782f68860d5e8158b71b55df85d2df44ab1a9",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 4 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 4,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 21413805,
+        "virtualTimeNs": 2250000000,
+        "ctWallMs": 3848,
+        "harnessWallMs": 11266
+      },
+      "digests": {
+        "finalState": "b872fe3f4a38004cacee6028089e789660f20e51fbe565680d2ce525a2e19de4",
+        "inputs": "9f0c94625989128ee6de49d68b8f3f62c18d0e7c2bae8378872c9cd79f38c2aa"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/gas_ventilation_fan_control",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "gas_ventilation_fan_control",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "e42a5954d22b647cbfe69bb06593c34dc966d262d244ecc91a66ce78332409b4",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 32 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 32,
+        "passedAssertions": 32,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 573617499,
+        "virtualTimeNs": 48150000062,
+        "ctWallMs": 85178,
+        "harnessWallMs": 89779
+      },
+      "digests": {
+        "finalState": "2d4e4b1e03445e023939b0a993b4d10503027670951d5651118fc8d49eacefe6",
+        "inputs": "98980ce6c690d53921f50cbf053924da7967038f42f97b59936aaa0b85b0097e"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/hcsr501_motion_alarm",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "hcsr501_motion_alarm",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "513fcb9321dc29c3bb50b970b67f8f54a7d0ef8081d3355335848de2afc1d9ee",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 4 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 4,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 39924591,
+        "virtualTimeNs": 4150000000,
+        "ctWallMs": 7909,
+        "harnessWallMs": 12885
+      },
+      "digests": {
+        "finalState": "230a9dd5bb4e554684d26ddfdbac0ee92c29bc9ac71f677a14a49537003690fe",
+        "inputs": "6d75ec66154b3ab3d7394f78816d21cacd45e0d80df01ba3c9c6c7537f4cd273"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/joystick_buzzer_pitch",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "joystick_buzzer_pitch",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "bad514f2f47c0c20e1771877e3c20fc92fce7cf61091838d43af1d176fd78ceb",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 7 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 7,
+        "passedAssertions": 7,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 93093287,
+        "virtualTimeNs": 7850000000,
+        "ctWallMs": 19363,
+        "harnessWallMs": 27727
+      },
+      "digests": {
+        "finalState": "2dee456aef61f2d49fcf4ff9d42b4086ce01fcc7fdb68d8393d50eb61ad03714",
+        "inputs": "89a34703f15ebdef25fcb9d5e3b02458c54a026ea86e819e0004a6ff2680d3d5"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/openai__gpt-6-luna/mpu6050_read_i2c",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "mpu6050_read_i2c",
+      "model": "openai__gpt-6-luna",
+      "mode": "nosim",
+      "firmwareSha256": "99dafecd01b0966f2b56db79ba86431728722e3a2cec33e2c51037160deaf073",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 0 passed, 2 failed",
+      "embedgymFailing": [
+        "[FAIL] @2500ms  @az[-1] == 16384 && @gx[-1] == -6550  (got @az = [64@204ms, 64@305ms, 64@406ms, 64@507ms, 64@608ms, 64@710ms, 64@811ms, 64@912ms, 64@1013ms, 64@1114ms, 64@1215ms, 64@1316ms, 64@1417ms, 64@1518ms, 64@1619ms, 64@1720ms, 64@1821ms, 64@1923ms, 64@2024ms, 64@2125ms, 64@2226ms, 64@2327ms, 64@2428ms], @gx = [0@204ms, 27366@305ms, 27366@406ms, 27366@507ms, 27366@608ms, 27366@710ms, 27366@811ms, 27366@912ms, 27366@1013ms, 27366@1114ms, 27366@1215ms, 27366@1316ms, 27366@1417ms, 27366@1518ms, 27366@1619ms, 27366@1720ms, 27366@1821ms, 27366@1923ms, 27366@2024ms, 27366@2125ms, 27366@2226ms, 27366@2327ms, 27366@2428ms])",
+        "[FAIL] @4800ms  @az[-1] == 4096 && @gx[-1] == -6550 && @az.t[-1] > 2600  (got @az = [64@204ms, 64@305ms, 64@406ms, 64@507ms, 64@608ms, 64@710ms, 64@811ms, 64@912ms, 64@1013ms, 64@1114ms, 64@1215ms, 64@1316ms, 64@1417ms, 64@1518ms, 64@1619ms, 64@1720ms, 64@1821ms, 64@1923ms, 64@2024ms, 64@2125ms, 64@2226ms, 64@2327ms, 64@2428ms, 64@2529ms, 16@2630ms, 16@2731ms, 16@2832ms, 16@2933ms, 16@3034ms, 16@3136ms, 16@3237ms, 16@3338ms, 16@3439ms, 16@3540ms, 16@3641ms, 16@3742ms, 16@3843ms, 16@3944ms, 16@4045ms, 16@4146ms, 16@4248ms, 16@4349ms, 16@4450ms, 16@4551ms, 16@4652ms, 16@4753ms], @gx = [0@204ms, 27366@305ms, 27366@406ms, 27366@507ms, 27366@608ms, 27366@710ms, 27366@811ms, 27366@912ms, 27366@1013ms, 27366@1114ms, 27366@1215ms, 27366@1316ms, 27366@1417ms, 27366@1518ms, 27366@1619ms, 27366@1720ms, 27366@1821ms, 27366@1923ms, 27366@2024ms, 27366@2125ms, 27366@2226ms, 27366@2327ms, 27366@2428ms, 27366@2529ms, 27366@2630ms, 27366@2731ms, 27366@2832ms, 27366@2933ms, 27366@3034ms, 27366@3136ms, 27366@3237ms, 27366@3338ms, 27366@3439ms, 27366@3540ms, 27366@3641ms, 27366@3742ms, 27366@3843ms, 27366@3944ms, 27366@4045ms, 27366@4146ms, 27366@4248ms, 27366@4349ms, 27366@4450ms, 27366@4551ms, 27366@4652ms, 27366@4753ms])"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 2,
+        "passedAssertions": 0,
+        "failedAssertions": 2,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 2500,
+            "expect": "@az[-1] == 16384 && @gx[-1] == -6550",
+            "passed": false
+          },
+          {
+            "at": 4800,
+            "expect": "@az[-1] == 4096 && @gx[-1] == -6550 && @az.t[-1] > 2600",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 58779929,
+        "virtualTimeNs": 4950000000,
+        "ctWallMs": 14475,
+        "harnessWallMs": 19019
+      },
+      "digests": {
+        "finalState": "27ab08eef9b6f5b3969ebf3c2c0bc727d3c85e035e116851a7c9c2ec8ab4b4ce",
+        "inputs": "a17abb5c90671171023457f8a543dc518c3feed629627b1c8faca218d5c80a22"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/mpu6050_read_i2c",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "mpu6050_read_i2c",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "1f91fb6c75cc5958fe2b2c381d60466742f6a13b179701f1df21b3816492a109",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 2 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 2,
+        "passedAssertions": 2,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 57775854,
+        "virtualTimeNs": 4950000000,
+        "ctWallMs": 15348,
+        "harnessWallMs": 23632
+      },
+      "digests": {
+        "finalState": "ea59dc1c259928fa63195fdc303cf5b559e1e4f4cabac64833c52d86fae5b7ca",
+        "inputs": "11a8e8a7f189f4e828f90885e6e8f59e186fbd2a62279b8caa4b3ac67f212f2f"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/mq2_gas_analog_read",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "mq2_gas_analog_read",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "c257c2dd5f67fca12e65ba96c7d71630ca9646147989fe5c128e93a34180d995",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 8 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 8,
+        "passedAssertions": 8,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 63732804,
+        "virtualTimeNs": 5350000000,
+        "ctWallMs": 12667,
+        "harnessWallMs": 19639
+      },
+      "digests": {
+        "finalState": "b2e0e1ce70ed51414729405926b5e51e77c4d4f8c23eb77161288644267fae51",
+        "inputs": "06cf841cfe9ef8841da65dbeb1247984e034b4351a69dd7e52c9caf44e3a4a27"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/mq2_gas_leak_detector",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "mq2_gas_leak_detector",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "b9b8b1675f86d28438b3dec09e288cafe420ed6baf543b509eea7d2b39554bbe",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 10 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 10,
+        "passedAssertions": 10,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 107025017,
+        "virtualTimeNs": 10550000000,
+        "ctWallMs": 16704,
+        "harnessWallMs": 23330
+      },
+      "digests": {
+        "finalState": "d42a78b46dbf7d3aca3fde2ba41f9036ec7734afc4fbbac25ba1bdfa1e7379f2",
+        "inputs": "e00206f2dce4b78bc52b551ec1884a2a7904a5b7520f8c074d7208806fb3f28d"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/photoresistor_nightlight",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "photoresistor_nightlight",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "43da91dee8bb73bc1ac7aa04c1f2566273f63b39f17f182716d6553e09b74502",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 0 passed, 3 failed",
+      "embedgymFailing": [
+        "[FAIL] @2400ms  led.value == false  (got true)",
+        "[FAIL] @4900ms  led.value == true  (got false)",
+        "[FAIL] @7400ms  led.value == false  (got true)"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 3,
+        "passedAssertions": 0,
+        "failedAssertions": 3,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 2400,
+            "expect": "led.value == false",
+            "passed": false
+          },
+          {
+            "at": 4900,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 7400,
+            "expect": "led.value == false",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 72620007,
+        "virtualTimeNs": 7550000000,
+        "ctWallMs": 16639,
+        "harnessWallMs": 27941
+      },
+      "digests": {
+        "finalState": "bc47e6c71e165d3d6ab25f864c1a89b0d168ee3224fcb4c081dacbd496525eee",
+        "inputs": "5fe2c7b42d38882fd7220866fc6c9ce791dd6506a061b385433122ae983a5d8f"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/sim/google__gemini-3.8-flash/photoresistor_nightlight",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "photoresistor_nightlight",
+      "model": "google__gemini-3.8-flash",
+      "mode": "sim",
+      "firmwareSha256": "d0a440496eb0c038cf47ffb3799a0f9bb35adbae8701345e703b3559d238f4a0",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 3 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 3,
+        "passedAssertions": 3,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 89751624,
+        "virtualTimeNs": 7550000000,
+        "ctWallMs": 16224,
+        "harnessWallMs": 21712
+      },
+      "digests": {
+        "finalState": "eea6ff40e443bb6090fc9b4c0d2569b2c11f55ce8d3d3d0a02785298e2ee83e3",
+        "inputs": "24939602dc39ef4f8fc1d5da93d482f2876f9600be172730e7ad0121f0fba595"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/sen0244_quality_led_indicator",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "sen0244_quality_led_indicator",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "934c2739024b755295cff092e4a3776838890a62ea39781f4b53d5b37737e7e8",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 16 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 16,
+        "passedAssertions": 16,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 240762226,
+        "virtualTimeNs": 22650000000,
+        "ctWallMs": 26638,
+        "harnessWallMs": 34591
+      },
+      "digests": {
+        "finalState": "0fbb9cb7ed4efa7e7b6244ef68a3bbdf2849280bfe4c17e26be992a4b4c4035f",
+        "inputs": "7f90853314f60f094988ad4ed6cb1e5a7632724d903f580972d0754986a80711"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/openai__gpt-5.6-luna/sen0244_stable_reading",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "sen0244_stable_reading",
+      "model": "openai__gpt-5.6-luna",
+      "mode": "nosim",
+      "firmwareSha256": "fa8b7fe5104c40c95fda3967a126cabf2484e2f577a40098cc1ca538e622d941",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 5 passed, 5 failed",
+      "embedgymFailing": [
+        "[FAIL] @10500ms  @dry.t[-1] < 3800 && @stable.t[-1] > 9400 && @stable.t[-1] > @settle.t[-1] && 293 <= @stable[-1] && @stable[-1] <= 307  (got @dry = [\"No water detected\"@2020ms], @stable = [299@8018ms], @settle = [299@4020ms, 299@5019ms, 299@6020ms, 299@7019ms])",
+        "[FAIL] @18000ms  @stable.t[-1] > 16900 && @stable.t[-1] > @settle.t[-1] && 585 <= @stable[-1] && @stable[-1] <= 610  (got @stable = [299@8018ms, 600@16017ms], @settle = [299@4020ms, 299@5019ms, 299@6020ms, 299@7019ms, 600@12020ms, 600@13020ms, 600@14020ms, 600@15020ms])",
+        "[FAIL] @21000ms  @dry.t[-1] > 19900 && @dry.t[-1] > @stable.t[-1] && @dry.t[-1] > @settle.t[-1]  (got @dry = [\"No water detected\"@2020ms, \"No water detected\"@19020ms], @stable = [299@8018ms, 600@16017ms], @settle = [299@4020ms, 299@5019ms, 299@6020ms, 299@7019ms, 600@12020ms, 600@13020ms, 600@14020ms, 600@15020ms])",
+        "[FAIL] @28500ms  @stable.t[-1] > 27400 && @stable.t[-1] > @settle.t[-1] && 585 <= @stable[-1] && @stable[-1] <= 610  (got @stable = [299@8018ms, 600@16017ms, 600@26018ms], @settle = [299@4020ms, 299@5019ms, 299@6020ms, 299@7019ms, 600@12020ms, 600@13020ms, 600@14020ms, 600@15020ms, 600@22020ms, 600@23019ms, 600@24020ms, 600@25020ms])",
+        "[FAIL] @28500ms  len(@dry) + len(@settle) + len(@stable) >= 25 && len(@dry) + len(@settle) + len(@stable) <= 30  (got @dry = [\"No water detected\"@2020ms, \"No water detected\"@19020ms], @settle = [299@4020ms, 299@5019ms, 299@6020ms, 299@7019ms, 600@12020ms, 600@13020ms, 600@14020ms, 600@15020ms, 600@22020ms, 600@23019ms, 600@24020ms, 600@25020ms], @stable = [299@8018ms, 600@16017ms, 600@26018ms])"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 10,
+        "passedAssertions": 5,
+        "failedAssertions": 5,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 10500,
+            "expect": "@dry.t[-1] < 3800 && @stable.t[-1] > 9400 && @stable.t[-1] > @settle.t[-1] && 293 <= @stable[-1] && @stable[-1] <= 307",
+            "passed": false
+          },
+          {
+            "at": 18000,
+            "expect": "@stable.t[-1] > 16900 && @stable.t[-1] > @settle.t[-1] && 585 <= @stable[-1] && @stable[-1] <= 610",
+            "passed": false
+          },
+          {
+            "at": 21000,
+            "expect": "@dry.t[-1] > 19900 && @dry.t[-1] > @stable.t[-1] && @dry.t[-1] > @settle.t[-1]",
+            "passed": false
+          },
+          {
+            "at": 28500,
+            "expect": "@stable.t[-1] > 27400 && @stable.t[-1] > @settle.t[-1] && 585 <= @stable[-1] && @stable[-1] <= 610",
+            "passed": false
+          },
+          {
+            "at": 28500,
+            "expect": "len(@dry) + len(@settle) + len(@stable) >= 25 && len(@dry) + len(@settle) + len(@stable) <= 30",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 297258804,
+        "virtualTimeNs": 28650000000,
+        "ctWallMs": 41978,
+        "harnessWallMs": 47465
+      },
+      "digests": {
+        "finalState": "3d5ae2c3488e434eb196b781085b423f74a74c75f7a8daffa6bf1758cd534544",
+        "inputs": "0a2e2af145d4a06c0c8a19ac62439b3ab7a8c7b6807c270802b3e4f8c87d2aaf"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/sen0244_stable_reading",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "sen0244_stable_reading",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "3dc11e4fee6faea6f6591bceaf2e7a62784343758f2c2a5d4eba0425a74447e7",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 10 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 10,
+        "passedAssertions": 10,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 310490822,
+        "virtualTimeNs": 28650000062,
+        "ctWallMs": 37029,
+        "harnessWallMs": 44940
+      },
+      "digests": {
+        "finalState": "0bc0ee089492fb5fdf8797a0020790291eedc97a1ddbe9d96820c17cb0d7e48e",
+        "inputs": "8da317f9fc9cfe049023fae029a01c32b53147c742b023c95ce6aa8f78620f2c"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/nvidia__nemotron-3.5-super-vl/sen0244_tds_read",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "sen0244_tds_read",
+      "model": "nvidia__nemotron-3.5-super-vl",
+      "mode": "nosim",
+      "firmwareSha256": "01d0a1bdde0d3998d6a55e5875aacd4330cfe2089f29d55b74abb38843949d96",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 0 passed, 6 failed",
+      "embedgymFailing": [
+        "[FAIL] @2500ms  len(@v) >= 1 && len(@v) <= 4 && @v[-1] == 0 && @ppm[-1] == 0  (got @v = [], @ppm = [])",
+        "[FAIL] @5000ms  len(@v) >= 3 && len(@v) <= 7  (got @v = [])",
+        "[FAIL] @5000ms  @v.t[-1] - @v.t[-2] > 900 && @v.t[-1] - @v.t[-2] < 1200  (got @v = [])",
+        "[FAIL] @5000ms  @v.t[-1] > 2600 && 0.65 <= @v[-1] && @v[-1] <= 0.69 && 245 <= @ppm[-1] && @ppm[-1] <= 255  (got @v = [], @ppm = [])",
+        "[FAIL] @7500ms  len(@v) >= 5 && len(@v) <= 10  (got @v = [])"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 6,
+        "passedAssertions": 0,
+        "failedAssertions": 6,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 2500,
+            "expect": "len(@v) >= 1 && len(@v) <= 4 && @v[-1] == 0 && @ppm[-1] == 0",
+            "passed": false
+          },
+          {
+            "at": 5000,
+            "expect": "len(@v) >= 3 && len(@v) <= 7",
+            "passed": false
+          },
+          {
+            "at": 5000,
+            "expect": "@v.t[-1] - @v.t[-2] > 900 && @v.t[-1] - @v.t[-2] < 1200",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 5000,
+            "expect": "@v.t[-1] > 2600 && 0.65 <= @v[-1] && @v[-1] <= 0.69 && 245 <= @ppm[-1] && @ppm[-1] <= 255",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 7500,
+            "expect": "len(@v) >= 5 && len(@v) <= 10",
+            "passed": false
+          },
+          {
+            "at": 7500,
+            "expect": "@v.t[-1] > 5100 && 1.83 <= @v[-1] && @v[-1] <= 1.90 && 765 <= @ppm[-1] && @ppm[-1] <= 815",
+            "passed": false,
+            "error": "list index out of range"
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 91126711,
+        "virtualTimeNs": 7650000250,
+        "ctWallMs": 15873,
+        "harnessWallMs": 28335
+      },
+      "digests": {
+        "finalState": "9026b5aca1c18348eaf6130ef5f82bb1ea23f0363664c72407a2c1843bb2a2c3",
+        "inputs": "8a50e1fdaeadea83105b12374d838210600046723765949bc21a91141dcf736c"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/sen0244_tds_read",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "sen0244_tds_read",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "02839d61eede3497a24f589474132b8dd56f2328910c3beacfbcab49e41ed672",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 6 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 6,
+        "passedAssertions": 6,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 91130484,
+        "virtualTimeNs": 7650000000,
+        "ctWallMs": 18136,
+        "harnessWallMs": 25449
+      },
+      "digests": {
+        "finalState": "fce4f0273ee1325c3be91fdbed92e9851a6ae37b6e916049550bff7f714f76b4",
+        "inputs": "af51d836c6519b107f32e9d75c5d0d7a4a688f3f5c8f3fa1f1264bcab3c06cb4"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/sim_s/meta__muse-glimmer-30b/sen0244_water_quality_monitor",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "sen0244_water_quality_monitor",
+      "model": "meta__muse-glimmer-30b",
+      "mode": "sim_s",
+      "firmwareSha256": "5a978de6df833952f543cab70de512945fbaecd53b5b7aa1b426c4d0baf4581b",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 1 passed, 7 failed",
+      "embedgymFailing": [
+        "[FAIL] @6000ms  len(@ppm) >= 2 && len(@ppm) <= 4  (got @ppm = [])",
+        "[FAIL] @6000ms  @ppm.t[-1] - @ppm.t[-2] > 900 && @ppm.t[-1] - @ppm.t[-2] < 1200  (got @ppm = [])",
+        "[FAIL] @6000ms  @ppm.t[-1] > 4400 && 84 <= @ppm[-1] && @ppm[-1] <= 92 && @q[-1] == 'Excellent'  (got @ppm = [], @q = [])",
+        "[FAIL] @9000ms  @ppm.t[-1] > 7400 && 214 <= @ppm[-1] && @ppm[-1] <= 226 && @q[-1] == 'Good'  (got @ppm = [], @q = [])",
+        "[FAIL] @12000ms  @ppm.t[-1] > 10400 && 382 <= @ppm[-1] && @ppm[-1] <= 396 && @q[-1] == 'Fair'  (got @ppm = [], @q = [])"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 8,
+        "passedAssertions": 1,
+        "failedAssertions": 7,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 6000,
+            "expect": "len(@ppm) >= 2 && len(@ppm) <= 4",
+            "passed": false
+          },
+          {
+            "at": 6000,
+            "expect": "@ppm.t[-1] - @ppm.t[-2] > 900 && @ppm.t[-1] - @ppm.t[-2] < 1200",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 6000,
+            "expect": "@ppm.t[-1] > 4400 && 84 <= @ppm[-1] && @ppm[-1] <= 92 && @q[-1] == 'Excellent'",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 9000,
+            "expect": "@ppm.t[-1] > 7400 && 214 <= @ppm[-1] && @ppm[-1] <= 226 && @q[-1] == 'Good'",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 12000,
+            "expect": "@ppm.t[-1] > 10400 && 382 <= @ppm[-1] && @ppm[-1] <= 396 && @q[-1] == 'Fair'",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 15000,
+            "expect": "@ppm.t[-1] > 13400 && 674 <= @ppm[-1] && @ppm[-1] <= 705 && @q[-1] == 'Poor'",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 18000,
+            "expect": "@dry.t[-1] > 16400 && @dry.t[-1] > @ppm.t[-1] && len(@dry) + len(@ppm) >= 14 && len(@dry) + len(@ppm) <= 19",
+            "passed": false,
+            "error": "list index out of range"
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 197637907,
+        "virtualTimeNs": 18150000000,
+        "ctWallMs": 22065,
+        "harnessWallMs": 31223
+      },
+      "digests": {
+        "finalState": "1aae0edf4e7eefe2ac00c21442b69eab8e76c9ee656c2e59f1f872d3f32d47cf",
+        "inputs": "7c9fb6de696e439a15d564f5881246d9b1d827a17c86f38a349d118e109af422"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/sen0244_water_quality_monitor",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "sen0244_water_quality_monitor",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "a60cc619e70f15a129c6d4ab5b984b44875892055851421d693478df9cd7210f",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 8 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 8,
+        "passedAssertions": 8,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 197623023,
+        "virtualTimeNs": 18150000062,
+        "ctWallMs": 21808,
+        "harnessWallMs": 35722
+      },
+      "digests": {
+        "finalState": "01aa8c1009ad70b6ebb2b7a3300f1b2c6eb713521f0110849731da65c16a43e1",
+        "inputs": "a4d2feb41a70231fe858e4165861cc00a9420da7dd1daf2efda8e8a39a997e84"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/sensor_pir_human_motion",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "sensor_pir_human_motion",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "82d484d0d21e8dec00c9091738b0696ac21c44bad18d3ecae52f6d74be3b1d5e",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 7 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 7,
+        "passedAssertions": 7,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 61349879,
+        "virtualTimeNs": 5150000000,
+        "ctWallMs": 8269,
+        "harnessWallMs": 13453
+      },
+      "digests": {
+        "finalState": "c45a9040e708aba44a681e6098446a49680e1fc904113f9fb71ad001953536de",
+        "inputs": "c8549bb670ab9ca633a1672f9450aeedde8bdee11f7a338b1fb2843a13c0ac20"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/meta__muse-glimmer-30b/step_counter_print",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "step_counter_print",
+      "model": "meta__muse-glimmer-30b",
+      "mode": "nosim",
+      "firmwareSha256": "f80b3eef4a735b9b24939e44030ec2d7d4f1d6a2bd001e6625f96dac644e7b06",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 1 passed, 2 failed",
+      "embedgymFailing": [
+        "[FAIL] @2400ms  @steps[-1] == 2  (got @steps = [1@504ms, 1@1006ms, 1@1508ms, 1@2009ms])",
+        "[FAIL] @3400ms  @steps[-1] == 3  (got @steps = [1@504ms, 1@1006ms, 1@1508ms, 1@2009ms, 1@2512ms, 1@3014ms])"
+      ],
+      "ctExit": 4,
+      "ctVerdict": "inconclusive",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 3,
+        "passedAssertions": 1,
+        "failedAssertions": 2,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 2400,
+            "expect": "@steps[-1] == 2",
+            "passed": false
+          },
+          {
+            "at": 3400,
+            "expect": "@steps[-1] == 3",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 36846073,
+        "virtualTimeNs": 3550000000,
+        "ctWallMs": 2948,
+        "harnessWallMs": 7725
+      },
+      "digests": {
+        "finalState": "8825b0c6e7cb8cc77d138dc2573fffb36d1de8a3162d3caaf860bc1d11c9e084",
+        "inputs": "f040ea4ec950263110d7aae295b96758e6ca52ea70c1c46e968de865c0b9df12"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [
+        {
+          "code": "device.register.undefined-write",
+          "severity": "warning",
+          "message": "firmware wrote 0x0 to register 0x06 of MPU6050, which its source documents do not define; the twin stores the value"
+        },
+        {
+          "code": "device.register.undefined-write",
+          "severity": "warning",
+          "message": "firmware wrote 0x0 to register 0x07 of MPU6050, which its source documents do not define; the twin stores the value"
+        },
+        {
+          "code": "device.register.undefined-write",
+          "severity": "warning",
+          "message": "firmware wrote 0x0 to register 0x08 of MPU6050, which its source documents do not define; the twin stores the value"
+        },
+        {
+          "code": "device.register.undefined-write",
+          "severity": "warning",
+          "message": "firmware wrote 0x0 to register 0x09 of MPU6050, which its source documents do not define; the twin stores the value"
+        },
+        {
+          "code": "device.register.undefined-write",
+          "severity": "warning",
+          "message": "firmware wrote 0x0 to register 0x0A of MPU6050, which its source documents do not define; the twin stores the value"
+        },
+        {
+          "code": "device.register.undefined-write",
+          "severity": "warning",
+          "message": "firmware wrote 0x0 to register 0x0B of MPU6050, which its source documents do not define; the twin stores the value"
+        },
+        {
+          "code": "device.register.undefined-write",
+          "severity": "warning",
+          "message": "firmware wrote 0x0 to register 0x13 of MPU6050, which its source documents do not define; the twin stores the value"
+        },
+        {
+          "code": "device.register.undefined-write",
+          "severity": "warning",
+          "message": "firmware wrote 0x0 to register 0x14 of MPU6050, which its source documents do not define; the twin stores the value"
+        }
+      ],
+      "error": "ct run: wrote <home>/AppData\\Local\\Temp\\eg_ct_hg2aywtc\\udr0.jsonl (70 accesses, 70 kept)\n"
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/step_counter_print",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "step_counter_print",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "6f63ed0d7e30d7f7e161d2e33dd9ac713895aa09c76c3d2609cc751c13e337ef",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 3 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 3,
+        "passedAssertions": 3,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 37297750,
+        "virtualTimeNs": 3550000000,
+        "ctWallMs": 3703,
+        "harnessWallMs": 10138
+      },
+      "digests": {
+        "finalState": "58702df5f1d64553899241ccae73518e896236dc9827e65ef0fbcb410ee79126",
+        "inputs": "d2f5cf6ef56267c76966fc6f2b6433adf0f7cfd485aa9c6c61bcc691193e2878"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/tilt_detection_alarm",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "tilt_detection_alarm",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "660bcf5c8ad60e327c4342f34ae02697dbd9807bdf2eb94d0a43f4e32e8c067e",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 5 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": false,
+      "grading": {
+        "totalAssertions": 5,
+        "passedAssertions": 3,
+        "failedAssertions": 2,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 800,
+            "expect": "buzzer.hasSignal == true",
+            "passed": false
+          },
+          {
+            "at": 1800,
+            "expect": "buzzer.hasSignal == true",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 24099124,
+        "virtualTimeNs": 2450000000,
+        "ctWallMs": 2540,
+        "harnessWallMs": 8255
+      },
+      "digests": {
+        "finalState": "9cdd420d7bc669f7a179e263b1acaef41a0d4b95873c2d35d2eb4ca6a04a7c44",
+        "inputs": "6b46bc3c761e1df7e6faac41a7500ba9f5c9153ca8bc3ab5e729a9a8aad757d9"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [
+        {
+          "code": "electrical.contention",
+          "severity": "warning",
+          "message": "net PJ1 (rail VCC): held high by the MCU's PORTJ and low by scripted driver tilt; it sits at 2.500 V and reads low"
+        },
+        {
+          "code": "electrical.indeterminate-level",
+          "severity": "warning",
+          "message": "net PJ1: sits at 2.500 V, between the input thresholds 1.500 V and 3.500 V of rail VCC; it keeps its previous level (low)"
+        },
+        {
+          "code": "electrical.contention",
+          "severity": "warning",
+          "message": "net PJ1 (rail VCC): held high by the MCU's PORTJ and low by scripted driver tilt; it sits at 2.500 V and reads high"
+        },
+        {
+          "code": "electrical.indeterminate-level",
+          "severity": "warning",
+          "message": "net PJ1: sits at 2.500 V, between the input thresholds 1.500 V and 3.500 V of rail VCC; it keeps its previous level (high)"
+        }
+      ],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/tmp36_read",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "tmp36_read",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "19936373424be30fac0f51131838a1c5e8d86aa8d17309552abe8ba5bd6da88c",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 7 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 7,
+        "passedAssertions": 7,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 93511741,
+        "virtualTimeNs": 7850000000,
+        "ctWallMs": 11301,
+        "harnessWallMs": 16916
+      },
+      "digests": {
+        "finalState": "c1ad98b6c934178390f479f93e533721a1e13b005b90e6f6c2f5611290a82a59",
+        "inputs": "e09ada0226fb821c27f32c43a6c35f3e901ccea2cc57e1d9f2673d6b0477b191"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega2560_arduino/nosim/google__gemini-3.8-flash/tof_distance_pulling",
+      "target": "atmega2560_arduino",
+      "ctBoard": "arduino-mega2560",
+      "task": "tof_distance_pulling",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "d77593673475a675cb7e171791e01eef3a8231a5c1b8d4bb17243b8a361781fe",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 6 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 6,
+        "passedAssertions": 6,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 54853493,
+        "virtualTimeNs": 4650000000,
+        "ctWallMs": 6240,
+        "harnessWallMs": 15127
+      },
+      "digests": {
+        "finalState": "2f12c79b76c6399723100e71dccd023260e3dc2e39ec5c70f9545e186ef4c7e9",
+        "inputs": "2ef7c3ae3620e8d6995d92e1625d5ddee23ebca4ce7ca1f0380815bbb94763b1"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [
+        {
+          "code": "device.register.vendor-private",
+          "severity": "warning",
+          "message": "firmware used registers of VL53L0X that its data sheet leaves to the vendor API (first: 0x89); the twin stores their values without modeling their effect"
+        }
+      ],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/sim/nvidia__nemotron-3.5-super-vl/blink_led_1hz",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "blink_led_1hz",
+      "model": "nvidia__nemotron-3.5-super-vl",
+      "mode": "sim",
+      "firmwareSha256": "373fac0f257e515e0d56be525dcc637a1cba1c7153abaf55c56497f93f136412",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 0 passed, 6 failed",
+      "embedgymFailing": [
+        "[FAIL] @250ms  led.value == true  (got false)",
+        "[FAIL] @750ms  led.value == false  (got true)",
+        "[FAIL] @1250ms  led.value == true  (got false)",
+        "[FAIL] @1750ms  led.value == false  (got true)",
+        "[FAIL] @2250ms  led.value == true  (got false)"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 6,
+        "passedAssertions": 0,
+        "failedAssertions": 6,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 250,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 750,
+            "expect": "led.value == false",
+            "passed": false
+          },
+          {
+            "at": 1250,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 1750,
+            "expect": "led.value == false",
+            "passed": false
+          },
+          {
+            "at": 2250,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 2750,
+            "expect": "led.value == false",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 35760271,
+        "virtualTimeNs": 2900000062,
+        "ctWallMs": 4112,
+        "harnessWallMs": 11211
+      },
+      "digests": {
+        "finalState": "209b1e6f8444eb2b9c76e070cceddb90913ac6e1f62f7e7035557ea626a7ea96",
+        "inputs": "881d0f1c548613b6f0566b7fcc1a705e89a635f8273106180b97e1579d18d9a9"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/blink_led_1hz",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "blink_led_1hz",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "c296d243a9b78caa9554079cb2745a80a8f6eac05180f25d3bee27110365ff66",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 6 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 6,
+        "passedAssertions": 6,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 35760259,
+        "virtualTimeNs": 2900000000,
+        "ctWallMs": 4268,
+        "harnessWallMs": 11732
+      },
+      "digests": {
+        "finalState": "c9fda4992d35e0f895a90756e6c3f8c7b9450424f2c4d439da8aefd32ac2ddc1",
+        "inputs": "acfb428a91e03650449785a31f48a8eaaddd389426039531c8d624c713ab9e6b"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/sim_s/nvidia__nemotron-3.5-super-vl/blink_led_morse_code",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "blink_led_morse_code",
+      "model": "nvidia__nemotron-3.5-super-vl",
+      "mode": "sim_s",
+      "firmwareSha256": "b54857af35e65f132f93396aa966c14dfa5bc23c7dd78afbb06a5065c02c0107",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 14 passed, 6 failed",
+      "embedgymFailing": [
+        "[FAIL] @2300ms  led.value == false  (got true)",
+        "[FAIL] @4500ms  led.value == true  (got false)",
+        "[FAIL] @6900ms  led.value == true  (got false)",
+        "[FAIL] @7300ms  led.value == true  (got false)",
+        "[FAIL] @7700ms  led.value == true  (got false)"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 20,
+        "passedAssertions": 14,
+        "failedAssertions": 6,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 2300,
+            "expect": "led.value == false",
+            "passed": false
+          },
+          {
+            "at": 4500,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 6900,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 7300,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 7700,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 8700,
+            "expect": "led.value == true",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 114062773,
+        "virtualTimeNs": 9250000062,
+        "ctWallMs": 12099,
+        "harnessWallMs": 20056
+      },
+      "digests": {
+        "finalState": "b6368f3ab60f521c8460d6527919841075c6e4a3a95bac25671b64c1485a2b60",
+        "inputs": "8926d216c79f06a93f76160c17799207609edfd4bc89a599f3cfc61cf42ae5af"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/blink_led_morse_code",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "blink_led_morse_code",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "3cf36abdf21443cba5264b9788445442cbcf4287132ce0f3c52a889929fa8f39",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 20 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 20,
+        "passedAssertions": 20,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 114062793,
+        "virtualTimeNs": 9250000000,
+        "ctWallMs": 14349,
+        "harnessWallMs": 24041
+      },
+      "digests": {
+        "finalState": "6af9ea40d4fe19626b87ca9d010a4d544e8cd74b57430f1c995cdef15420f52e",
+        "inputs": "604441ccef60a29d85d678886a19bec4ec2c6add13ddf6a9c90d06de757f4a1d"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/blink_led_no_delay",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "blink_led_no_delay",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "c1bddcc0f13b696d48bc3b3e99505bca911f3a0f03f33399eb19e1a444ea8738",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 6 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 6,
+        "passedAssertions": 6,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 30894593,
+        "virtualTimeNs": 2900000000,
+        "ctWallMs": 1786,
+        "harnessWallMs": 9176
+      },
+      "digests": {
+        "finalState": "6c3d9a665e2e65016e8b62ecb53a70383714fbd6913a7d3968e98118068ad19e",
+        "inputs": "be34c04dbf9ae2d5f5b976abd278a5306267138c50da9b9464458bc6906a572f"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/blink_two_leds",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "blink_two_leds",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "bffee764375355b6ee21fd3adb22dff02b515196fa1685251a2ba2711d285b84",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 14 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 14,
+        "passedAssertions": 14,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 20107270,
+        "virtualTimeNs": 1775000000,
+        "ctWallMs": 1358,
+        "harnessWallMs": 9087
+      },
+      "digests": {
+        "finalState": "f10ede4a0282311c9b2ee16d89b7705a79dbaafb574668159f48ac1950df082a",
+        "inputs": "a5b69b1f8f61b1441d1501fc21b2a2738931919ed62a75fbf41542eef69b763b"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/breathing_led",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "breathing_led",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "778302b4b40f3ed657bf177169b61c6551dc49a22e23fd179aa3d7911a1a38ee",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 4 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 4,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 19728241,
+        "virtualTimeNs": 1600000000,
+        "ctWallMs": 3160,
+        "harnessWallMs": 13842
+      },
+      "digests": {
+        "finalState": "0bd942c0bf8a7abbd9ef517068d35634952d1b6c2daebfe6015278d0d6039b75",
+        "inputs": "2c4837366cc4aec8e58b60b58e9efda6a6a99d97341b172454105a34fed4d94f"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/button_press_debounce",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "button_press_debounce",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "0a4dcc7fea847467fdec0f1d04908b8c7d7786f25a8cf5ab16ea9894b7b29cf5",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 7 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 7,
+        "passedAssertions": 7,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 29591258,
+        "virtualTimeNs": 2750000000,
+        "ctWallMs": 4753,
+        "harnessWallMs": 12139
+      },
+      "digests": {
+        "finalState": "f8a8b73c03820be894451990b784041cc5d41263f7d7838331f0bd33cbeb0c5c",
+        "inputs": "42df6e5757fa985327bfe139d2ceea92f271c601e56d7dea1ee04a478ad9505c"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/button_status_count",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "button_status_count",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "2000463450404a9e7f4b50c110c670807271155782219f854dc586b1175f25b3",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 8 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 8,
+        "passedAssertions": 8,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 26431361,
+        "virtualTimeNs": 2450000062,
+        "ctWallMs": 3778,
+        "harnessWallMs": 12480
+      },
+      "digests": {
+        "finalState": "b6f4109991b68c8ba834e680edbcfce63f1564bd7f2ed89470258cb7ea6418b8",
+        "inputs": "ef3864801d3fd6d7a16147465a09cca9f9a9b90b4b12f943528a38647257a94a"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/sim/nvidia__nemotron-3.5-super-vl/button_status_display",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "button_status_display",
+      "model": "nvidia__nemotron-3.5-super-vl",
+      "mode": "sim",
+      "firmwareSha256": "637687b52dcc1a22177b0ca3bc8582ab3ec36d3701b54714b564a84fe8feab0c",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 2 passed, 2 failed",
+      "embedgymFailing": [
+        "[FAIL] @1350ms  len(@presses) == 1  (got @presses = [\"Button Pressed!\"@917ms, \"Button Pressed!\"@967ms, \"Button Pressed!\"@1017ms, \"Button Pressed!\"@1067ms, \"Button Pressed!\"@1117ms, \"Button Pressed!\"@1168ms, \"Button Pressed!\"@1218ms, \"Button Pressed!\"@1268ms, \"Button Pressed!\"@1318ms])",
+        "[FAIL] @1800ms  len(@presses) == 1  (got @presses = [\"Button Pressed!\"@917ms, \"Button Pressed!\"@967ms, \"Button Pressed!\"@1017ms, \"Button Pressed!\"@1067ms, \"Button Pressed!\"@1117ms, \"Button Pressed!\"@1168ms, \"Button Pressed!\"@1218ms, \"Button Pressed!\"@1268ms, \"Button Pressed!\"@1318ms, \"Button Pressed!\"@1368ms])"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 2,
+        "failedAssertions": 2,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 1350,
+            "expect": "len(@presses) == 1",
+            "passed": false
+          },
+          {
+            "at": 1800,
+            "expect": "len(@presses) == 1",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 24038157,
+        "virtualTimeNs": 1950000125,
+        "ctWallMs": 4485,
+        "harnessWallMs": 10985
+      },
+      "digests": {
+        "finalState": "2fc521c9cf2fae1d64be7918cf1e913a83a36c49a9c3a1e9e996006393482b23",
+        "inputs": "4b5044cdba156b26e3e7d9507809421a86c267b67cba14d22a1a9afc5a3233e8"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/button_status_display",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "button_status_display",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "486853650b87937fb0af6babaff5145324ff36a4067969b3ab7945228f8ea7f1",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 4 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 4,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 21013571,
+        "virtualTimeNs": 1950000062,
+        "ctWallMs": 3987,
+        "harnessWallMs": 13536
+      },
+      "digests": {
+        "finalState": "f15375f67a128cc7f30e0d004acf7e84877bb2098f0d6fbe09f47288bdac3b78",
+        "inputs": "f4721a834684bc26dc7ca1106fd17471329f376c9c9e28e3620e7f2a3044598f"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/nvidia__nemotron-3.5-super-vl/buzzer_button",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "buzzer_button",
+      "model": "nvidia__nemotron-3.5-super-vl",
+      "mode": "nosim",
+      "firmwareSha256": "da94b2e2497d4663de3ba7e44693149806d9518b30442ed85113115bd574de02",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 6 passed, 4 failed",
+      "embedgymFailing": [
+        "[FAIL] @1800ms  buzzer.hasSignal == false  (got true)",
+        "[FAIL] @2300ms  buzzer.hasSignal == true  (got false)",
+        "[FAIL] @2300ms  buzzer.pulseRate == 1  (got 0)",
+        "[FAIL] @3800ms  buzzer.hasSignal == false  (got true)"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 10,
+        "passedAssertions": 7,
+        "failedAssertions": 3,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 1800,
+            "expect": "buzzer.hasSignal == false",
+            "passed": false
+          },
+          {
+            "at": 2300,
+            "expect": "buzzer.hasSignal == true",
+            "passed": false
+          },
+          {
+            "at": 3800,
+            "expect": "buzzer.hasSignal == false",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 41366297,
+        "virtualTimeNs": 3950000062,
+        "ctWallMs": 4085,
+        "harnessWallMs": 15734
+      },
+      "digests": {
+        "finalState": "fe529b690ddcd92e9aa3534349f3fa367af693598ec6cfbf2d69ccacd76bfce5",
+        "inputs": "df79472d3d9cb90cb02e892b91551a5c95f186bf90a148756b08f17b4ceb63a8"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/buzzer_button",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "buzzer_button",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "cbc6adc42b914fa9efc7d404c92a5b83f43838eb9c0b62228124ccf3e7a6b28a",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 10 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 10,
+        "passedAssertions": 10,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 41378551,
+        "virtualTimeNs": 3950000125,
+        "ctWallMs": 5802,
+        "harnessWallMs": 16085
+      },
+      "digests": {
+        "finalState": "a4d6764e720d836cf7b531342f5f95032670363ae40e232db2e8551f052e598a",
+        "inputs": "45649cc22981f779d8e8a97eb0e68e289e27203819d7b77c1d5fbcb459d16cb0"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/buzzer_doorbell",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "buzzer_doorbell",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "0e34d4d2eba12fb806e88733ded736fe5d551bd9b2660aadeaa5f9f4d971d218",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 5 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 5,
+        "passedAssertions": 5,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 29055544,
+        "virtualTimeNs": 2950000000,
+        "ctWallMs": 4315,
+        "harnessWallMs": 16975
+      },
+      "digests": {
+        "finalState": "70b3d3f6376488a88f792939fdd11bbbf7ccb900b7d592e654b2d30549b55041",
+        "inputs": "c68fecb8b445af05e69f8083d1ff7380458c8bc5102c36246b597c6323695d80"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/buzzer_laser_tripwire",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "buzzer_laser_tripwire",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "8b8907f7f4a70c3ad3f268043291a029a57b3e53bf80a9746c834733927cade3",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 4 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 4,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 92727710,
+        "virtualTimeNs": 7550000000,
+        "ctWallMs": 10615,
+        "harnessWallMs": 18583
+      },
+      "digests": {
+        "finalState": "979fb9ba897446015f381a6c168b624805c22fdbc45a307cc10d6123c820985d",
+        "inputs": "3384c08e9c5ca10cb7daff62afe44d18d623202b421e50cb1625ef6b10b492cd"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/nvidia__nemotron-3.5-super-vl/buzzer_toggle_led_freq",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "buzzer_toggle_led_freq",
+      "model": "nvidia__nemotron-3.5-super-vl",
+      "mode": "nosim",
+      "firmwareSha256": "6697284652f5195f040e028915d9fcc482c0026f60aaa4a321e346ddba523c46",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 14 passed, 6 failed",
+      "embedgymFailing": [
+        "[FAIL] @2225ms  led.value == false  (got true)",
+        "[FAIL] @2725ms  led.value == false  (got true)",
+        "[FAIL] @3787ms  (@a0 != @a1 && @a1 != @a2 && @a2 != @a3) || (@b0 != @b1 && @b1 != @b2 && @b2 != @b3)  (got @a0 = 0, @a1 = 0, @a2 = 0, @a3 = 1, @b0 = 0, @b1 = 0, @b2 = 1, @b3 = 1)",
+        "[FAIL] @4200ms  buzzer.hasSignal == false  (got true)",
+        "[FAIL] @4520ms  led.value == false  (got true)"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 20,
+        "passedAssertions": 14,
+        "failedAssertions": 6,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 2225,
+            "expect": "led.value == false",
+            "passed": false
+          },
+          {
+            "at": 2725,
+            "expect": "led.value == false",
+            "passed": false
+          },
+          {
+            "at": 3787,
+            "expect": "(@a0 != @a1 && @a1 != @a2 && @a2 != @a3) || (@b0 != @b1 && @b1 != @b2 && @b2 != @b3)",
+            "passed": false
+          },
+          {
+            "at": 4200,
+            "expect": "buzzer.hasSignal == false",
+            "passed": false
+          },
+          {
+            "at": 4520,
+            "expect": "led.value == false",
+            "passed": false
+          },
+          {
+            "at": 4800,
+            "expect": "led.value == false",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 66376296,
+        "virtualTimeNs": 6000000000,
+        "ctWallMs": 5004,
+        "harnessWallMs": 12805
+      },
+      "digests": {
+        "finalState": "cc73088ee30aeaf86c1e2bf2e49f34a384860ff5ed6cc682153e0fbf6e374117",
+        "inputs": "fc5a3979418f830a5f717ad416ab73d5b75f324f6b3b911dde21b05bad784c19"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/buzzer_toggle_led_freq",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "buzzer_toggle_led_freq",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "49b92bc6357f7ad19e4022c5931872212f2f56ea9fe5ecce1e1bb8ddff83933e",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 20 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 20,
+        "passedAssertions": 20,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 63386777,
+        "virtualTimeNs": 6000000125,
+        "ctWallMs": 5515,
+        "harnessWallMs": 15629
+      },
+      "digests": {
+        "finalState": "11eae512d5790de7f8699c08d3200aaf43246165ee521a0a64fad260ecc76b28",
+        "inputs": "30e336dc659b580f30a768eae7da23a9cac85972510e2aff5450df550f8dd503"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/clap_switch",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "clap_switch",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "219dcd779e15d2c21b4aab2ffc325609e61424ea47cd9ef9c90f42c503252407",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 2 passed, 2 failed",
+      "embedgymFailing": [
+        "[FAIL] @900ms  relay.energized == true  (got false)",
+        "[FAIL] @2100ms  relay.energized == true  (got false)"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 2,
+        "failedAssertions": 2,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 900,
+            "expect": "relay.energized == true",
+            "passed": false
+          },
+          {
+            "at": 2100,
+            "expect": "relay.energized == true",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 21618060,
+        "virtualTimeNs": 2250000062,
+        "ctWallMs": 1214,
+        "harnessWallMs": 8438
+      },
+      "digests": {
+        "finalState": "f3f4e6a6b6e2008f199fda8125139f2cce4732b7cb9ebf4f6d96bf54b34da840",
+        "inputs": "1661f02e72273c0997ab1768b7dce4e3f6116b47c6d2a895eb4eeba99404f87c"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/openai__gpt-5.6-luna/clap_switch",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "clap_switch",
+      "model": "openai__gpt-5.6-luna",
+      "mode": "nosim",
+      "firmwareSha256": "09a6f0085343881bd341f249e56112a36ce97a803d800091092140366bbc8926",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 4 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 4,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 21883920,
+        "virtualTimeNs": 2250000000,
+        "ctWallMs": 1883,
+        "harnessWallMs": 10204
+      },
+      "digests": {
+        "finalState": "c2c5680e45762ada6a1b5dbd4d4f25a57cc84b36f8beab78d2517ba764692b21",
+        "inputs": "fca8c3127335062de71ee3a533ee5df2bb0d33213fd5ad1bfa6ab5527e182705"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/gas_ventilation_fan_control",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "gas_ventilation_fan_control",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "b0156405678c4cf368b3094d1779e74fe0aa7df6c6e60ab3db01217d1bf368b2",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 32 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 32,
+        "passedAssertions": 32,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 593688371,
+        "virtualTimeNs": 48150000000,
+        "ctWallMs": 80596,
+        "harnessWallMs": 87681
+      },
+      "digests": {
+        "finalState": "2fa75fa84f5eaba86d7c7547105632c23c0f8aed840d1630d768d74fdee44486",
+        "inputs": "61391aabb11420812c545eede44675c830e5d7dad61089bae3112934dd7c18e1"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/hcsr501_motion_alarm",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "hcsr501_motion_alarm",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "d56a2bde74f67fd3788b50fa34686c8f21aedde03096ad66a3a6856e657183bf",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 4 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 4,
+        "passedAssertions": 4,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 51003779,
+        "virtualTimeNs": 4150000062,
+        "ctWallMs": 9527,
+        "harnessWallMs": 22817
+      },
+      "digests": {
+        "finalState": "bdc32ad63e1ebd9c65573431defcf04d28e00fe27d5f5ca38e05cb134c593a3b",
+        "inputs": "04139cf247b2b0e52fb30fd400c61df1156d3fa03becb7c2c2fa5b5ea36c8345"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/joystick_buzzer_pitch",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "joystick_buzzer_pitch",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "d87531feebf2a3ec8254d1a6a7e1f40c99443d70e2b7af80df3723d6197614db",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 7 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 7,
+        "passedAssertions": 7,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 96503732,
+        "virtualTimeNs": 7850000000,
+        "ctWallMs": 16767,
+        "harnessWallMs": 23845
+      },
+      "digests": {
+        "finalState": "d62daeb2afbe9eeb72e2c0520303ae6efc07c427a65e6c50670c0a6b1545ec3d",
+        "inputs": "27815e987201a3dd09c80b04e26862089adfddc079d0b5541c23956c262275d4"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/mpu6050_read_i2c",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "mpu6050_read_i2c",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "7e454a17b7af9a7f251eed9ee686f44c7ba69e7781953b56e5e303676fd8c29c",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 2 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 2,
+        "passedAssertions": 2,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 60733022,
+        "virtualTimeNs": 4950000062,
+        "ctWallMs": 12630,
+        "harnessWallMs": 19574
+      },
+      "digests": {
+        "finalState": "8b25bd329675d58c42cc6cc682954a93b51098fb821ab201e0a613ffd0d510e0",
+        "inputs": "d8c1785bdeae548c6036c3ec5e9a34970be1056d4e59039536591a1d28a8c634"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/mq2_gas_analog_read",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "mq2_gas_analog_read",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "fcd334c3b7dd625b5823e50f6d0eabcb979304e355550b2b0c758ae21143d943",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 8 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 8,
+        "passedAssertions": 8,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 65959913,
+        "virtualTimeNs": 5350000000,
+        "ctWallMs": 8937,
+        "harnessWallMs": 17836
+      },
+      "digests": {
+        "finalState": "f3e646308be201bb780e6d30268687babc64e092f69294d306518455a06520dd",
+        "inputs": "f6440eddd6873780a8247d824988fbfdcd9a82e68a227dc532e836960e38280c"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/mq2_gas_leak_detector",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "mq2_gas_leak_detector",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "e8b0a96d1a04ef09c61be44419a418e4ad6f63fa470433ff4ce072a873606b75",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 10 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 10,
+        "passedAssertions": 10,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 117615990,
+        "virtualTimeNs": 10550000000,
+        "ctWallMs": 16637,
+        "harnessWallMs": 31421
+      },
+      "digests": {
+        "finalState": "cb374ce83d2166758c3a543a909f808b4d74c9e2509ba688528db563020904d5",
+        "inputs": "9e33348a26c179e8eb8e9110bfcc8e9ac3e7fe8e06a6bb06eb61de4421a3d636"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/meta__muse-glimmer-30b/photoresistor_nightlight",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "photoresistor_nightlight",
+      "model": "meta__muse-glimmer-30b",
+      "mode": "nosim",
+      "firmwareSha256": "64e4ed0d511b7ea28861eb8ee02ff9ab67265f82c260e2fc4447c73b1a849eb0",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 0 passed, 3 failed",
+      "embedgymFailing": [
+        "[FAIL] @2400ms  led.value == false  (got true)",
+        "[FAIL] @4900ms  led.value == true  (got false)",
+        "[FAIL] @7400ms  led.value == false  (got true)"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 3,
+        "passedAssertions": 0,
+        "failedAssertions": 3,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 2400,
+            "expect": "led.value == false",
+            "passed": false
+          },
+          {
+            "at": 4900,
+            "expect": "led.value == true",
+            "passed": false
+          },
+          {
+            "at": 7400,
+            "expect": "led.value == false",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 92863794,
+        "virtualTimeNs": 7550000000,
+        "ctWallMs": 11823,
+        "harnessWallMs": 17515
+      },
+      "digests": {
+        "finalState": "bc233e6a057faa6402ac5bb11250281c20ce3ddf5f4b6c9b3fa9ac92ae9a1252",
+        "inputs": "1b6eb6aca7412fb181feca0d64162367b3d5d62d7c5affe122facb05e399b72d"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/photoresistor_nightlight",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "photoresistor_nightlight",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "018b4839e70afd0388eaaf7aca2436bf45a915c2caa22da968d480e754ed5637",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 3 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 3,
+        "passedAssertions": 3,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 92981099,
+        "virtualTimeNs": 7550000000,
+        "ctWallMs": 12058,
+        "harnessWallMs": 18480
+      },
+      "digests": {
+        "finalState": "f4f8260473492dc11d75734d3a3e4384391da3efd46240ded5e0ab513ce0d79b",
+        "inputs": "d0850c5108c50d24a102a543abd93e1c22c45bac705d1124e26637f79214159c"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/sim/nvidia__nemotron-3.5-super-vl/sen0244_quality_led_indicator",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "sen0244_quality_led_indicator",
+      "model": "nvidia__nemotron-3.5-super-vl",
+      "mode": "sim",
+      "firmwareSha256": "ca558466824526601f887dc17f231e103822037466744a52ffe485f9fe2cf0fd",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 14 passed, 2 failed",
+      "embedgymFailing": [
+        "[FAIL] @12500ms  Math.abs((@good_0 != @good_1) + (@good_1 != @good_2) + (@good_2 != @good_3) + (@good_3 != @good_4) + (@good_4 != @good_5) + (@good_5 != @good_6) + (@good_6 != @good_7) + (@good_7 != @good_8) + (@good_8 != @good_9) + (@good_9 != @good_10) + (@good_10 != @good_11) + (@good_11 != @good_12) + (@good_12 != @good_13) + (@good_13 != @good_14) + (@good_14 != @good_15) + (@good_15 != @good_16) + (@good_16 != @good_17) + (@good_17 != @good_18) + (@good_18 != @good_19) + (@good_19 != @good_20) + (@good_20 != @good_21) + (@good_21 != @good_22) + (@good_22 != @good_23) + (@good_23 != @good_24) + (@good_24 != @good_25) + (@good_25 != @good_26) + (@good_26 != @good_27) + (@good_27 != @good_28) + (@good_28 != @good_29) + (@good_29 != @good_30) + (@good_30 != @good_31) + (@good_31 != @good_32) + (@good_32 != @good_33) + (@good_33 != @good_34) + (@good_34 != @good_35) + (@good_35 != @good_36) + (@good_36 != @good_37) + (@good_37 != @good_38) + (@good_38 != @good_39) + (@good_39 != @good_40) + (@good_40 != @good_41) + (@good_41 != @good_42) + (@good_42 != @good_43) + (@good_43 != @good_44) + (@good_44 != @good_45) + (@good_45 != @good_46) + (@good_46 != @good_47) + (@good_47 != @good_48) + (@good_48 != @good_49) + (@good_49 != @good_50) + (@good_50 != @good_51) + (@good_51 != @good_52) + (@good_52 != @good_53) + (@good_53 != @good_54) + (@good_54 != @good_55) + (@good_55 != @good_56) + (@good_56 != @good_57) + (@good_57 != @good_58) + (@good_58 != @good_59) + (@good_59 != @good_60) + (@good_60 != @good_61) + (@good_61 != @good_62) + (@good_62 != @good_63) + (@good_63 != @good_64) + (@good_64 != @good_65) + (@good_65 != @good_66) + (@good_66 != @good_67) + (@good_67 != @good_68) + (@good_68 != @good_69) + (@good_69 != @good_70) + (@good_70 != @good_71) + (@good_71 != @good_72) + (@good_72 != @good_73) + (@good_73 != @good_74) + (@good_74 != @good_75) + (@good_75 != @good_76) + (@good_76 != @good_77) + (@good_77 != @good_78) + (@good_78 != @good_79) - 8) <= 2  (got @good_0 = 0, @good_1 = 1, @good_2 = 1, @good_3 = 1, @good_4 = 1, @good_5 = 1, @good_6 = 1, @good_7 = 1, @good_8 = 1, @good_9 = 1, @good_10 = 1, @good_11 = 1, @good_12 = 1, @good_13 = 1, @good_14 = 1, @good_15 = 1, @good_16 = 1, @good_17 = 1, @good_18 = 1, @good_19 = 1, @good_20 = 1, @good_21 = 0, @good_22 = 0, @good_23 = 0, @good_24 = 0, @good_25 = 0, @good_26 = 0, @good_27 = 0, @good_28 = 0, @good_29 = 0, @good_30 = 0, @good_31 = 0, @good_32 = 0, @good_33 = 0, @good_34 = 0, @good_35 = 0, @good_36 = 0, @good_37 = 0, @good_38 = 0, @good_39 = 0, @good_40 = 0, @good_41 = 1, @good_42 = 1, @good_43 = 1, @good_44 = 1, @good_45 = 1, @good_46 = 1, @good_47 = 1, @good_48 = 1, @good_49 = 1, @good_50 = 1, @good_51 = 1, @good_52 = 1, @good_53 = 1, @good_54 = 1, @good_55 = 1, @good_56 = 1, @good_57 = 1, @good_58 = 1, @good_59 = 1, @good_60 = 1, @good_61 = 0, @good_62 = 0, @good_63 = 0, @good_64 = 0, @good_65 = 0, @good_66 = 0, @good_67 = 0, @good_68 = 0, @good_69 = 0, @good_70 = 0, @good_71 = 0, @good_72 = 0, @good_73 = 0, @good_74 = 0, @good_75 = 0, @good_76 = 0, @good_77 = 0, @good_78 = 0, @good_79 = 0)",
+        "[FAIL] @16500ms  Math.abs((@fair_0 != @fair_1) + (@fair_1 != @fair_2) + (@fair_2 != @fair_3) + (@fair_3 != @fair_4) + (@fair_4 != @fair_5) + (@fair_5 != @fair_6) + (@fair_6 != @fair_7) + (@fair_7 != @fair_8) + (@fair_8 != @fair_9) + (@fair_9 != @fair_10) + (@fair_10 != @fair_11) + (@fair_11 != @fair_12) + (@fair_12 != @fair_13) + (@fair_13 != @fair_14) + (@fair_14 != @fair_15) + (@fair_15 != @fair_16) + (@fair_16 != @fair_17) + (@fair_17 != @fair_18) + (@fair_18 != @fair_19) + (@fair_19 != @fair_20) + (@fair_20 != @fair_21) + (@fair_21 != @fair_22) + (@fair_22 != @fair_23) + (@fair_23 != @fair_24) + (@fair_24 != @fair_25) + (@fair_25 != @fair_26) + (@fair_26 != @fair_27) + (@fair_27 != @fair_28) + (@fair_28 != @fair_29) + (@fair_29 != @fair_30) + (@fair_30 != @fair_31) + (@fair_31 != @fair_32) + (@fair_32 != @fair_33) + (@fair_33 != @fair_34) + (@fair_34 != @fair_35) + (@fair_35 != @fair_36) + (@fair_36 != @fair_37) + (@fair_37 != @fair_38) + (@fair_38 != @fair_39) + (@fair_39 != @fair_40) + (@fair_40 != @fair_41) + (@fair_41 != @fair_42) + (@fair_42 != @fair_43) + (@fair_43 != @fair_44) + (@fair_44 != @fair_45) + (@fair_45 != @fair_46) + (@fair_46 != @fair_47) + (@fair_47 != @fair_48) + (@fair_48 != @fair_49) + (@fair_49 != @fair_50) + (@fair_50 != @fair_51) + (@fair_51 != @fair_52) + (@fair_52 != @fair_53) + (@fair_53 != @fair_54) + (@fair_54 != @fair_55) + (@fair_55 != @fair_56) + (@fair_56 != @fair_57) + (@fair_57 != @fair_58) + (@fair_58 != @fair_59) + (@fair_59 != @fair_60) + (@fair_60 != @fair_61) + (@fair_61 != @fair_62) + (@fair_62 != @fair_63) + (@fair_63 != @fair_64) + (@fair_64 != @fair_65) + (@fair_65 != @fair_66) + (@fair_66 != @fair_67) + (@fair_67 != @fair_68) + (@fair_68 != @fair_69) + (@fair_69 != @fair_70) + (@fair_70 != @fair_71) + (@fair_71 != @fair_72) + (@fair_72 != @fair_73) + (@fair_73 != @fair_74) + (@fair_74 != @fair_75) + (@fair_75 != @fair_76) + (@fair_76 != @fair_77) + (@fair_77 != @fair_78) + (@fair_78 != @fair_79) - 16) <= 2  (got @fair_0 = 1, @fair_1 = 1, @fair_2 = 1, @fair_3 = 1, @fair_4 = 1, @fair_5 = 0, @fair_6 = 0, @fair_7 = 0, @fair_8 = 0, @fair_9 = 0, @fair_10 = 1, @fair_11 = 1, @fair_12 = 1, @fair_13 = 1, @fair_14 = 1, @fair_15 = 0, @fair_16 = 0, @fair_17 = 0, @fair_18 = 0, @fair_19 = 0, @fair_20 = 1, @fair_21 = 1, @fair_22 = 1, @fair_23 = 1, @fair_24 = 1, @fair_25 = 1, @fair_26 = 1, @fair_27 = 1, @fair_28 = 1, @fair_29 = 1, @fair_30 = 0, @fair_31 = 0, @fair_32 = 0, @fair_33 = 0, @fair_34 = 0, @fair_35 = 1, @fair_36 = 1, @fair_37 = 1, @fair_38 = 1, @fair_39 = 1, @fair_40 = 0, @fair_41 = 0, @fair_42 = 0, @fair_43 = 0, @fair_44 = 0, @fair_45 = 1, @fair_46 = 1, @fair_47 = 1, @fair_48 = 1, @fair_49 = 1, @fair_50 = 0, @fair_51 = 0, @fair_52 = 0, @fair_53 = 0, @fair_54 = 0, @fair_55 = 1, @fair_56 = 1, @fair_57 = 1, @fair_58 = 1, @fair_59 = 1, @fair_60 = 0, @fair_61 = 0, @fair_62 = 0, @fair_63 = 0, @fair_64 = 0, @fair_65 = 0, @fair_66 = 0, @fair_67 = 0, @fair_68 = 0, @fair_69 = 0, @fair_70 = 1, @fair_71 = 1, @fair_72 = 1, @fair_73 = 1, @fair_74 = 1, @fair_75 = 0, @fair_76 = 0, @fair_77 = 0, @fair_78 = 0, @fair_79 = 0)"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 16,
+        "passedAssertions": 14,
+        "failedAssertions": 2,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 12500,
+            "expect": "Math.abs((@good_0 != @good_1) + (@good_1 != @good_2) + (@good_2 != @good_3) + (@good_3 != @good_4) + (@good_4 != @good_5) + (@good_5 != @good_6) + (@good_6 != @good_7) + (@good_7 != @good_8) + (@good_8 != @good_9) + (@good_9 != @good_10) + (@good_10 != @good_11) + (@good_11 != @good_12) + (@good_12 != @good_13) + (@good_13 != @good_14) + (@good_14 != @good_15) + (@good_15 != @good_16) + (@good_16 != @good_17) + (@good_17 != @good_18) + (@good_18 != @good_19) + (@good_19 != @good_20) + (@good_20 != @good_21) + (@good_21 != @good_22) + (@good_22 != @good_23) + (@good_23 != @good_24) + (@good_24 != @good_25) + (@good_25 != @good_26) + (@good_26 != @good_27) + (@good_27 != @good_28) + (@good_28 != @good_29) + (@good_29 != @good_30) + (@good_30 != @good_31) + (@good_31 != @good_32) + (@good_32 != @good_33) + (@good_33 != @good_34) + (@good_34 != @good_35) + (@good_35 != @good_36) + (@good_36 != @good_37) + (@good_37 != @good_38) + (@good_38 != @good_39) + (@good_39 != @good_40) + (@good_40 != @good_41) + (@good_41 != @good_42) + (@good_42 != @good_43) + (@good_43 != @good_44) + (@good_44 != @good_45) + (@good_45 != @good_46) + (@good_46 != @good_47) + (@good_47 != @good_48) + (@good_48 != @good_49) + (@good_49 != @good_50) + (@good_50 != @good_51) + (@good_51 != @good_52) + (@good_52 != @good_53) + (@good_53 != @good_54) + (@good_54 != @good_55) + (@good_55 != @good_56) + (@good_56 != @good_57) + (@good_57 != @good_58) + (@good_58 != @good_59) + (@good_59 != @good_60) + (@good_60 != @good_61) + (@good_61 != @good_62) + (@good_62 != @good_63) + (@good_63 != @good_64) + (@good_64 != @good_65) + (@good_65 != @good_66) + (@good_66 != @good_67) + (@good_67 != @good_68) + (@good_68 != @good_69) + (@good_69 != @good_70) + (@good_70 != @good_71) + (@good_71 != @good_72) + (@good_72 != @good_73) + (@good_73 != @good_74) + (@good_74 != @good_75) + (@good_75 != @good_76) + (@good_76 != @good_77) + (@good_77 != @good_78) + (@good_78 != @good_79) - 8) <= 2",
+            "passed": false
+          },
+          {
+            "at": 16500,
+            "expect": "Math.abs((@fair_0 != @fair_1) + (@fair_1 != @fair_2) + (@fair_2 != @fair_3) + (@fair_3 != @fair_4) + (@fair_4 != @fair_5) + (@fair_5 != @fair_6) + (@fair_6 != @fair_7) + (@fair_7 != @fair_8) + (@fair_8 != @fair_9) + (@fair_9 != @fair_10) + (@fair_10 != @fair_11) + (@fair_11 != @fair_12) + (@fair_12 != @fair_13) + (@fair_13 != @fair_14) + (@fair_14 != @fair_15) + (@fair_15 != @fair_16) + (@fair_16 != @fair_17) + (@fair_17 != @fair_18) + (@fair_18 != @fair_19) + (@fair_19 != @fair_20) + (@fair_20 != @fair_21) + (@fair_21 != @fair_22) + (@fair_22 != @fair_23) + (@fair_23 != @fair_24) + (@fair_24 != @fair_25) + (@fair_25 != @fair_26) + (@fair_26 != @fair_27) + (@fair_27 != @fair_28) + (@fair_28 != @fair_29) + (@fair_29 != @fair_30) + (@fair_30 != @fair_31) + (@fair_31 != @fair_32) + (@fair_32 != @fair_33) + (@fair_33 != @fair_34) + (@fair_34 != @fair_35) + (@fair_35 != @fair_36) + (@fair_36 != @fair_37) + (@fair_37 != @fair_38) + (@fair_38 != @fair_39) + (@fair_39 != @fair_40) + (@fair_40 != @fair_41) + (@fair_41 != @fair_42) + (@fair_42 != @fair_43) + (@fair_43 != @fair_44) + (@fair_44 != @fair_45) + (@fair_45 != @fair_46) + (@fair_46 != @fair_47) + (@fair_47 != @fair_48) + (@fair_48 != @fair_49) + (@fair_49 != @fair_50) + (@fair_50 != @fair_51) + (@fair_51 != @fair_52) + (@fair_52 != @fair_53) + (@fair_53 != @fair_54) + (@fair_54 != @fair_55) + (@fair_55 != @fair_56) + (@fair_56 != @fair_57) + (@fair_57 != @fair_58) + (@fair_58 != @fair_59) + (@fair_59 != @fair_60) + (@fair_60 != @fair_61) + (@fair_61 != @fair_62) + (@fair_62 != @fair_63) + (@fair_63 != @fair_64) + (@fair_64 != @fair_65) + (@fair_65 != @fair_66) + (@fair_66 != @fair_67) + (@fair_67 != @fair_68) + (@fair_68 != @fair_69) + (@fair_69 != @fair_70) + (@fair_70 != @fair_71) + (@fair_71 != @fair_72) + (@fair_72 != @fair_73) + (@fair_73 != @fair_74) + (@fair_74 != @fair_75) + (@fair_75 != @fair_76) + (@fair_76 != @fair_77) + (@fair_77 != @fair_78) + (@fair_78 != @fair_79) - 16) <= 2",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 266783558,
+        "virtualTimeNs": 22650000000,
+        "ctWallMs": 30370,
+        "harnessWallMs": 37972
+      },
+      "digests": {
+        "finalState": "b79a3e14958827a6fdf63664cace34e974c5674dfadbd700378249a4274279fe",
+        "inputs": "0722240aa41f7d9d8053e23ff7793e2ebf3b0f084f502033a6d466ed1d699903"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/sen0244_quality_led_indicator",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "sen0244_quality_led_indicator",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "b5d29cb7a305a42110b52c40d449373d5ac467e863450961200deab5a7f0bcf2",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 16 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 16,
+        "passedAssertions": 16,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 257035559,
+        "virtualTimeNs": 22650000000,
+        "ctWallMs": 23593,
+        "harnessWallMs": 31318
+      },
+      "digests": {
+        "finalState": "8bf21eb46955ee761d2be4865b2b1ef95c21233bc1cb7a2846ffdbde5a992df2",
+        "inputs": "0184f88b691413ac31a175cfa8d00ee7547a29750b7b9ef7ada4c1d32a2990e6"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/sim/nvidia__nemotron-3.5-super-vl/sen0244_stable_reading",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "sen0244_stable_reading",
+      "model": "nvidia__nemotron-3.5-super-vl",
+      "mode": "sim",
+      "firmwareSha256": "7c7b206d4a07e385d62d4652c47f70f60c623d8283b8e837ec0d7fb635eec8a0",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 1 passed, 9 failed",
+      "embedgymFailing": [
+        "[FAIL] @7000ms  len(@stable) == 0 && len(@settle) >= 3 && len(@settle) <= 5  (got @stable = [], @settle = [])",
+        "[FAIL] @7000ms  @settle.t[-1] > 5900 && 293 <= @settle[-1] && @settle[-1] <= 307  (got @settle = [])",
+        "[FAIL] @10500ms  @dry.t[-1] < 3800 && @stable.t[-1] > 9400 && @stable.t[-1] > @settle.t[-1] && 293 <= @stable[-1] && @stable[-1] <= 307  (got @dry = [\"No water detected\"@1020ms, \"No water detected\"@2020ms, \"No water detected\"@3020ms], @stable = [], @settle = [])",
+        "[FAIL] @14800ms  @stable.t[-1] < 11500 && @settle.t[-1] > 13700 && 585 <= @settle[-1] && @settle[-1] <= 610  (got @stable = [], @settle = [])",
+        "[FAIL] @18000ms  @stable.t[-1] > 16900 && @stable.t[-1] > @settle.t[-1] && 585 <= @stable[-1] && @stable[-1] <= 610  (got @stable = [], @settle = [])"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 10,
+        "passedAssertions": 1,
+        "failedAssertions": 9,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 7000,
+            "expect": "len(@stable) == 0 && len(@settle) >= 3 && len(@settle) <= 5",
+            "passed": false
+          },
+          {
+            "at": 7000,
+            "expect": "@settle.t[-1] > 5900 && 293 <= @settle[-1] && @settle[-1] <= 307",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 10500,
+            "expect": "@dry.t[-1] < 3800 && @stable.t[-1] > 9400 && @stable.t[-1] > @settle.t[-1] && 293 <= @stable[-1] && @stable[-1] <= 307",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 14800,
+            "expect": "@stable.t[-1] < 11500 && @settle.t[-1] > 13700 && 585 <= @settle[-1] && @settle[-1] <= 610",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 18000,
+            "expect": "@stable.t[-1] > 16900 && @stable.t[-1] > @settle.t[-1] && 585 <= @stable[-1] && @stable[-1] <= 610",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 21000,
+            "expect": "@dry.t[-1] > 19900 && @dry.t[-1] > @stable.t[-1] && @dry.t[-1] > @settle.t[-1]",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 25300,
+            "expect": "@stable.t[-1] < 21100 && @settle.t[-1] > 24200 && 585 <= @settle[-1] && @settle[-1] <= 610",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 28500,
+            "expect": "@stable.t[-1] > 27400 && @stable.t[-1] > @settle.t[-1] && 585 <= @stable[-1] && @stable[-1] <= 610",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 28500,
+            "expect": "len(@dry) + len(@settle) + len(@stable) >= 25 && len(@dry) + len(@settle) + len(@stable) <= 30",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 339329700,
+        "virtualTimeNs": 28650000062,
+        "ctWallMs": 36673,
+        "harnessWallMs": 47916
+      },
+      "digests": {
+        "finalState": "5135246d004282f334b93f8fe7cde9cecca11232a84ab03ca96b573e761b1b5f",
+        "inputs": "26cb77d862bed5e5e05a0c4b8126563bab597375aab546d960b3e20670a25297"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/sen0244_stable_reading",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "sen0244_stable_reading",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "0aa8fbf4cc3ebb0713dfa866c309aa0986aec89ffe1abc4c39337b8da384c70d",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 10 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 10,
+        "passedAssertions": 10,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 339290074,
+        "virtualTimeNs": 28650000062,
+        "ctWallMs": 39458,
+        "harnessWallMs": 47949
+      },
+      "digests": {
+        "finalState": "f1c225153dcd70995aa9d42318088cc4b853a7e74861fe4298c14fa47c007910",
+        "inputs": "3c98fd2e962f2429f40723c8eb398aa34ec633ff8c02e265a287dd7cbb8ef788"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/sim/openai__gpt-5.6-luna/sen0244_tds_read",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "sen0244_tds_read",
+      "model": "openai__gpt-5.6-luna",
+      "mode": "sim",
+      "firmwareSha256": "326ad0c75bb9ec04bc71850a1ce43527d8f9f6dd358dfac6e13983801ec58f1e",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 5 passed, 1 failed",
+      "embedgymFailing": [
+        "[FAIL] @2500ms  len(@v) >= 1 && len(@v) <= 4 && @v[-1] == 0 && @ppm[-1] == 0  (got @v = [0@29ms, 0@58ms, 0@87ms, 0@1030ms, 0@2030ms], @ppm = [0@29ms, 0@58ms, 0@87ms, 0@1030ms, 0@2030ms])"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 6,
+        "passedAssertions": 5,
+        "failedAssertions": 1,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 2500,
+            "expect": "len(@v) >= 1 && len(@v) <= 4 && @v[-1] == 0 && @ppm[-1] == 0",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 90885493,
+        "virtualTimeNs": 7650000062,
+        "ctWallMs": 8073,
+        "harnessWallMs": 17705
+      },
+      "digests": {
+        "finalState": "ac1edeab069a5715cb5e550a56af29f58226c383c2c4d16e1ee8e3aa5d617a8e",
+        "inputs": "71397a6523eaffb1a0af336d684a794ed6ade8c407cd0beb7aea6a361e7d8cfc"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/sen0244_tds_read",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "sen0244_tds_read",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "207edc174da19a207c1b4d5d6aab9623ac92ad003b4eb51b3e3bdd89d857f44f",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 6 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 6,
+        "passedAssertions": 6,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 94319220,
+        "virtualTimeNs": 7650000000,
+        "ctWallMs": 12479,
+        "harnessWallMs": 24999
+      },
+      "digests": {
+        "finalState": "c08d76bbc212169647ea419d061834fc57386adf79650c83ec21b1c20e6c7f4d",
+        "inputs": "e33c07f51273568c7e3c59f6a9f51f4958d83643b273282fa967188fe8ebbc4a"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/meta__muse-glimmer-30b/sen0244_water_quality_monitor",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "sen0244_water_quality_monitor",
+      "model": "meta__muse-glimmer-30b",
+      "mode": "nosim",
+      "firmwareSha256": "4b22492be6b8e0874510d03e5d99d49f551f9bd8ee2b9ce8405014d432be71de",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 1 passed, 7 failed",
+      "embedgymFailing": [
+        "[FAIL] @6000ms  len(@ppm) >= 2 && len(@ppm) <= 4  (got @ppm = [])",
+        "[FAIL] @6000ms  @ppm.t[-1] - @ppm.t[-2] > 900 && @ppm.t[-1] - @ppm.t[-2] < 1200  (got @ppm = [])",
+        "[FAIL] @6000ms  @ppm.t[-1] > 4400 && 84 <= @ppm[-1] && @ppm[-1] <= 92 && @q[-1] == 'Excellent'  (got @ppm = [], @q = [])",
+        "[FAIL] @9000ms  @ppm.t[-1] > 7400 && 214 <= @ppm[-1] && @ppm[-1] <= 226 && @q[-1] == 'Good'  (got @ppm = [], @q = [])",
+        "[FAIL] @12000ms  @ppm.t[-1] > 10400 && 382 <= @ppm[-1] && @ppm[-1] <= 396 && @q[-1] == 'Fair'  (got @ppm = [], @q = [])"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 8,
+        "passedAssertions": 1,
+        "failedAssertions": 7,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 6000,
+            "expect": "len(@ppm) >= 2 && len(@ppm) <= 4",
+            "passed": false
+          },
+          {
+            "at": 6000,
+            "expect": "@ppm.t[-1] - @ppm.t[-2] > 900 && @ppm.t[-1] - @ppm.t[-2] < 1200",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 6000,
+            "expect": "@ppm.t[-1] > 4400 && 84 <= @ppm[-1] && @ppm[-1] <= 92 && @q[-1] == 'Excellent'",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 9000,
+            "expect": "@ppm.t[-1] > 7400 && 214 <= @ppm[-1] && @ppm[-1] <= 226 && @q[-1] == 'Good'",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 12000,
+            "expect": "@ppm.t[-1] > 10400 && 382 <= @ppm[-1] && @ppm[-1] <= 396 && @q[-1] == 'Fair'",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 15000,
+            "expect": "@ppm.t[-1] > 13400 && 674 <= @ppm[-1] && @ppm[-1] <= 705 && @q[-1] == 'Poor'",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 18000,
+            "expect": "@dry.t[-1] > 16400 && @dry.t[-1] > @ppm.t[-1] && len(@dry) + len(@ppm) >= 14 && len(@dry) + len(@ppm) <= 19",
+            "passed": false,
+            "error": "list index out of range"
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 213712723,
+        "virtualTimeNs": 18150000000,
+        "ctWallMs": 20926,
+        "harnessWallMs": 26669
+      },
+      "digests": {
+        "finalState": "dbcfa28a64f42121a0e8105f0c2e15e44c4b4982e872c7fc3953caa5c4816f59",
+        "inputs": "d8c4df2f4f52b97b874f9832ec0763d784f4493c5d51527371915cdbf982f963"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/sen0244_water_quality_monitor",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "sen0244_water_quality_monitor",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "5336d52a823e0c8119f3726cf2abae6a156c27823d61f16e39ce4436a7b85ed5",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 8 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 8,
+        "passedAssertions": 8,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 213722570,
+        "virtualTimeNs": 18150000000,
+        "ctWallMs": 18662,
+        "harnessWallMs": 30198
+      },
+      "digests": {
+        "finalState": "45ab08437bf318ac73900b26478f842769aa2b0ee83fc57e88299d26dd90890a",
+        "inputs": "538124725e0098b36a4d0c19aee6e19601501737e07b4928a241a24a852c28f6"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/sensor_pir_human_motion",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "sensor_pir_human_motion",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "3aca1af75883fe39a901eebd0796e5186edf386a56051983c924080a8c5ff982",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 7 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 7,
+        "passedAssertions": 7,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 50634438,
+        "virtualTimeNs": 5150000000,
+        "ctWallMs": 6131,
+        "harnessWallMs": 11863
+      },
+      "digests": {
+        "finalState": "d3a52c5989055d578b288583312055437775846101ecf7f0ac4161ed830ba67f",
+        "inputs": "3330fba0f538d9a69948b054f1c4cb7c29252ed7302dc038552f3022a643ee9e"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/meta__muse-glimmer-30b/step_counter_print",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "step_counter_print",
+      "model": "meta__muse-glimmer-30b",
+      "mode": "nosim",
+      "firmwareSha256": "1484b75f707cb2d75f56bf6b1ce601c4ed32f17e55bce8fff28c043b89a7db6f",
+      "embedgymVerdict": "fail",
+      "embedgymGradeSummary": "FAIL \u2014 0 passed, 3 failed",
+      "embedgymFailing": [
+        "[FAIL] @1400ms  @steps[-1] == 1  (got @steps = [])",
+        "[FAIL] @2400ms  @steps[-1] == 2  (got @steps = [])",
+        "[FAIL] @3400ms  @steps[-1] == 3  (got @steps = [])"
+      ],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 3,
+        "passedAssertions": 0,
+        "failedAssertions": 3,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 1400,
+            "expect": "@steps[-1] == 1",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 2400,
+            "expect": "@steps[-1] == 2",
+            "passed": false,
+            "error": "list index out of range"
+          },
+          {
+            "at": 3400,
+            "expect": "@steps[-1] == 3",
+            "passed": false,
+            "error": "list index out of range"
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 37699731,
+        "virtualTimeNs": 3550000000,
+        "ctWallMs": 3897,
+        "harnessWallMs": 11316
+      },
+      "digests": {
+        "finalState": "1d02bc2de542f5d3fb2e39209aa6a486269e8545602fa4abfab4322804a2d7e0",
+        "inputs": "4ba825f5f35fcc66a5889910fc5b8f30d57ba32d862e82d8f21cdf8acce5182e"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/step_counter_print",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "step_counter_print",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "09eed0677a7c62425de07d2d04e661665f6cb581f6f024254431ced1541b4221",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 3 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 3,
+        "passedAssertions": 3,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 42414540,
+        "virtualTimeNs": 3550000000,
+        "ctWallMs": 2662,
+        "harnessWallMs": 10532
+      },
+      "digests": {
+        "finalState": "6b8b900abb38ad11b6b252fa2a16d6896346fb42a4d3535ce14fdaea1c7ad6c1",
+        "inputs": "bac7e4bb0ee624a403b781149c4cf6580a8e3b1b3d7dea85a8dd624dc4f4920b"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/tilt_detection_alarm",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "tilt_detection_alarm",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "35667eb04589f33d5272edd5c9d2f408f2e51e8b1fd08755b4dd50f131d0c551",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 5 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "fail",
+      "agreed": false,
+      "grading": {
+        "totalAssertions": 5,
+        "passedAssertions": 3,
+        "failedAssertions": 2,
+        "allPassed": false,
+        "failures": [
+          {
+            "at": 800,
+            "expect": "buzzer.hasSignal == true",
+            "passed": false
+          },
+          {
+            "at": 1800,
+            "expect": "buzzer.hasSignal == true",
+            "passed": false
+          }
+        ]
+      },
+      "stats": {
+        "instructions": 24733738,
+        "virtualTimeNs": 2450000125,
+        "ctWallMs": 1224,
+        "harnessWallMs": 9093
+      },
+      "digests": {
+        "finalState": "913b4f93316f3cbb0f8d0ab941c8a98f1b158f20c8d23e3ae8b3d464376f9a18",
+        "inputs": "179bf564456b2017f25b5609c83ed9276a90e39b82d877db79cdc51e812e6f50"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [
+        {
+          "code": "electrical.contention",
+          "severity": "warning",
+          "message": "net PD2 (rail VCC): held high by the MCU's PORTD and low by scripted driver tilt; it sits at 2.500 V and reads low"
+        },
+        {
+          "code": "electrical.indeterminate-level",
+          "severity": "warning",
+          "message": "net PD2: sits at 2.500 V, between the input thresholds 1.500 V and 3.500 V of rail VCC; it keeps its previous level (low)"
+        },
+        {
+          "code": "electrical.contention",
+          "severity": "warning",
+          "message": "net PD2 (rail VCC): held high by the MCU's PORTD and low by scripted driver tilt; it sits at 2.500 V and reads high"
+        },
+        {
+          "code": "electrical.indeterminate-level",
+          "severity": "warning",
+          "message": "net PD2: sits at 2.500 V, between the input thresholds 1.500 V and 3.500 V of rail VCC; it keeps its previous level (high)"
+        }
+      ],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/tmp36_read",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "tmp36_read",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "051924685c8c69882b582cbb21adeff994b98350311652c60f803baa4b51c311",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 7 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 7,
+        "passedAssertions": 7,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 96790106,
+        "virtualTimeNs": 7850000000,
+        "ctWallMs": 7270,
+        "harnessWallMs": 14778
+      },
+      "digests": {
+        "finalState": "7da85a7f26788b22fb78e13eac6bedb5b6ebddfaa70c6604b8e41f242845228e",
+        "inputs": "404b1bbdbec4ffc16f7ade61c5907d4f3a45e53a575c9d411fdb9d9a0a2aaae9"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [],
+      "error": null
+    },
+    {
+      "runId": "atmega328p_arduino/nosim/google__gemini-3.8-flash/tof_distance_pulling",
+      "target": "atmega328p_arduino",
+      "ctBoard": "arduino-uno",
+      "task": "tof_distance_pulling",
+      "model": "google__gemini-3.8-flash",
+      "mode": "nosim",
+      "firmwareSha256": "3752afe14a5bf1586a8ab8ed4c52d20409f4a956f334c3cbdafa51e425be2853",
+      "embedgymVerdict": "pass",
+      "embedgymGradeSummary": "PASS \u2014 6 passed, 0 failed",
+      "embedgymFailing": [],
+      "ctExit": 0,
+      "ctVerdict": "pass",
+      "evalVerdict": "pass",
+      "agreed": true,
+      "grading": {
+        "totalAssertions": 6,
+        "passedAssertions": 6,
+        "failedAssertions": 0,
+        "allPassed": true,
+        "failures": []
+      },
+      "stats": {
+        "instructions": 56683651,
+        "virtualTimeNs": 4650000000,
+        "ctWallMs": 6633,
+        "harnessWallMs": 19546
+      },
+      "digests": {
+        "finalState": "4061f2509ccada93e1497acf6130ee3609addb553f8abe50063afcdc14b4e5c9",
+        "inputs": "3c5d0dbd1393e9a4dc019e7351168bfb117e2d704c65098d3c04fd9447aa8093"
+      },
+      "engineRevision": "87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9",
+      "nonInfoIssues": [
+        {
+          "code": "device.register.vendor-private",
+          "severity": "warning",
+          "message": "firmware used registers of VL53L0X that its data sheet leaves to the vendor API (first: 0x89); the twin stores their values without modeling their effect"
+        }
+      ],
+      "error": null
+    }
+  ]
+}

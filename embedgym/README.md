@@ -49,7 +49,34 @@ Each upstream `.hex` image is executed **unchanged** on CircuitTwin (`ct run --j
 
 ## Published Clean-Tree Results (`2026-11-22`)
 
-See [`results/2026-11-22/report.md`](results/2026-11-22/report.md) and [`results/2026-11-22/embedgym-2026-11-22.json`](results/2026-11-22/embedgym-2026-11-22.json) for the full clean-tree record and every per-run diagnostic.
+Recorded from a clean `CircuitTwin-Web` tree (`176c4df5ec5bae5ecf7ccf51f13e9a44047a5ff3`, `ct 0.1.0`, `ct.exe` sha256 `25f7bdc43645b13a1da0d587db9916f083861e18e28f5a9abc51ac94f85b757c`, engine revision `87494d1b5be8808ad1195eeacd8a004d9d2f0f3d3a24c75ea640856a227756f9`) and clean `agent-bench` tree (`48ae276`):
+
+| Metric | Value |
+|---|---:|
+| Evaluated task instances (29 tasks × 2 AVR boards) | 58 / 598 upstream (58 / 184 AVR) |
+| Real upstream agent `.hex` binaries executed | 80 (58 pass controls, 22 fail controls) |
+| Passing controls passed on CircuitTwin (True Positives) | 56 / 58 (96.55%) |
+| Passing controls falsely flagged (False Alarms) | 2 / 58 |
+| Failing controls caught by CircuitTwin (True Negatives) | 22 / 22 (100.0%) |
+| Failing controls missed by CircuitTwin (False Negatives) | 0 / 22 |
+| Inconclusive / Error runs | 0 / 0 |
+| Overall exact verdict agreement with EmbedGym | **78 / 80 (97.5%)** |
+
+| Category | Tasks | Pass Controls (CT Pass / Total) | Fail Controls (CT Catch / Total) |
+|---|---:|---:|---:|
+| `gpio_pwm_output` | 5 | 10 / 10 | 4 / 4 |
+| `gpio_input_output` | 10 | 18 / 20 | 6 / 6 |
+| `analog_adc` | 11 | 22 / 22 | 9 / 9 |
+| `catalog_i2c_sensors` (`MPU6050`, `VL53L0X`) | 3 | 6 / 6 | 3 / 3 |
+
+### Documented Misses & Engine Findings
+
+- **2 / 58 false alarms — `tilt_detection_alarm` on both `atmega328p_arduino` (`arduino-uno`) and `atmega2560_arduino` (`arduino-mega2560`):**
+  The passing agent firmware configures the tilt-switch pin with `pinMode(TILT_PIN, INPUT_PULLUP)`. In CircuitTwin `crates/ct-periph/src/avr/port.rs` (`avr.port`), an input pin with `PORTx = 1` (`DDRx = 0`) currently drives the net with `DRIVE_HIGH` (strong 40 Ω driver) instead of a weak 40 kΩ internal pull-up. When the external tilt-switch driver holds the net LOW through CircuitTwin's electrical layer, the net resolves to 2.500 V (`electrical.contention` + `electrical.indeterminate-level`) and never transitions cleanly, preventing the alarm from triggering.
+- **Non-blocking `VL53L0X` warning on `tof_distance_pulling`:**
+  Both boards pass 6/6 assertions (`250 mm` and `1200 mm`), while CircuitTwin logs a `warning` (`device.register.vendor-private`) because the Arduino VL53L0X driver writes vendor-private initialization registers (`0x89`).
+
+See [`results/2026-11-22/report.md`](results/2026-11-22/report.md) and [`results/2026-11-22/embedgym-2026-11-22.json`](results/2026-11-22/embedgym-2026-11-22.json) for the complete clean-tree record and every per-run diagnostic.
 
 ## Reproduce
 
